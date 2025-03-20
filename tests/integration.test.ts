@@ -1,4 +1,4 @@
-import { createHandler } from 'next-test-api-route-handler';
+import createHandler from 'next-test-api-route-handler';
 import handler from '../pages/api/quote'; // Import your API route
 
 describe('Integration Tests', () => {
@@ -31,10 +31,11 @@ describe('Integration Tests', () => {
     const data = res._getJSONData();
     expect(data).toHaveProperty('quote');
     expect(typeof data.quote).toBe('string');
-    expect(data).toHaveProperty('author', author);
+    expect(data).toHaveProperty('author');
+    expect(data.author).toBe(author);
   });
 
-  it('should return a random quote when author is not found', async () => {
+  it('should return 404 when author is not found', async () => {
     const author = 'Unknown Author';
     const { req, res } = createHandler({
       handler,
@@ -43,11 +44,8 @@ describe('Integration Tests', () => {
 
     await handler(req, res);
 
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toBe(404);
     const data = res._getJSONData();
-    expect(data).toHaveProperty('quote');
-    expect(typeof data.quote).toBe('string');
-    expect(data).toHaveProperty('author');
-    expect(typeof data.author).toBe('string');
+    expect(data).toHaveProperty('error', `No quotes found for author: ${author}`);
   });
 });
