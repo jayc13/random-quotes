@@ -14,8 +14,20 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Quote>
     { quote: "It is during our darkest moments that we must focus to see the light.", author: "Aristotle" },
   ];
 
-  const randomIndex = Math.floor(Math.random() * quotes.length);
-  const selectedQuote: Quote = quotes[randomIndex];
+  const { author } = req.query;
+
+  let selectedQuote: Quote;
+  if (author) {
+    const filteredQuotes = quotes.filter(quote => quote.author === author);
+    if (filteredQuotes.length > 0) {
+      selectedQuote = filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)];
+    } else {
+      // Return a random quote if the author is not found.
+      selectedQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    }
+  } else {
+    selectedQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  }
 
   res.status(200).json(selectedQuote);
 }
