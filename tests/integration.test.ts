@@ -1,4 +1,4 @@
-import { createHandler } from 'next-test-api-route-handler';
+import createHandler from 'next-test-api-route-handler';
 import handler from '../pages/api/quote'; // Import your API route
 
 describe('Integration Tests', () => {
