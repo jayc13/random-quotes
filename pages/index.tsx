@@ -4,6 +4,7 @@ import Loading from '../src/components/Loading';
 type Quote = {
   quote: string;
   author: string;
+  error?: string;
 };
 
 function HomePage() {
@@ -11,9 +12,16 @@ function HomePage() {
 
   useEffect(() => {
     async function fetchQuote() {
-      const response = await fetch('/api/quote');
-      const data: Quote = await response.json();
-      setQuote(data);
+      try {
+        const response = await fetch('/api/quote');
+        if (!response.ok) {
+          throw new Error(`Failed to fetch quote: ${response.status}`);
+        }
+        const data: Quote = await response.json();
+        setQuote(data);
+      } catch (error: any) {
+        setQuote({ quote: '', author: '', error: error.message });
+      }
     }
     fetchQuote();
   }, []);
@@ -23,27 +31,32 @@ function HomePage() {
   }
 
   return (
-    <div style={{ 
-      display: 'flex', 
-      justifyContent: 'center', 
-      alignItems: 'center', 
-      minHeight: '100vh', 
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100vh',
       padding: '20px',
       fontFamily: 'Arial, sans-serif',
     }}>
-      <div style={{ 
-        border: '1px solid #ccc', 
-        borderRadius: '8px', 
-        padding: '20px', 
-        maxWidth: '600px', 
+      <div style={{
+        border: '1px solid #ccc',
+        borderRadius: '8px',
+        maxWidth: '600px',
         textAlign: 'center',
       }}>
-        <p style={{ fontSize: '1.5em', fontStyle: 'italic', marginBottom: '10px' }}>
-          "{quote.quote}"
-        </p>
-        <p style={{ fontSize: '1.2em', color: '#555' }}>
-          - {quote.author}
-        </p>
+        {quote.error ? (
+          <div style={{ color: 'red' }}>{quote.error}</div>
+        ) : (
+          <>
+            <p style={{ fontSize: '1.5em', fontStyle: 'italic', marginBottom: '10px' }}>
+              "{quote.quote}"
+            </p>
+            <p style={{ fontSize: '1.2em', color: '#555' }}>
+              - {quote.author}
+            </p>
+          </>
+        )}
       </div>
     </div>
   );
