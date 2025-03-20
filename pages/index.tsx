@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
-import Loading from '../src/components/Loading';
+import Container from '@mui/material/Container';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 type Quote = {
   quote: string;
@@ -27,38 +32,41 @@ function HomePage() {
   }, []);
 
   if (!quote) {
-    return <Loading />;
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      minHeight: '100vh',
-      padding: '20px',
-      fontFamily: 'Arial, sans-serif',
-    }}>
-      <div style={{
-        border: '1px solid #ccc',
-        borderRadius: '8px',
-        maxWidth: '600px',
-        textAlign: 'center',
-      }}>
-        {quote.error ? (
-          <div style={{ color: 'red' }}>{quote.error}</div>
-        ) : (
-          <>
-            <p style={{ fontSize: '1.5em', fontStyle: 'italic', marginBottom: '10px' }}>
-              "{quote.quote}"
-            </p>
-            <p style={{ fontSize: '1.2em', color: '#555' }}>
-              - {quote.author}
-            </p>
-          </>
-        )}
-      </div>
-    </div>
+    <Container
+      maxWidth="sm"
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        padding: '20px',
+      }}
+    >
+      <Card sx={{ width: '100%', textAlign: 'center', boxShadow: 3 }}>
+        <CardContent>
+          {quote.error ? (
+            <Typography color="error">{quote.error}</Typography>
+          ) : (
+            <>
+              <Typography variant="h6" fontStyle="italic" marginBottom="10px">
+                "{quote.quote}"
+              </Typography>
+              <Typography variant="subtitle1" color="text.secondary">
+                - {quote.author}
+              </Typography>
+            </>
+          )}
+        </CardContent>
+      </Card>
+    </Container>
   );
 }
 
