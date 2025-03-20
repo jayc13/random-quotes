@@ -1,5 +1,12 @@
-export default function handler(req, res) {
-  const quotes = [
+type Quote = {
+  quote: string;
+  author: string;
+};
+
+import { NextApiRequest, NextApiResponse } from 'next';
+
+export default function handler(req: NextApiRequest, res: NextApiResponse<Quote>) {
+  const quotes: Quote[] = [
     { quote: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
     { quote: "Strive not to be a success, but rather to be of value.", author: "Albert Einstein" },
     { quote: "The mind is everything. What you think you become.", author: "Buddha" },
@@ -8,7 +15,7 @@ export default function handler(req, res) {
   ];
 
   const randomIndex = Math.floor(Math.random() * quotes.length);
-  const selectedQuote = quotes[randomIndex];
+  const selectedQuote: Quote = quotes[randomIndex];
 
   res.status(200).json(selectedQuote);
 }
