@@ -1,27 +1,45 @@
-const request = require('supertest');
-const app = require('../server'); // Assuming server.js exports the app
+import { createHandler } from 'next-test-api-route-handler';
+import handler from '../pages/api/quote'; // Import your API route
 
 describe('Integration Tests', () => {
   it('should return a quote', async () => {
-    const response = await request(app).get('/quote');
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty('quote');
-    expect(response.body).toHaveProperty('author');
+    const { req, res } = createHandler({
+      handler,
+      url: '/api/quote',
+    });
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(200);
+    expect(res._getJSONData()).toHaveProperty('quote');
+    expect(res._getJSONData()).toHaveProperty('author');
   });
 
   it('should return a quote by a specific author', async () => {
     const author = 'Steve Jobs';
-    const response = await request(app).get(`/quote?author=${author}`);
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty('quote');
-    expect(response.body).toHaveProperty('author', author);
+    const { req, res } = createHandler({
+      handler,
+      url: `/api/quote?author=${author}`,
+    });
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(200);
+    expect(res._getJSONData()).toHaveProperty('quote');
+    expect(res._getJSONData()).toHaveProperty('author', author);
   });
 
   it('should return a random quote when author is not found', async () => {
     const author = 'Unknown Author';
-    const response = await request(app).get(`/quote?author=${author}`);
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty('quote');
-    expect(response.body).toHaveProperty('author');
+    const { req, res } = createHandler({
+      handler,
+      url: `/api/quote?author=${author}`,
+    });
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(200);
+    expect(res._getJSONData()).toHaveProperty('quote');
+    expect(res._getJSONData()).toHaveProperty('author');
   });
 });
