@@ -11,8 +11,11 @@ describe('Integration Tests', () => {
     await handler(req, res);
 
     expect(res.statusCode).toBe(200);
-    expect(res._getJSONData()).toHaveProperty('quote');
-    expect(res._getJSONData()).toHaveProperty('author');
+    const data = res._getJSONData();
+    expect(data).toHaveProperty('quote');
+    expect(typeof data.quote).toBe('string');
+    expect(data).toHaveProperty('author');
+    expect(typeof data.author).toBe('string');
   });
 
   it('should return a quote by a specific author', async () => {
@@ -25,8 +28,10 @@ describe('Integration Tests', () => {
     await handler(req, res);
 
     expect(res.statusCode).toBe(200);
-    expect(res._getJSONData()).toHaveProperty('quote');
-    expect(res._getJSONData()).toHaveProperty('author', author);
+    const data = res._getJSONData();
+    expect(data).toHaveProperty('quote');
+    expect(typeof data.quote).toBe('string');
+    expect(data).toHaveProperty('author', author);
   });
 
   it('should return a random quote when author is not found', async () => {
@@ -39,7 +44,10 @@ describe('Integration Tests', () => {
     await handler(req, res);
 
     expect(res.statusCode).toBe(200);
-    expect(res._getJSONData()).toHaveProperty('quote');
-    expect(res._getJSONData()).toHaveProperty('author');
+    const data = res._getJSONData();
+    expect(data).toHaveProperty('quote');
+    expect(typeof data.quote).toBe('string');
+    expect(data).toHaveProperty('author');
+    expect(typeof data.author).toBe('string');
   });
 });

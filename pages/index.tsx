@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react';
 
+type Quote = {
+  quote: string;
+  author: string;
+};
+
 function HomePage() {
-  const [quote, setQuote] = useState(null);
+  const [quote, setQuote] = useState<Quote | null>(null);
 
   useEffect(() => {
     async function fetchQuote() {
       const response = await fetch('/api/quote');
-      const data = await response.json();
+      const data: Quote = await response.json();
       setQuote(data);
     }
     fetchQuote();
