@@ -42,7 +42,6 @@ function HomePage() {
       <div style={{
         border: '1px solid #ccc',
         borderRadius: '8px',
-        padding: '20px',
         maxWidth: '600px',
         textAlign: 'center',
       }}>
