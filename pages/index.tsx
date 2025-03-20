@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Loading from '../src/components/Loading';
 
 type Quote = {
   quote: string;
@@ -18,7 +19,7 @@ function HomePage() {
   }, []);
 
   if (!quote) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
