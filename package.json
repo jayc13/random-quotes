@@ -4,8 +4,13 @@
   "description": "A simple random quote generator",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "jest tests/integration.test.js"
   },
   "author": "jayc13",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "supertest": "^6.3.4",
+    "jest": "^29.7.0"
+  }
 }
