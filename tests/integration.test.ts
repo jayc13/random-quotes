@@ -1,5 +1,5 @@
 import { createHandler } from 'next-test-api-route-handler';
-import handler from '../pages/api/quote.ts'; // Import your API route
+import handler from '../pages/api/quote'; // Import your API route
 
 describe('Integration Tests', () => {
   it('should return a quote', async () => {
