@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import ThemeProvider from './ThemeProvider'
 
 
 const LoadingContainer = styled.div`
