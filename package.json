@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
-    "lint-fix": "eslint . --fix",
+    "lint": "eslint pages src",
+    "lint-fix": "eslint pages src --fix",
     "test-unit": "jest --testPathPattern=tests/unit",
     "test-integration": "jest --testPathPattern=tests/integration",
     "test-e2e": "npx playwright test"
