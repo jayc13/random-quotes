@@ -61,6 +61,16 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     }
   }, [theme]);
 
+  
+
+  const useTheme = () => {
+    const context = useContext(ThemeContext);
+    if (context === undefined) {
+      throw new Error('useTheme must be used within a ThemeProvider');
+    }
+    return context;
+  };
+
   const toggleTheme = () => {
     setTheme((prevTheme) => {
       let newTheme: PaletteMode | undefined;
@@ -112,12 +122,4 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   );
 };
 
-const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
-};
-
-export { ThemeProvider, useTheme };
+export default ThemeProvider;
