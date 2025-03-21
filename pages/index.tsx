@@ -51,7 +51,7 @@ function HomePage() {
       try {
         const response = await fetch('/api/quote');
         if (!response.ok) {
-          throw new Error(`Failed to fetch quote: ${response.status}`);
+          throw new Error(`Failed to fetch quote`);
         }
         const data: Quote = await response.json();
         setQuote(data);
