@@ -6,7 +6,8 @@ on:
       - main
 
 jobs:
-  test:
+  setup:
+    name: "Setup"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,7 +17,17 @@ jobs:
           node-version: '20'
       - name: Install dependencies
         run: npm install
+  integration-test:
+    name: "Integration Tests"
+    runs-on: ubuntu-latest
+    steps:
       - name: Run Integration tests
         run: npm run test-integration
+  e2e-test:
+    name: "E2E Tests"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Playwright
+        run: npx playwright install
       - name: Run E2E tests
         run: npm run test-e2e
