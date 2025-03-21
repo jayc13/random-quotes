@@ -10,23 +10,10 @@ type Quote = {
   error?: string;
 };
 
-const theme = {
-  light: {
-    backgroundColor: '#f0f0f0',
-    color: '#333',
-    quoteBackground: '#fff',
-  },
-  dark: {
-    backgroundColor: '#444',
-    color: '#fff',
-    quoteBackground: '#333',
-  },
-};
-
 const MainContainer = styled("div")(({ theme }) => ({
-  display: flex,
-  justifyContent: center,
-  alignItems: center,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
   minHeight: '100vh',
   fontFamily: 'sans-serif',
   color: theme.color,
