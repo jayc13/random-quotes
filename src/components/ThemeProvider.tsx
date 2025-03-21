@@ -8,23 +8,21 @@ import {
   AutoMode as AutoModeIcon
 } from '@mui/icons-material';
 
-type ThemeMode = 'light' | 'dark' | 'system';
-
 interface ThemeContextProps {
-  theme: ThemeMode;
-  setTheme: (theme: ThemeMode) => void;
+  theme?: PaletteMode;
+  setTheme: (theme: PaletteMode) => void;
 }
 
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
-const systemTheme = (): ThemeMode => {
+const systemTheme = (): PaletteMode => {
   const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   return prefersDarkMode ? 'dark' : 'light';
 };
 
-const getInitialTheme = (): ThemeMode => {
-  const storedTheme = localStorage.getItem('theme') as ThemeMode | null;
-  return storedTheme || 'system';
+const getInitialTheme = (): PaletteMode | undefined => {
+  const storedTheme = localStorage.getItem('theme') as PaletteMode | null;
+  return storedTheme || undefined;
 };
 
 interface ThemeProviderProps {
@@ -32,7 +30,7 @@ interface ThemeProviderProps {
 }
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<ThemeMode>(getInitialTheme);
+  const [theme, setTheme] = useState<PaletteMode>(getInitialTheme);
 
   useEffect(() => {
     const initialTheme = getInitialTheme();
@@ -44,7 +42,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => {
-      if (theme === 'system') {
+      if (theme === undefined) {
         setTheme(systemTheme());
       }
     };
@@ -61,15 +59,15 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const toggleTheme = () => {
     setTheme((prevTheme) => {
-      let newTheme: ThemeMode;
+      let newTheme: PaletteMode;
       switch (prevTheme) {
         case 'light':
           newTheme = 'dark';
           break;
         case 'dark':
-          newTheme = 'system';
+          newTheme = undefined;
           break;
-        case 'system':
+        case undefined:
           newTheme = 'light';
           break;
       }
@@ -79,7 +77,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const muiTheme: Theme = createTheme({
     palette: {
-      mode: theme === 'system' ? systemTheme() : theme as PaletteMode,
+      mode: theme === undefined ? systemTheme() : theme as PaletteMode,
     },
   });
 
