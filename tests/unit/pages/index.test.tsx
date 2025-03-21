@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import Home from './index';
+import '@testing-library/jest-dom';
+import Home from '../../pages/index';
 
 // Mock the fetch function
 global.fetch = jest.fn();
