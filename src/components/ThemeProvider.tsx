@@ -63,7 +63,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const toggleTheme = () => {
     setTheme((prevTheme) => {
-      let newTheme: PaletteMode;
+      let newTheme: PaletteMode | undefined;
       switch (prevTheme) {
         case 'light':
           newTheme = 'dark';
