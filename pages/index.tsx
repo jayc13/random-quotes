@@ -17,9 +17,9 @@ const theme = {
     quoteBackground: '#fff',
   },
   dark: {
-    backgroundColor: '#333',
+    backgroundColor: '#444',
     color: '#fff',
-    quoteBackground: '#222',
+    quoteBackground: '#333',
   },
 };
 
