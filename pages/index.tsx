@@ -70,11 +70,11 @@ function HomePage() {
     <MainContainer>
       <QuoteContainer>
         {quote.error ? (
-          <ErrorMessage>{quote.error}</ErrorMessage>
+          <ErrorMessage id="error">{quote.error}</ErrorMessage>
         ) : (
           <>
-            <QuoteText>&ldquo;{quote.quote}&rdquo;</QuoteText>
-            <AuthorText>- {quote.author}</AuthorText>
+            <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
+            <AuthorText id="author">- {quote.author}</AuthorText>
           </>
         )}
       </QuoteContainer>
