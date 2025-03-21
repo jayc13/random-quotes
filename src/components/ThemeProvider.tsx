@@ -54,7 +54,11 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   }, [theme]);
 
   useEffect(() => {
-    localStorage.setItem('theme', theme);
+    if(theme === undefined) {
+      localStorage.removeItem("theme");
+    } else {
+      localStorage.setItem('theme', theme);
+    }
   }, [theme]);
 
   const toggleTheme = () => {
