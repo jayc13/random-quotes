@@ -34,7 +34,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const initialTheme = getInitialTheme();
-    if (initialTheme === 'system') {
+    if (initialTheme === undefined) {
       setTheme(systemTheme());
     } else {
       setTheme(initialTheme);
