@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Head from 'next/head';
 import Loading from '../src/components/Loading';
 
 type Quote = {
@@ -67,18 +68,24 @@ function HomePage() {
   }
 
   return (
-    <MainContainer>
-      <QuoteContainer>
-        {quote.error ? (
-          <ErrorMessage id="error">{quote.error}</ErrorMessage>
-        ) : (
-          <>
-            <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
-            <AuthorText id="author">- {quote.author}</AuthorText>
-          </>
-        )}
-      </QuoteContainer>
-    </MainContainer>
+    <>
+      <Head>
+        <title>Quote of the Day</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <MainContainer>
+        <QuoteContainer>
+          {quote.error ? (
+            <ErrorMessage id="error">{quote.error}</ErrorMessage>
+          ) : (
+            <>
+              <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
+              <AuthorText id="author">- {quote.author}</AuthorText>
+            </>
+          )}
+        </QuoteContainer>
+      </MainContainer>
+    </>
   );
 }
 
