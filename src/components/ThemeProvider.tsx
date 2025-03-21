@@ -23,28 +23,21 @@ const systemTheme = (): PaletteMode => {
   return 'light';
 };
 
-const getInitialTheme = (): PaletteMode | undefined => {
-  if (typeof window !== 'undefined') {
-    return localStorage.getItem('theme') as PaletteMode | undefined;
-  } else {
-    return undefined;
-  }
-};
-
 interface ThemeProviderProps {
   children?: React.ReactNode;
 }
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setTheme] = useState<PaletteMode | undefined>(systemTheme());
-  
-  const useTheme = () => {
-    const context = useContext(ThemeContext);
-    if (context === undefined) {
-      throw new Error('useTheme must be used within a ThemeProvider');
+
+  useEffect(() => {
+    if (window) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+        setTheme(event.matches ? "dark" : "light");
+      });
     }
-    return context;
-  };
+  }, []);
+
 
   const toggleTheme = () => {
     setTheme((prevTheme) => {
@@ -56,9 +49,6 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         case 'dark':
           newTheme = 'light';
           break;
-      }
-      if (typeof window !== 'undefined' && newTheme !== undefined) {
-        // localStorage.setItem('theme', newTheme);
       }
       return newTheme;
     });
