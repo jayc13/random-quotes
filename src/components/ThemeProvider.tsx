@@ -34,7 +34,7 @@ interface ThemeProviderProps {
 }
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<PaletteMode | undefined>(getInitialTheme);
+  const [theme, setTheme] = useState<PaletteMode | undefined>(undefined);
 
   useEffect(() => {
     const initialTheme = getInitialTheme();
