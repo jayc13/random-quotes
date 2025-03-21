@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useState, useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import Loading from '../src/components/Loading';
 import { useTheme } from '../src/components/ThemeProvider';
 import ThemeSwitcher from '../src/components/ThemeSwitcher';
+import Loading from '../src/components/Loading';
 
 type Quote = {
   quote: string;
