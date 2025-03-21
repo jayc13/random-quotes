@@ -1,5 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import ThemeProvider from './ThemeProvider'; // Import useTheme
+
+const theme = {
+  light: {
+    color: '#333',
+  },
+  dark: {
+    color: '#fff',
+  },
+};
 
 const LoadingContainer = styled.div`
   display: flex;
@@ -10,14 +20,16 @@ const LoadingContainer = styled.div`
 
 const LoadingText = styled.p`
   font-size: 1.5em;
-  color: #333;
+  color: ${({ theme }) => theme.color};
 `;
 
 const Loading = () => {
   return (
-    <LoadingContainer id="loading">
-      <LoadingText>Loading...</LoadingText>
-    </LoadingContainer>
+    <ThemeProvider>
+      <LoadingContainer id="loading">
+        <LoadingText>Loading...</LoadingText>
+      </LoadingContainer>
+    </ThemeProvider>
   );
 };
 
