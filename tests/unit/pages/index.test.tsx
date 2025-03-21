@@ -17,7 +17,7 @@ describe('Home', () => {
   it('renders loading state initially', () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
-        json: () => Promise.resolve({ quote: '', author: '' }),
+        json: { quote: '', author: '' },
       }),
     ) as jest.Mock;
     render(<Home />);
@@ -28,7 +28,7 @@ describe('Home', () => {
     const mockQuote = { quote: 'The only way to do great work is to love what you do.', author: 'Steve Jobs' };
     global.fetch = jest.fn(() =>
       Promise.resolve({
-        json: () => Promise.resolve(mockQuote),
+        json: mockQuote,
       }),
     ) as jest.Mock;
     render(<Home />);
