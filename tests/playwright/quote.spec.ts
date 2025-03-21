@@ -6,6 +6,10 @@ test.describe('Quote App', () => {
   });
 
   test('should display a loading indicator initially', async ({ page }) => {
+    await page.route('/api/quote', async route => {
+      await new Promise(f => setTimeout(f, 100));
+      await route.continue();
+    });
     await expect(page.locator('#loading')).toBeVisible();
   });
 
