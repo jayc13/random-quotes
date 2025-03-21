@@ -26,7 +26,7 @@ test.describe('Quote App', () => {
 
   test('should handle errors during quote fetching', async ({ page }) => {
     // Mock the API to simulate an error
-    await page.route('https://api.quotable.io/random', async route => {
+    await page.route('/api/quote', async route => {
       await route.fulfill({
         status: 500,
         contentType: 'application/json',
@@ -41,6 +41,6 @@ test.describe('Quote App', () => {
     await expect(page.locator('#loading')).toBeHidden();
 
     // Check for an error message or fallback content (adjust based on your app's behavior)
-    await expect(page.locator('#quote')).toHaveText('Failed to fetch quote');
+    await expect(page.locator('#error')).toHaveText('Failed to fetch quote');
   });
 });
