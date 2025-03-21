@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import Loading from '../src/components/Loading';
 
 type Quote = {
@@ -6,6 +7,41 @@ type Quote = {
   author: string;
   error?: string;
 };
+
+const MainContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: sans-serif;
+  background-color: #f0f0f0;
+`;
+
+const QuoteContainer = styled.div`
+  background-color: #fff;
+  padding: 20px;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+const ErrorMessage = styled.div`
+  color: #d32f2f;
+  font-weight: bold;
+`;
+
+const QuoteText = styled.p`
+  font-size: 1.4em;
+  font-style: italic;
+  margin-bottom: 10px;
+  color: #333;
+`;
+
+const AuthorText = styled.p`
+  font-size: 1.1em;
+  color: #777;
+`;
 
 function HomePage() {
   const [quote, setQuote] = useState<Quote | null>(null);
@@ -31,34 +67,18 @@ function HomePage() {
   }
 
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      minHeight: '100vh',
-      padding: '20px',
-      fontFamily: 'Arial, sans-serif',
-    }}>
-      <div style={{
-        border: '1px solid #ccc',
-        borderRadius: '8px',
-        maxWidth: '600px',
-        textAlign: 'center',
-      }}>
+    <MainContainer>
+      <QuoteContainer>
         {quote.error ? (
-          <div style={{ color: 'red' }}>{quote.error}</div>
+          <ErrorMessage>{quote.error}</ErrorMessage>
         ) : (
           <>
-            <p style={{ fontSize: '1.5em', fontStyle: 'italic', marginBottom: '10px' }}>
-              "{quote.quote}"
-            </p>
-            <p style={{ fontSize: '1.2em', color: '#555' }}>
-              - {quote.author}
-            </p>
+            <QuoteText>"{quote.quote}"</QuoteText>
+            <AuthorText>- {quote.author}</AuthorText>
           </>
         )}
-      </div>
-    </div>
+      </QuoteContainer>
+    </MainContainer>
   );
 }
 
