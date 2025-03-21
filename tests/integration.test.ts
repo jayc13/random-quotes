@@ -1,10 +1,10 @@
-import createHandler from 'next-test-api-route-handler';
+import { createMocks } from 'node-mocks-http'
 import handler from '../pages/api/quote'; // Import your API route
 
 describe('Integration Tests', () => {
   it('should return a quote', async () => {
-    const { req, res } = createHandler({
-      handler,
+    const { req, res } = createMocks({
+      method: 'GET',
       url: '/api/quote',
     });
 
@@ -20,8 +20,8 @@ describe('Integration Tests', () => {
 
   it('should return a quote by a specific author', async () => {
     const author = 'Steve Jobs';
-    const { req, res } = createHandler({
-      handler,
+    const { req, res } = createMocks({
+      method: 'GET',
       url: `/api/quote?author=${author}`,
     });
 
@@ -37,8 +37,8 @@ describe('Integration Tests', () => {
 
   it('should return 404 when author is not found', async () => {
     const author = 'Unknown Author';
-    const { req, res } = createHandler({
-      handler,
+    const { req, res } = createMocks({
+      method: 'GET',
       url: `/api/quote?author=${author}`,
     });
 
