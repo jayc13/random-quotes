@@ -36,7 +36,7 @@ interface ThemeProviderProps {
 }
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<PaletteMode | undefined>(getInitialTheme());
+  const [theme, setTheme] = useState<PaletteMode | undefined>(systemTheme());
   
   const useTheme = () => {
     const context = useContext(ThemeContext);
@@ -58,7 +58,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
           break;
       }
       if (typeof window !== 'undefined' && newTheme !== undefined) {
-        localStorage.setItem('theme', newTheme);
+        // localStorage.setItem('theme', newTheme);
       }
       return newTheme;
     });
@@ -87,7 +87,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       <MuiThemeProvider theme={muiTheme}>
         <CssBaseline />
         {children}
-        <IconButton onClick={toggleTheme} sx={{ position: 'fixed', bottom: 16, right: 16 }}>
+        <IconButton onClick={() => toggleTheme()} sx={{ position: 'fixed', bottom: 16, right: 16 }}>
           {getThemeIcon()}
         </IconButton>
       </MuiThemeProvider>
