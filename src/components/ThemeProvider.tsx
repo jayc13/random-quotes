@@ -91,7 +91,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         return <LightModeIcon />;
       case 'dark':
         return <DarkModeIcon />;
-      case 'system':
+      case undefined:
         return <AutoModeIcon />;
       default:
         return <AutoModeIcon />;
