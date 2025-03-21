@@ -57,18 +57,16 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const muiTheme: Theme = createTheme({
     palette: {
       mode: theme === undefined ? systemTheme() : theme as PaletteMode,
-      light: true,
-      dark: true,
     },
-    light: {
-      backgroundColor: '#f0f0f0',
-      color: '#333',
-      quoteBackground: '#fff',
+    primary: {
+      main: '#fff',
+      light: '#fff',
+      dark: '#333'
     },
-    dark: {
-      backgroundColor: '#444',
-      color: '#fff',
-      quoteBackground: '#333',
+    secondary: {
+      main: '#f0f0f0',
+      light: '#f0f0f0',
+      dark: '#444',
     },
   });
 
