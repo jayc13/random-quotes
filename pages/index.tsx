@@ -10,37 +10,36 @@ type Quote = {
   error?: string;
 };
 
-const MainContainer = styled("div")(({ theme }) => ({
+const MainContainer = styled("div")(() => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   minHeight: '100vh',
   fontFamily: 'sans-serif',
   // color: theme.color,
-  // backgroundColor: ${({ theme }) => theme[theme.palette.mode].backgroundColor};
 }));
 
-const QuoteContainer = styled("div")(({ theme }) => ({
+const QuoteContainer = styled("div")((props) => ({
   padding: '20px',
   maxWidth: '600px',
   textAlign: 'center',
   boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
   borderRadius: '8px',
-  //backgroundColor: ${({ theme }) => theme[theme.palette.mode].quoteBackground};
+  backgroundColor: props.quoteBackground,
 }));
 
-const ErrorMessage = styled("div")(({ theme }) => ({
+const ErrorMessage = styled("div")(() => ({
   color: '#d32f2f',
-  fontWeight: bold,
+  fontWeight: 'bold',
 }));
 
-const QuoteText = styled("p")(({ theme }) => ({
+const QuoteText = styled("p")(() => ({
   fontSize: '1.4em',
   fontStyle: 'italic',
   marginBottom: '10px',
 }));
 
-const AuthorText = styled("p")(({ theme }) => ({
+const AuthorText = styled("p")(() => ({
   fontSize: '1.1em',
 }));
 
