@@ -16,16 +16,18 @@ const MainContainer = styled("div")(() => ({
   alignItems: 'center',
   minHeight: '100vh',
   fontFamily: 'sans-serif',
-  // color: theme.color,
+  backgroundColor: 'secondary.main', 
+  color: 'secondary.contrastText'
 }));
 
-const QuoteContainer = styled("div")((props) => ({
+const QuoteContainer = styled("div")(() => ({
   padding: '20px',
   maxWidth: '600px',
   textAlign: 'center',
   boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
   borderRadius: '8px',
-  backgroundColor: props.quoteBackground,
+  backgroundColor: 'primary.main', 
+  color: 'primary.contrastText'
 }));
 
 const ErrorMessage = styled("div")(() => ({
