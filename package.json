@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
-    "test": "jest"
+    "test-integration": "jest --testPathPattern=tests/integration",
+    "test-e2e": "npx playwright test"
   },
   "dependencies": {
     "next": "^14.0.0",
@@ -25,6 +26,9 @@
     "supertest": "^6.3.4",
     "ts-jest": "^29.0.0",
     "typescript": "^5.4.3",
-    "@types/jest": "^29.5.12"
+    "@types/jest": "^29.5.12",
+    "node-mocks-http": "^1.15.0",
+    "playwright": "^1.44.0",
+    "@playwright/test": "^1.51.1"
   }
 }
