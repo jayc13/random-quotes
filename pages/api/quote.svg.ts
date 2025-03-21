@@ -6,7 +6,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
   const { quote, author } = quotes[randomIndex];
 
   const svg = `
-    <svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+    <svg xmlns="http://www.w3.org/2000/svg">
       <rect width="100%" height="100%" fill="#f0f0f0" />
       <text x="20" y="80" font-family="Arial" font-size="16" fill="#333" text-anchor="start">
         <tspan x="20" dy="0">${quote}</tspan>
