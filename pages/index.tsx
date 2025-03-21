@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
 import Head from 'next/head';
 import Loading from '../src/components/Loading';
+import ThemeProvider from '../src/components/ThemeProvider';
 
 type Quote = {
   quote: string;
@@ -9,40 +10,40 @@ type Quote = {
   error?: string;
 };
 
-const MainContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
-  font-family: sans-serif;
-  background-color: #f0f0f0;
-`;
+const MainContainer = styled("div")(() => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  minHeight: '100vh',
+  fontFamily: 'sans-serif',
+  backgroundColor: 'secondary.main', 
+  color: 'secondary.contrastText'
+}));
 
-const QuoteContainer = styled.div`
-  background-color: #fff;
-  padding: 20px;
-  max-width: 600px;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
+const QuoteContainer = styled("div")(() => ({
+  padding: '20px',
+  maxWidth: '600px',
+  textAlign: 'center',
+  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+  borderRadius: '8px',
+  backgroundColor: 'primary.main', 
+  color: 'primary.contrastText'
+}));
 
-const ErrorMessage = styled.div`
-  color: #d32f2f;
-  font-weight: bold;
-`;
+const ErrorMessage = styled("div")(() => ({
+  color: '#d32f2f',
+  fontWeight: 'bold',
+}));
 
-const QuoteText = styled.p`
-  font-size: 1.4em;
-  font-style: italic;
-  margin-bottom: 10px;
-  color: #333;
-`;
+const QuoteText = styled("p")(() => ({
+  fontSize: '1.4em',
+  fontStyle: 'italic',
+  marginBottom: '10px',
+}));
 
-const AuthorText = styled.p`
-  font-size: 1.1em;
-  color: #777;
-`;
+const AuthorText = styled("p")(() => ({
+  fontSize: '1.1em',
+}));
 
 function HomePage() {
   const [quote, setQuote] = useState<Quote | null>(null);
@@ -68,7 +69,7 @@ function HomePage() {
   }
 
   return (
-    <>
+    <ThemeProvider>
       <Head>
         <title>Quote of the Day</title>
         <link rel="icon" href="/favicon.ico" />
@@ -85,7 +86,7 @@ function HomePage() {
           )}
         </QuoteContainer>
       </MainContainer>
-    </>
+    </ThemeProvider>
   );
 }
 

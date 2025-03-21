@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
+
 const LoadingContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -30,15 +31,17 @@ const Spinner = styled.div`
 
 const LoadingText = styled.p`
   font-size: 1.2em;
-  color: #333;
+  font-size: 1.5em;
 `;
 
 const Loading = () => {
   return (
-    <LoadingContainer id="loading">
-      <Spinner />
-      <LoadingText>Loading...</LoadingText>
-    </LoadingContainer>
+    <ThemeProvider>
+      <LoadingContainer id="loading">  
+        <Spinner />
+        <LoadingText>Loading...</LoadingText>
+      </LoadingContainer>
+    </ThemeProvider>
   );
 };
 
