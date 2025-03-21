@@ -65,7 +65,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
           newTheme = 'light';
           break;
       }
-      if (typeof window !== 'undefined' && theme !== undefined) {
+      if (typeof window !== 'undefined' && newTheme !== undefined) {
         localStorage.setItem('theme', newTheme);
       }
       return newTheme;
