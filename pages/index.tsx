@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import { useState, useEffect } from 'react';
+import styled, { ThemeProvider } from 'styled-components';
 import Loading from '../src/components/Loading';
+import { useTheme } from '../src/components/ThemeProvider';
+import ThemeSwitcher from '../src/components/ThemeSwitcher';
 
 type Quote = {
   quote: string;
@@ -15,11 +18,12 @@ const MainContainer = styled.div`
   min-height: 100vh;
   padding: 20px;
   font-family: sans-serif;
-  background-color: #f0f0f0;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
 `;
 
 const QuoteContainer = styled.div`
-  background-color: #fff;
+  background-color: ${(props) => props.theme.background};
   padding: 20px;
   max-width: 600px;
   text-align: center;
@@ -35,12 +39,10 @@ const QuoteText = styled.p`
   font-size: 1.4em;
   font-style: italic;
   margin-bottom: 10px;
-  color: #333;
 `;
 
 const AuthorText = styled.p`
   font-size: 1.1em;
-  color: #777;
 `;
 
 function HomePage() {
@@ -78,6 +80,7 @@ function HomePage() {
           </>
         )}
       </QuoteContainer>
+      <ThemeSwitcher />
     </MainContainer>
   );
 }
