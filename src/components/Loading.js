@@ -1,5 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+import { useTheme } from './ThemeProvider'; // Import useTheme
+
+const theme = {
+  light: {
+    color: '#333',
+  },
+  dark: {
+    color: '#fff',
+  },
+};
 
 const LoadingContainer = styled.div`
   display: flex;
@@ -10,14 +20,19 @@ const LoadingContainer = styled.div`
 
 const LoadingText = styled.p`
   font-size: 1.5em;
-  color: #333;
+  color: ${({ theme }) => theme.color};
 `;
 
 const Loading = () => {
+  const { theme: currentTheme } = useTheme();
+  const selectedTheme = currentTheme === 'dark' ? theme.dark : theme.light;
+
   return (
-    <LoadingContainer id="loading">
-      <LoadingText>Loading...</LoadingText>
-    </LoadingContainer>
+    <ThemeProvider theme={selectedTheme}>
+      <LoadingContainer id="loading">
+        <LoadingText>Loading...</LoadingText>
+      </LoadingContainer>
+    </ThemeProvider>
   );
 };
 
