@@ -37,14 +37,6 @@ interface ThemeProviderProps {
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setTheme] = useState<PaletteMode | undefined>(getInitialTheme());
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = () => {
-      setTheme(systemTheme());
-    };
-    mediaQuery.addEventListener('change', handleChange);
-  }, [theme]);
   
   const useTheme = () => {
     const context = useContext(ThemeContext);
