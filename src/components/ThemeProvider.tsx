@@ -60,6 +60,16 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       light: true,
       dark: true,
     },
+    light: {
+      backgroundColor: '#f0f0f0',
+      color: '#333',
+      quoteBackground: '#fff',
+    },
+    dark: {
+      backgroundColor: '#444',
+      color: '#fff',
+      quoteBackground: '#333',
+    },
   });
 
   const getThemeIcon = () => {
