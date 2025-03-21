@@ -15,18 +15,22 @@ describe('Home', () => {
   });
 
   it('renders loading state initially', () => {
-    fetch.mockReturnValueOnce({
-      json: async () => ({ quote: '', author: '' }),
-    });
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve({ quote: '', author: '' }),
+      }),
+    ) as jest.Mock;
     render(<Home />);
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
   it('renders quote and author on successful fetch', async () => {
     const mockQuote = { quote: 'The only way to do great work is to love what you do.', author: 'Steve Jobs' };
-    fetch.mockReturnValueOnce({
-      json: async () => mockQuote,
-    });
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve(mockQuote),
+      }),
+    ) as jest.Mock;
     render(<Home />);
     await waitFor(() => {
       expect(screen.getByText(mockQuote.quote)).toBeInTheDocument();
@@ -35,7 +39,12 @@ describe('Home', () => {
   });
 
   it('renders error message on failed fetch', async () => {
-    fetch.mockReturnValueOnce(new Error('Failed to fetch quote'));
+    
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () => new Error('Failed to fetch quote'),
+      }),
+    ) as jest.Mock;
     render(<Home />);
     await waitFor(() => {
       expect(screen.getByText('Failed to fetch quote')).toBeInTheDocument();
