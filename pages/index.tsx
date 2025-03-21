@@ -73,7 +73,7 @@ function HomePage() {
           <ErrorMessage>{quote.error}</ErrorMessage>
         ) : (
           <>
-            <QuoteText>"{quote.quote}"</QuoteText>
+            <QuoteText>&ldquo;{quote.quote}&rdquo;</QuoteText>
             <AuthorText>- {quote.author}</AuthorText>
           </>
         )}
