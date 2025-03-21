@@ -88,9 +88,6 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
           newTheme = 'dark';
           break;
         case 'dark':
-          newTheme = undefined;
-          break;
-        case undefined:
           newTheme = 'light';
           break;
       }
