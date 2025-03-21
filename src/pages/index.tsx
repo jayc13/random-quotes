@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Head from 'next/head';
-import Loading from '../src/components/Loading';
+import Loading from '../../src/components/Loading';
 
 type Quote = {
   quote: string;
