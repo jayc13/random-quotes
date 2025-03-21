@@ -29,12 +29,12 @@ const MainContainer = styled.div`
   align-items: center;
   min-height: 100vh;
   font-family: sans-serif;
-  background-color: ${({ theme }) => theme.backgroundColor};
-  color: ${({ theme }) => theme.color};
+  background-color: ${({ theme }) => theme[theme.palette.mode].backgroundColor};
+  color: ${({ theme }) => theme[theme.palette.mode].color};
 `;
 
 const QuoteContainer = styled.div`
-  background-color: ${({ theme }) => theme.quoteBackground};
+  background-color: ${({ theme }) => theme[theme.palette.mode].quoteBackground};
   padding: 20px;
   max-width: 600px;
   text-align: center;
