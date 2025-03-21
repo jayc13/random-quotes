@@ -1,16 +1,12 @@
-type Quote = {
-  quote: string;
-  author: string;
-};
-
 import { NextApiRequest, NextApiResponse } from 'next';
 import { promises as fs } from 'fs';
 import path from 'path';
 
 
-const filePath = path.join(process.cwd(), 'pages/api/quotes.json');
-const jsonData = await fs.readFile(filePath, 'utf8');
-const quotes: Quote[] = JSON.parse(jsonData);
+type Quote = {
+  quote: string;
+  author: string;
+};
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,6 +15,11 @@ export default async function handler(
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
+
+  const filePath = path.join(process.cwd(), 'pages/api/quotes.json');
+  const jsonData = await fs.readFile(filePath, 'utf8');
+  const quotes: Quote[] = JSON.parse(jsonData);
+  
   if (req.query.author) {
     const author = req.query.author as string;
     const filteredQuotes = quotes.filter((quote) => quote.author === author);
