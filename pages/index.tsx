@@ -28,7 +28,6 @@ const MainContainer = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 20px;
   font-family: sans-serif;
   background-color: ${({ theme }) => theme.backgroundColor};
   color: ${({ theme }) => theme.color};
