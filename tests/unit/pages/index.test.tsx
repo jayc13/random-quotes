@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Home from '../../pages/index';
+import Home from '../../../pages/index';
 
 // Mock the fetch function
 global.fetch = jest.fn();
@@ -15,7 +15,7 @@ describe('Home', () => {
   });
 
   it('renders loading state initially', () => {
-    fetch.mockResolvedValueOnce({
+    fetch.mockReturnValueOnce({
       json: async () => ({ quote: '', author: '' }),
     });
     render(<Home />);
@@ -24,7 +24,7 @@ describe('Home', () => {
 
   it('renders quote and author on successful fetch', async () => {
     const mockQuote = { quote: 'The only way to do great work is to love what you do.', author: 'Steve Jobs' };
-    fetch.mockResolvedValueOnce({
+    fetch.mockReturnValueOnce({
       json: async () => mockQuote,
     });
     render(<Home />);
@@ -35,7 +35,7 @@ describe('Home', () => {
   });
 
   it('renders error message on failed fetch', async () => {
-    fetch.mockRejectedValueOnce(new Error('Failed to fetch quote'));
+    fetch.mockReturnValueOnce(new Error('Failed to fetch quote'));
     render(<Home />);
     await waitFor(() => {
       expect(screen.getByText('Failed to fetch quote')).toBeInTheDocument();
