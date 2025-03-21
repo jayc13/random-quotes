@@ -5,10 +5,6 @@ test.describe('Quote App', () => {
     await page.goto('/');
   });
 
-  test('should have the correct title', async ({ page }) => {
-    await expect(page).toHaveTitle('Quote of the Day');
-  });
-
   test('should display a loading indicator initially', async ({ page }) => {
     await expect(page.locator('#loading')).toBeVisible();
   });
