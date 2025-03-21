@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { Theme, ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
+import { Theme, ThemeProvider as MuiThemeProvider, createTheme, PaletteMode } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
 import { 
@@ -53,7 +53,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     return () => {
       mediaQuery.removeEventListener('change', handleChange);
     };
-  }, []);
+  }, [theme]);
 
   useEffect(() => {
     localStorage.setItem('theme', theme);
@@ -79,7 +79,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const muiTheme: Theme = createTheme({
     palette: {
-      mode: theme === 'system' ? systemTheme() : theme,
+      mode: theme === 'system' ? systemTheme() : theme as PaletteMode,
     },
   });
 
