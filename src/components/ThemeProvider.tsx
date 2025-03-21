@@ -21,8 +21,12 @@ const systemTheme = (): PaletteMode => {
 };
 
 const getInitialTheme = (): PaletteMode | undefined => {
-  const storedTheme = localStorage.getItem('theme') as PaletteMode | null;
-  return storedTheme || undefined;
+  if (typeof window !== 'undefined') {
+    const storedTheme = localStorage.getItem('theme') as PaletteMode | null;
+    return storedTheme || undefined;
+  } else {
+    return undefined;
+  }
 };
 
 interface ThemeProviderProps {
@@ -54,10 +58,12 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   }, [theme]);
 
   useEffect(() => {
-    if(theme === undefined) {
-      localStorage.removeItem("theme");
-    } else {
-      localStorage.setItem('theme', theme);
+    if (typeof window !== 'undefined') {
+      if(theme === undefined) {
+        localStorage.removeItem("theme");
+      } else {
+        localStorage.setItem('theme', theme);
+      }
     }
   }, [theme]);
 
