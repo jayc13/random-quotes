@@ -30,7 +30,7 @@
     "@types/jest": "^29.5.12",
     "node-mocks-http": "^1.15.0",
     "playwright": "^1.44.0",
-    "@playwright/test": "^1.51.1"
+    "@playwright/test": "^1.51.1",
     "@testing-library/react": "^16.2.0"
   }
 }
