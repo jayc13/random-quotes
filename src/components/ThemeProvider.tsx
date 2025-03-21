@@ -2,7 +2,11 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import { Theme, ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
-import { DarkMode as DarkModeIcon, LightMode as LightModeIcon, AutoMode as AutoModeIcon } from '@mui/icons-material';
+import { 
+  DarkMode as DarkModeIcon, 
+  LightMode as LightModeIcon, 
+  AutoMode as AutoModeIcon
+} from '@mui/icons-material';
 
 type ThemeMode = 'light' | 'dark' | 'system';
 
@@ -23,7 +27,11 @@ const getInitialTheme = (): ThemeMode => {
   return storedTheme || 'system';
 };
 
-const ThemeProvider: React.FC = ({ children }) => {
+interface ThemeProviderProps {
+  children?: React.ReactNode;
+}
+
+const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setTheme] = useState<ThemeMode>(getInitialTheme);
 
   useEffect(() => {
