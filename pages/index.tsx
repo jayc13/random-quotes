@@ -16,7 +16,7 @@ const MainContainer = styled("div")(({ theme }) => ({
   alignItems: 'center',
   minHeight: '100vh',
   fontFamily: 'sans-serif',
-  color: theme.color,
+  // color: theme.color,
   // backgroundColor: ${({ theme }) => theme[theme.palette.mode].backgroundColor};
 }));
 
