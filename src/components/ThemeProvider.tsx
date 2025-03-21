@@ -25,8 +25,7 @@ const systemTheme = (): PaletteMode => {
 
 const getInitialTheme = (): PaletteMode | undefined => {
   if (typeof window !== 'undefined') {
-    const storedTheme = localStorage.getItem('theme') as PaletteMode | null;
-    return storedTheme || undefined;
+    return localStorage.getItem('theme') as PaletteMode | undefined;
   } else {
     return undefined;
   }
@@ -37,41 +36,16 @@ interface ThemeProviderProps {
 }
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<PaletteMode | undefined>(undefined);
+  const [theme, setTheme] = useState<PaletteMode | undefined>(getInitialTheme());
 
   useEffect(() => {
-    const initialTheme = getInitialTheme();
-    if (initialTheme === undefined) {
-      setTheme(systemTheme());
-    } else {
-      setTheme(initialTheme);
-    }
-
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => {
-      if (theme === undefined) {
-        setTheme(systemTheme());
-      }
+      setTheme(systemTheme());
     };
     mediaQuery.addEventListener('change', handleChange);
-
-    return () => {
-      mediaQuery.removeEventListener('change', handleChange);
-    };
   }, [theme]);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if(theme === undefined) {
-        localStorage.removeItem("theme");
-      } else {
-        localStorage.setItem('theme', theme);
-      }
-    }
-  }, [theme]);
-
   
-
   const useTheme = () => {
     const context = useContext(ThemeContext);
     if (context === undefined) {
@@ -91,6 +65,9 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
           newTheme = 'light';
           break;
       }
+      if (typeof window !== 'undefined' && theme !== undefined) {
+        localStorage.setItem('theme', newTheme);
+      }
       return newTheme;
     });
   };
@@ -107,8 +84,6 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         return <LightModeIcon />;
       case 'dark':
         return <DarkModeIcon />;
-      case undefined:
-        return <AutoModeIcon />;
       default:
         return <AutoModeIcon />;
     }
