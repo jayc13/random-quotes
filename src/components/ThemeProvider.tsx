@@ -16,8 +16,11 @@ interface ThemeContextProps {
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 const systemTheme = (): PaletteMode => {
-  const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  return prefersDarkMode ? 'dark' : 'light';
+  if (typeof window !== 'undefined') {
+    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return prefersDarkMode ? 'dark' : 'light';
+  }
+  return 'light';
 };
 
 const getInitialTheme = (): PaletteMode | undefined => {
