@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import Head from 'next/head';
 import Loading from '../src/components/Loading';
-import { useTheme } from '../src/components/ThemeProvider'; // Import useTheme
+import ThemeProvider from '../src/components/ThemeProvider';
 
 type Quote = {
   quote: string;
@@ -59,9 +59,6 @@ const AuthorText = styled.p`
 
 function HomePage() {
   const [quote, setQuote] = useState<Quote | null>(null);
-  const { theme: currentTheme } = useTheme(); // Use the useTheme hook
-  const selectedTheme = currentTheme === 'dark' ? theme.dark : theme.light;
-
 
   useEffect(() => {
     async function fetchQuote() {
@@ -84,7 +81,7 @@ function HomePage() {
   }
 
   return (
-    <ThemeProvider theme={selectedTheme}> {/* Pass the theme object */}
+    <ThemeProvider>
       <Head>
         <title>Quote of the Day</title>
         <link rel="icon" href="/favicon.ico" />
