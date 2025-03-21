@@ -1,6 +1,6 @@
 import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import { useTheme } from './ThemeProvider'; // Import useTheme
+import styled from 'styled-components';
+import ThemeProvider from './ThemeProvider'; // Import useTheme
 
 const theme = {
   light: {
@@ -24,11 +24,8 @@ const LoadingText = styled.p`
 `;
 
 const Loading = () => {
-  const { theme: currentTheme } = useTheme();
-  const selectedTheme = currentTheme === 'dark' ? theme.dark : theme.light;
-
   return (
-    <ThemeProvider theme={selectedTheme}>
+    <ThemeProvider>
       <LoadingContainer id="loading">
         <LoadingText>Loading...</LoadingText>
       </LoadingContainer>
