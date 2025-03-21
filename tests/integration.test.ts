@@ -48,4 +48,17 @@ describe('Integration Tests', () => {
     const data = res._getJSONData();
     expect(data).toHaveProperty('error', `No quotes found for author: ${author}`);
   });
+
+  it('should return 405 for non-GET requests', async () => {
+    const { req, res } = createMocks({
+      method: 'POST',
+      url: '/api/quote',
+    });
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(405);
+    const data = res._getJSONData();
+    expect(data).toHaveProperty('error', 'Method Not Allowed');
+  });
 });
