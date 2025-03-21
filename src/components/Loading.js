@@ -15,7 +15,7 @@ const LoadingText = styled.p`
 
 const Loading = () => {
   return (
-    <LoadingContainer>
+    <LoadingContainer id="loading">
       <LoadingText>Loading...</LoadingText>
     </LoadingContainer>
   );

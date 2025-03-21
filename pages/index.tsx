@@ -51,7 +51,7 @@ function HomePage() {
       try {
         const response = await fetch('/api/quote');
         if (!response.ok) {
-          throw new Error(`Failed to fetch quote: ${response.status}`);
+          throw new Error(`Failed to fetch quote`);
         }
         const data: Quote = await response.json();
         setQuote(data);
@@ -70,11 +70,11 @@ function HomePage() {
     <MainContainer>
       <QuoteContainer>
         {quote.error ? (
-          <ErrorMessage>{quote.error}</ErrorMessage>
+          <ErrorMessage id="error">{quote.error}</ErrorMessage>
         ) : (
           <>
-            <QuoteText>&ldquo;{quote.quote}&rdquo;</QuoteText>
-            <AuthorText>- {quote.author}</AuthorText>
+            <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
+            <AuthorText id="author">- {quote.author}</AuthorText>
           </>
         )}
       </QuoteContainer>
