@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
-    "test-unit": "jest --testPathPattern=tests/unit",
-    "test-integration": "jest --testPathPattern=tests/integration",
+    "test-unit": "jest --testPathPattern=tests/unit --detectOpenHandles",
+    "test-integration": "jest --testPathPattern=tests/integration --detectOpenHandles",
     "test-e2e": "npx playwright test"
   },
   "dependencies": {
