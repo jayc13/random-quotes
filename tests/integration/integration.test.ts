@@ -2,6 +2,11 @@ import { createMocks } from 'node-mocks-http'
 import handler from '../../pages/api/quote'; // Import your API route
 
 describe('Integration Tests', () => {
+
+  afterAll(() => {
+    clearInterval(global.cleanupInterval);
+  });
+  
   it('should return a quote', async () => {
     const { req, res } = createMocks({
       method: 'GET',
