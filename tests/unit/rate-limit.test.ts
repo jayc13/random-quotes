@@ -20,7 +20,12 @@ describe('Rate Limiting', () => {
       socket: {
         remoteAddress: '127.0.0.1',
       },
-    } as NextApiRequest;
+      // Add other required properties with default or mock values
+      query: {},
+      cookies: {},
+      body: {},
+      env: {},
+    } as Partial<NextApiRequest> as NextApiRequest;
 
     const res = {
       status: jest.fn().mockReturnThis(),
@@ -51,7 +56,12 @@ describe('Rate Limiting', () => {
       socket: {
         remoteAddress: '127.0.0.1',
       },
-    } as NextApiRequest;
+      // Add other required properties with default or mock values
+      query: {},
+      cookies: {},
+      body: {},
+      env: {},
+    } as Partial<NextApiRequest> as NextApiRequest;
 
     const res = {
       status: jest.fn().mockReturnThis(),
@@ -82,7 +92,12 @@ describe('Rate Limiting', () => {
       socket: {
         remoteAddress: '192.168.1.1',
       },
-    } as NextApiRequest;
+      // Add other required properties with default or mock values
+      query: {},
+      cookies: {},
+      body: {},
+      env: {},
+    } as Partial<NextApiRequest> as NextApiRequest;
 
     const req2 = {
       headers: {
@@ -91,7 +106,12 @@ describe('Rate Limiting', () => {
       socket: {
         remoteAddress: '192.168.1.2',
       },
-    } as NextApiRequest;
+      // Add other required properties with default or mock values
+      query: {},
+      cookies: {},
+      body: {},
+      env: {},
+    } as Partial<NextApiRequest> as NextApiRequest;
 
     const res1 = {
       status: jest.fn().mockReturnThis(),
