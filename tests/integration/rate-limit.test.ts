@@ -1,7 +1,12 @@
-import rateLimit from '../../../pages/api/rate-limit';
+import rateLimit from '../../pages/api/rate-limit';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 describe('Rate Limiting', () => {
+
+  afterAll(() => {
+    clearInterval(global.cleanupInterval);
+  });
+  
   it('should allow requests within the limit', async () => {
     const limiter = rateLimit({
       interval: 1000, // 1 second
