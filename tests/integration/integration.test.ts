@@ -3,7 +3,7 @@ import handler from '../../pages/api/quote'; // Import your API route
 
 describe('Integration Tests', () => {
 
-  after(() => {
+  afterAll(() => {
     clearInterval(global.cleanupInterval);
   });
   
