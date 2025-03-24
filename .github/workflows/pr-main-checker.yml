@@ -25,6 +25,8 @@ jobs:
         run: npm run build
       - name: Lint Check
         run: npm run lint
+      - name: Run unit tests
+        run: npm run test-unit
   integration-test:
     name: "Integration Tests"
     needs: [build-check]
