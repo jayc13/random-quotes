@@ -9,7 +9,11 @@
     "moduleResolution": "node",
     "outDir": ".next",
     "sourceMap": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "noEmit": true,
+    "incremental": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
