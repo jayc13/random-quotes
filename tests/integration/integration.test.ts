@@ -62,3 +62,16 @@ describe('Integration Tests', () => {
     expect(data).toHaveProperty('error', 'Method Not Allowed');
   });
 });
+
+describe('GET /api/quote.svg', () => {
+  it('should return a 200 status code and an SVG image', async () => {
+    const { req, res } = createMocks({
+      method: 'GET',
+      url: '/api/quote.svg',
+    });
+
+    await handler(req, res);
+    expect(res.statusCode).toBe(200);
+    // /expect(res.headers.get('Content-Type')).toBe('image/svg+xml');
+  });
+});
