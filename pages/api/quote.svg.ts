@@ -1,7 +1,19 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import quotes from './quotes.json';
+import rateLimit from './rate-limit';
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
+const limiter = rateLimit({
+  interval: 60 * 1000, // 1 minute
+  uniqueTokenPerInterval: 50, // Max 50 requests per minute for SVG
+});
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    await limiter.check(req, res);
+  } catch {
+    return res.status(429).send('Rate limit exceeded');
+  }
+
   const randomIndex = Math.floor(Math.random() * quotes.length);
   const { quote, author } = quotes[randomIndex];
 
