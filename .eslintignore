@@ -6,3 +6,5 @@ paclage.json
 run_tests.sh
 tsconfig.json
 vercel.json
+babel.config.js
+next.config.js
