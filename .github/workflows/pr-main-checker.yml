@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.npm
@@ -40,6 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.npm
@@ -63,6 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.npm
@@ -98,6 +101,7 @@ jobs:
       url: ${{ steps.get_release_url.outputs.release_url }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.npm
