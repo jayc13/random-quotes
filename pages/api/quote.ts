@@ -1,11 +1,17 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { promises as fs } from 'fs';
 import path from 'path';
+import rateLimit from './rate-limit';
 
 type Quote = {
   quote: string;
   author: string;
 };
+
+const limiter = rateLimit({
+  interval: 60 * 1000, // 1 minute
+  uniqueTokenPerInterval: 100, // Max 100 requests per minute
+});
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,45 +21,10 @@ export default async function handler(
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  // Rate limiting
-  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-  const rateLimitWindow = 60 * 1000; // 60 seconds
-  const maxRequests = 100;
-
-  if (!global.requestCounts) {
-    global.requestCounts = new Map<string, number[]>();
-  }
-
-  const now = Date.now();
-  const timestamps = global.requestCounts.get(ip as string) || [];
-  const recentRequests = timestamps.filter(
-    (timestamp) => now - timestamp < rateLimitWindow
-  );
-
-  if (recentRequests.length >= maxRequests) {
-    return res.status(429).json({ error: 'Too Many Requests' });
-  }
-
-  global.requestCounts.set(ip as string, [...recentRequests, now]);
-
-  // Periodically clean up old entries
-  if (!global.cleanupInterval) {
-    global.cleanupInterval = setInterval(() => {
-      const rateLimitWindow = 60 * 1000;
-      const now = Date.now();
-      if (global.requestCounts) {
-        for (const [ip, timestamps] of global.requestCounts.entries()) {
-          const recentRequests = timestamps.filter(
-            (timestamp) => now - timestamp < rateLimitWindow
-          );
-          if (recentRequests.length === 0) {
-            global.requestCounts.delete(ip);
-          } else {
-            global.requestCounts.set(ip, recentRequests);
-          }
-        }
-      }
-    }, 60 * 1000);
+  try {
+    await limiter.check(req, res);
+  } catch {
+    return res.status(429).json({ error: 'Rate limit exceeded' });
   }
 
   const filePath = path.join(process.cwd(), 'pages/api/quotes.json');
