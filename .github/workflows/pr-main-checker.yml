@@ -98,7 +98,7 @@ jobs:
     # needs: [e2e-test, integration-test]
     environment: 
       name: Preview
-      url: ${{ steps.get_release_url.outputs.release_url }}
+      url: ${{ steps.deploy_to_vercel.outputs.release_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/cache@v4
@@ -118,11 +118,8 @@ jobs:
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
+        id: deploy_to_vercel
         run: |
           DEPLOYMENT_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
-          echo $DEPLOYMENT_URL
-      - name: Set deploy URL
-        id: get_release_url
-        run: |
           echo $DEPLOYMENT_URL
           echo release_url=$DEPLOYMENT_URL >> $GITHUB_OUTPUT
