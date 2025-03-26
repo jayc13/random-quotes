@@ -1,65 +1,31 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import { Theme, ThemeProvider as NextThemesProvider, createTheme, PaletteMode } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import IconButton from '@mui/material/IconButton';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Utility function to get system theme
-const systemTheme = (): PaletteMode | undefined => {
-  if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    return 'dark';
-  }
-  return 'light';
-};
-
-interface ThemeProviderProps {
-  children?: React.ReactNode;
+interface ThemeContextProps {
+  theme: string;
+  setTheme: (theme: string) => void;
 }
 
-const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
-  const [theme, setTheme] = useState<PaletteMode | undefined>(systemTheme());
+const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
-  useEffect(() => {
-    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
-      setTheme(e.matches ? 'dark' : 'light');
-    };
-
-    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    darkModeMediaQuery.addEventListener('change', handleSystemThemeChange);
-
-    return () => {
-      darkModeMediaQuery.removeEventListener('change', handleSystemThemeChange);
-    };
-  }, []);
-
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
-  };
-
-  const muiTheme = createTheme({
-    palette: {
-      mode: theme,
-    },
-  });
-
-  const getThemeIcon = () => {
-    if (theme === 'light') {
-      return '🌞'; // Sun icon for light theme
-    }
-    return '🌜'; // Moon icon for dark theme
-  };
-
-  return (
-    <NextThemesProvider theme={muiTheme} {...props}>
-      <CssBaseline />
-      {children}
-      <IconButton
-        onClick={toggleTheme}
-        sx={{ position: 'fixed', bottom: 16, right: 16 }}
-      >
-        {getThemeIcon()}
-      </IconButton>
-    </NextThemesProvider>
-  );
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
 };
 
-export default ThemeProvider;
+export const ThemeProvider: React.FC = ({ children }) => {
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    setTheme(systemTheme);
+  }, []);
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
