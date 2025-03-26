@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import { Theme, ThemeProvider as NextThemesProvider, createTheme, PaletteMode } from '@mui/material/styles';
+import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
+import { ThemeProvider as MuiThemeProvider, createTheme, PaletteMode } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
 
@@ -10,8 +10,15 @@ const systemTheme = (): PaletteMode | undefined => {
   return 'light';
 };
 
+interface ThemeContextType {
+  theme: PaletteMode | undefined;
+  toggleTheme: () => void;
+}
+
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
 interface ThemeProviderProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, ...props }) => {
@@ -48,21 +55,23 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, ...props }) => 
   };
 
   return (
-    <NextThemesProvider theme={muiTheme} {...props}>
-      <CssBaseline />
-      {children}
-      <IconButton
-        onClick={toggleTheme}
-        sx={{ position: 'fixed', bottom: 16, right: 16 }}
-      >
-        {getThemeIcon()}
-      </IconButton>
-    </NextThemesProvider>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <MuiThemeProvider theme={muiTheme} {...props}>
+        <CssBaseline />
+        {children}
+        <IconButton
+          onClick={toggleTheme}
+          sx={{ position: 'fixed', bottom: 16, right: 16 }}
+        >
+          {getThemeIcon()}
+        </IconButton>
+      </MuiThemeProvider>
+    </ThemeContext.Provider>
   );
 };
 
 export const useTheme = () => {
-  const context = useContext(NextThemesProvider);
+  const context = useContext(ThemeContext);
   if (!context) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
