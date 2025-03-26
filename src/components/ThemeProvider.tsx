@@ -2,23 +2,11 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import { Theme, ThemeProvider as NextThemesProvider, createTheme, PaletteMode } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
-import { 
-  DarkMode as DarkModeIcon, 
-  LightMode as LightModeIcon, 
-  AutoMode as AutoModeIcon
-} from '@mui/icons-material';
 
-interface ThemeContextProps {
-  theme?: PaletteMode;
-  setTheme: (theme: PaletteMode) => void;
-}
-
-const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
-
-const systemTheme = (): PaletteMode => {
-  if (typeof window !== 'undefined') {
-    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return prefersDarkMode ? 'dark' : 'light';
+// Utility function to get system theme
+const systemTheme = (): PaletteMode | undefined => {
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return 'dark';
   }
   return 'light';
 };
@@ -27,71 +15,56 @@ interface ThemeProviderProps {
   children?: React.ReactNode;
 }
 
+const ThemeContext = createContext<{
+  theme: PaletteMode | undefined;
+  setTheme: React.Dispatch<React.SetStateAction<PaletteMode | undefined>>;
+} | undefined>(undefined);
+
 const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<PaletteMode | undefined>(systemTheme());
 
   useEffect(() => {
-    if (window) {
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-        setTheme(event.matches ? "dark" : "light");
-      });
-    }
+    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+      setTheme(e.matches ? 'dark' : 'light');
+    };
+
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    darkModeMediaQuery.addEventListener('change', handleSystemThemeChange);
+
+    return () => {
+      darkModeMediaQuery.removeEventListener('change', handleSystemThemeChange);
+    };
   }, []);
 
-
   const toggleTheme = () => {
-    setTheme((prevTheme) => {
-      let newTheme: PaletteMode | undefined;
-      switch (prevTheme) {
-        case 'light':
-          newTheme = 'dark';
-          break;
-        case 'dark':
-          newTheme = 'light';
-          break;
-      }
-      return newTheme;
-    });
+    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
-  const muiTheme: Theme = createTheme({
+  const muiTheme = createTheme({
     palette: {
-      mode: theme === undefined ? systemTheme() : theme as PaletteMode,
-      primary: {
-        main: '#fff',
-        light: '#fff',
-        dark: '#333'
-      },
-      secondary: {
-        main: '#f0f0f0',
-        light: '#f0f0f0',
-        dark: '#444',
-      },
+      mode: theme,
     },
   });
 
   const getThemeIcon = () => {
-    switch (theme) {
-      case 'light':
-        return <LightModeIcon />;
-      case 'dark':
-        return <DarkModeIcon />;
-      default:
-        return <AutoModeIcon />;
+    if (theme === 'light') {
+      return '🌞'; // Sun icon for light theme
     }
+    return '🌜'; // Moon icon for dark theme
   };
 
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
-
   return (
-    <NextThemesProvider value={{ theme: muiTheme, setTheme }}>
-        <CssBaseline />
-        {children}
-        <IconButton onClick={() => toggleTheme()} sx={{ position: 'fixed', bottom: 16, right: 16 }}>
-          {getThemeIcon()}
-        </IconButton>
+    <NextThemesProvider {...props}>
+      <CssBaseline />
+      {children}
+      <IconButton
+        onClick={toggleTheme}
+        sx={{ position: 'fixed', bottom: 16, right: 16 }}
+      >
+        {getThemeIcon()}
+      </IconButton>
     </NextThemesProvider>
   );
 };
 
-export default ThemeProvider;
+export { ThemeProvider, ThemeContext };
