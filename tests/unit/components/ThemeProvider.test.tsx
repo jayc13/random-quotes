@@ -32,7 +32,6 @@ describe('ThemeProvider', () => {
 
   it('should initialize with system preference if no theme is stored - default dark theme', () => {
     setupMatchMedia(true); // Mock system preference as dark
-    console.log('debug:', window.matchMedia('(prefers-color-scheme: dark)').matches);
     render(
       <ThemeProvider>
         <TestComponent />
@@ -43,7 +42,6 @@ describe('ThemeProvider', () => {
 
   it('should initialize with system preference if no theme is stored - default light theme', () => {
     setupMatchMedia(false); // Mock system preference as light
-    console.log('debug:', window.matchMedia('(prefers-color-scheme: dark)').matches);
     render(
       <ThemeProvider>
         <TestComponent />
