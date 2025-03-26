@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Head from 'next/head';
 import Loading from '../src/components/Loading';
-import { ThemeProvider } from '../src/components/ThemeProvider';
+import ThemeProvider from '../src/components/ThemeProvider';
 
 type Quote = {
   quote: string;
