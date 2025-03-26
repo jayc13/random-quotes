@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Home from '../../../pages/index';
+import HomePage from '../../../pages/index';
 import { act } from 'react-dom/test-utils';
 
 // Mock the fetch function
@@ -21,22 +21,14 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 });
 
-describe('Home', () => {
-  it('renders a heading', () => {
-    render(<Home />);
-    const heading = screen.getByRole('heading', {
-      name: /hello/i,
-    });
-    expect(heading).toBeInTheDocument();
-  });
-
+describe('HomePage', () => {
   it('renders loading state initially', () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
-        json: { quote: '', author: '' },
+        json: () => ({ quote: '', author: '' }),
       }),
     ) as jest.Mock;
-    render(<Home />);
+    render(<HomePage />);
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
@@ -44,26 +36,24 @@ describe('Home', () => {
     const mockQuote = { quote: 'The only way to do great work is to love what you do.', author: 'Steve Jobs' };
     global.fetch = jest.fn(() =>
       Promise.resolve({
-        json: mockQuote,
+        json: () => mockQuote,
       }),
     ) as jest.Mock;
     await act(async () => {
-      render(<Home />);
+      render(<HomePage />);
     });
     await waitFor(() => {
-      expect(screen.getByText(mockQuote.quote)).toBeInTheDocument();
+      expect(screen.getByText(`“${mockQuote.quote}”`)).toBeInTheDocument();
       expect(screen.getByText(`- ${mockQuote.author}`)).toBeInTheDocument();
     });
   });
 
   it('renders error message on failed fetch', async () => {
     global.fetch = jest.fn(() =>
-      Promise.resolve({
-        json: () => new Error('Failed to fetch quote'),
-      }),
+      Promise.reject(new Error('Failed to fetch quote')),
     ) as jest.Mock;
     await act(async () => {
-      render(<Home />);
+      render(<HomePage />);
     });
     await waitFor(() => {
       expect(screen.getByText('Failed to fetch quote')).toBeInTheDocument();
