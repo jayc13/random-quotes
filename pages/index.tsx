@@ -126,10 +126,4 @@ const NewQuoteButton = styled("button")<{ disabled?: boolean }>(({ disabled }) =
   cursor: disabled ? 'default' : 'pointer',
 }));
 
-
-export default HomePage
-
-  );
-}
-
 export default HomePage
