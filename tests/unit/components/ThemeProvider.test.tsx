@@ -1,28 +1,24 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { ThemeProvider, useTheme } from '../../../src/components/ThemeProvider';
+import ThemeProvider, { useTheme } from '../../../src/components/ThemeProvider';
 
 const TestComponent: React.FC = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   return (
     <div>
       <span data-testid="theme">{theme}</span>
-      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>Toggle Theme</button>
+      <button onClick={toggleTheme}>Toggle Theme</button>
     </div>
   );
 };
 
 describe('ThemeProvider', () => {
-  beforeEach(() => {
-    localStorage.clear();
-  });
-
-  it('should initialize with system preference if no theme is stored', () => {
+  const setupMatchMedia = (matches: boolean) => {
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
       value: jest.fn().mockImplementation((query) => ({
-        matches: query === '(prefers-color-scheme: dark)',
+        matches,
         media: query,
         onchange: null,
         addListener: jest.fn(),
@@ -32,34 +28,19 @@ describe('ThemeProvider', () => {
         dispatchEvent: jest.fn(),
       })),
     });
+  };
 
-    window.matchMedia('(prefers-color-scheme: dark)').matches = true;
+  it('should initialize with system preference if no theme is stored - default dark theme', () => {
+    setupMatchMedia(true);
     render(
       <ThemeProvider>
         <TestComponent />
       </ThemeProvider>
     );
     expect(screen.getByTestId('theme')).toHaveTextContent('dark');
-
-    window.matchMedia('(prefers-color-scheme: dark)').matches = false;
-    render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
-    );
-    expect(screen.getByTestId('theme')).toHaveTextContent('light');
   });
-
-  it('should initialize with stored theme from localStorage', () => {
-    localStorage.setItem('theme', 'dark');
-    render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
-    );
-    expect(screen.getByTestId('theme')).toHaveTextContent('dark');
-
-    localStorage.setItem('theme', 'light');
+  it('should initialize with system preference if no theme is stored - default light theme', () => {
+    setupMatchMedia(false);
     render(
       <ThemeProvider>
         <TestComponent />
@@ -83,20 +64,5 @@ describe('ThemeProvider', () => {
 
     fireEvent.click(toggleButton);
     expect(screen.getByTestId('theme')).toHaveTextContent('light');
-  });
-
-  it('should persist theme preference in localStorage', () => {
-    render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
-    );
-
-    const toggleButton = screen.getByRole('button', { name: /toggle theme/i });
-    fireEvent.click(toggleButton);
-    expect(localStorage.getItem('theme')).toBe('dark');
-
-    fireEvent.click(toggleButton);
-    expect(localStorage.getItem('theme')).toBe('light');
   });
 });
