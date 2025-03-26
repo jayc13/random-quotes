@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import Head from 'next/head';
 import Loading from '../src/components/Loading';
 import ThemeProvider from '../src/components/ThemeProvider';
+import RotateRightIcon from '@mui/icons-material/RotateRight';
 
 type Quote = {
   quote: string;
@@ -51,12 +52,15 @@ const AuthorText = styled("p")(() => ({
 const NewQuoteButton = styled("button")<{ disabled?: boolean }>(({ disabled }) => ({
   marginTop: '20px',
   padding: '10px 20px',
-  fontSize: '1em',
+  fontSize: '0px', /* Hide the text */
   color: 'primary.contrastText',
   backgroundColor: disabled ? 'gray' : 'secondary.main',
   border: 'none',
   borderRadius: '5px',
   cursor: disabled ? 'default' : 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px',
 }));
 
 const Tagline = styled("div")(() => ({
@@ -107,7 +111,7 @@ const HomePage = () => {
               <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
               <AuthorText id="author">- {quote.author}</AuthorText>
               <NewQuoteButton onClick={() => fetchNewQuote()} disabled={loading}>
-                New Quote
+                <RotateRightIcon />
               </NewQuoteButton>
             </>
           )}
