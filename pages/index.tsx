@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Head from 'next/head';
 import Loading from '../src/components/Loading';
-import ThemeProvider from '../src/components/ThemeProvider';
+import ThemeProvider, { useTheme } from '../src/components/ThemeProvider';
+import Image from 'next/image';
 
 type Quote = {
   quote: string;
@@ -67,25 +68,47 @@ const Tagline = styled("div")(() => ({
   color: 'text.primary',
 }));
 
+const QuoteImage = styled(Image)(() => ({
+  maxWidth: '100%',
+  height: 'auto',
+}));
+
 const HomePage = () => {
-  const [quote, setQuote] = useState<Quote | null>(null);
+  const [quote, setQuote] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     async function fetchQuote() {
       try {
-        const response = await fetch('/api/quote');
+        const response = await fetch(`/api/quote.svg?theme=${theme}`);
         if (!response.ok) {
           throw new Error('Failed to fetch quote');
         }
-        const data: Quote = await response.json();
-        setQuote(data);
+        const svg = await response.text();
+        setQuote(svg);
       } catch (error: any) {
-        setQuote({ quote: '', author: '', error: error.message });
+        setQuote(`<div id="error">Failed to fetch quote: ${error.message}</div>`);
       }
     }
     fetchQuote();
-  }, []);
+  }, [theme]);
+
+  async function fetchNewQuote() {
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/quote.svg?theme=${theme}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch quote');
+      }
+      const svg = await response.text();
+      setQuote(svg);
+    } catch (error) {
+      setQuote(`<div id="error">Failed to fetch new quote: ${error}</div>`);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   if (!quote) {
     return <Loading />;
@@ -99,38 +122,15 @@ const HomePage = () => {
       </Head>
       <MainContainer>
         <QuoteContainer>
-          {quote.error ? (
-            <ErrorMessage id="error">{quote.error}</ErrorMessage>
-          ) : (
-            <>
-              <Tagline>Your daily dose of inspiration.</Tagline>
-              <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
-              <AuthorText id="author">- {quote.author}</AuthorText>
-              <NewQuoteButton onClick={() => fetchNewQuote()} disabled={loading}>
-                New Quote
-              </NewQuoteButton>
-            </>
-          )}
+          <Tagline>Your daily dose of inspiration.</Tagline>
+          <div dangerouslySetInnerHTML={{ __html: quote }} />
+          <NewQuoteButton onClick={() => fetchNewQuote()} disabled={loading}>
+            New Quote
+          </NewQuoteButton>
         </QuoteContainer>
       </MainContainer>
     </ThemeProvider>
   );
-
-  async function fetchNewQuote() {
-    setLoading(true);
-    try {
-      const response = await fetch('/api/quote');
-      if (!response.ok) {
-        throw new Error('Failed to fetch quote');
-      }
-      const data = await response.json();
-      setQuote(data);
-    } catch (error) {
-      setQuote({ quote: '', author: '', error: 'Failed to fetch new quote' });
-    } finally {
-      setLoading(false);
-    }
-  }
 }
 
 export default HomePage;

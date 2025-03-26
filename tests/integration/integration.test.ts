@@ -70,7 +70,7 @@ describe('Integration Tests', () => {
 });
 
 describe('GET /api/quote.svg', () => {
-  it('should return a 200 status code and an SVG image', async () => {
+  it('should return a 200 status code and an SVG image without theme', async () => {
     const { req, res } = createMocks({
       method: 'GET',
       url: '/api/quote.svg',
@@ -78,6 +78,36 @@ describe('GET /api/quote.svg', () => {
 
     await handler(req, res);
     expect(res.statusCode).toBe(200);
-    // /expect(res.headers.get('Content-Type')).toBe('image/svg+xml');
+    expect(res.getHeader('Content-Type')).toBe('image/svg+xml');
+  });
+
+  it('should return a 200 status code and an SVG image with light theme', async () => {
+    const { req, res } = createMocks({
+      method: 'GET',
+      url: '/api/quote.svg?theme=light',
+    });
+
+    await handler(req, res);
+    expect(res.statusCode).toBe(200);
+    expect(res.getHeader('Content-Type')).toBe('image/svg+xml');
+    const svg = res._getData().toString();
+    expect(svg).toContain('<rect fill="#f0f0f0"');
+    expect(svg).toContain('<text fill="#333"');
+    expect(svg).toContain('<text fill="#777"');
+  });
+
+  it('should return a 200 status code and an SVG image with dark theme', async () => {
+    const { req, res } = createMocks({
+      method: 'GET',
+      url: '/api/quote.svg?theme=dark',
+    });
+
+    await handler(req, res);
+    expect(res.statusCode).toBe(200);
+    expect(res.getHeader('Content-Type')).toBe('image/svg+xml');
+    const svg = res._getData().toString();
+    expect(svg).toContain('<rect fill="#333"');
+    expect(svg).toContain('<text fill="#f0f0f0"');
+    expect(svg).toContain('<text fill="#ccc"');
   });
 });
