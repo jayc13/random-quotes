@@ -4,11 +4,11 @@ import '@testing-library/jest-dom';
 import ThemeProvider, { useTheme } from '../../../src/components/ThemeProvider';
 
 const TestComponent: React.FC = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   return (
     <div>
       <span data-testid="theme">{theme}</span>
-      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>Toggle Theme</button>
+      <button onClick={toggleTheme}>Toggle Theme</button>
     </div>
   );
 };
