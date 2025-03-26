@@ -34,11 +34,7 @@ describe('HomePage', () => {
     const fakeQuote = { quote: 'Test Quote', author: 'Test Author' };
 
     // Mock fetch response
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve(fakeQuote),
-      })
-    ) as jest.Mock;
+    global.fetch = jest.fn(() => Promise.resolve(fakeQuote) as jest.Mock;
 
     await act(async () => {
       render(<HomePage />);
