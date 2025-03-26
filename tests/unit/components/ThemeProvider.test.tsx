@@ -5,7 +5,12 @@ import ThemeProvider from '../../../src/components/ThemeProvider';
 
 const TestComponent: React.FC = () => {
   return (
-    <div></div>
+    <div>
+      <span data-testid="theme">{document.body.classList.contains('dark') ? 'dark' : 'light'}</span>
+      <button onClick={() => document.body.classList.toggle('dark', !document.body.classList.contains('dark'))}>
+        Toggle Theme
+      </button>
+    </div>
   );
 };
 
