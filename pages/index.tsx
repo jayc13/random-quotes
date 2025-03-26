@@ -69,10 +69,11 @@ const Tagline = styled("div")(() => ({
 
 const HomePage = () => {
   const [quote, setQuote] = useState<Quote | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchQuote() {
+      setLoading(true);
       try {
         const response = await fetch('/api/quote');
         if (!response.ok) {
@@ -82,13 +83,19 @@ const HomePage = () => {
         setQuote(data);
       } catch (error: any) {
         setQuote({ quote: '', author: '', error: error.message });
+      } finally {
+        setLoading(false);
       }
     }
     fetchQuote();
   }, []);
 
-  if (!quote) {
+  if (loading) {
     return <Loading />;
+  }
+
+  if (!quote) {
+    return null; // or a different fallback if needed
   }
 
   return (
