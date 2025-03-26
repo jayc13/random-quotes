@@ -15,21 +15,18 @@ const MainContainer = styled("div")(() => ({
   justifyContent: 'center',
   alignItems: 'center',
   minHeight: '100vh',
+  width: '100vw',
   fontFamily: 'sans-serif',
-  backgroundColor: 'secondary.main',
+  backgroundColor: 'background.default',
   color: 'secondary.contrastText',
-  backgroundImage: "url(data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3L3 1' stroke='%239C92AC' stroke-opacity='0.5'/%3E%3C/svg%3E)",
-  backgroundRepeat: 'repeat',
 }));
 
 const QuoteContainer = styled("div")(() => ({
-  padding: '20px',
+  padding: '16px',
   maxWidth: '600px',
   textAlign: 'center',
-  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-  borderRadius: '8px',
-  backgroundColor: 'primary.main',
-  color: 'primary.contrastText'
+  backgroundColor: 'background.paper',
+  color: 'text.primary'
 }));
 
 const ErrorMessage = styled("div")(() => ({
@@ -42,11 +39,13 @@ const QuoteText = styled("p")(() => ({
   fontStyle: 'italic',
   marginBottom: '10px',
   fontFamily: 'Lora, serif',
+  color: 'text.primary',
 }));
 
 const AuthorText = styled("p")(() => ({
   fontSize: '1.1em',
   fontFamily: 'Open Sans, sans-serif',
+  color: 'text.secondary',
 }));
 
 const NewQuoteButton = styled("button")<{ disabled?: boolean }>(({ disabled }) => ({
@@ -65,6 +64,7 @@ const Tagline = styled("div")(() => ({
   fontSize: '1.2em',
   fontWeight: 'bold',
   fontFamily: 'Open Sans, sans-serif',
+  color: 'text.primary',
 }));
 
 const HomePage = () => {
