@@ -1,3 +1,26 @@
+import { render, screen, waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import HomePage from '../../../pages/index';
+import { act } from 'react-dom/test-utils';
+
+// Mock the fetch function
+global.fetch = jest.fn();
+
+// Mock window.matchMedia
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(), // Deprecated
+    removeListener: jest.fn(), // Deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
+
 describe('HomePage', () => {
   it('renders loading state initially', () => {
     global.fetch = jest.fn(() =>
