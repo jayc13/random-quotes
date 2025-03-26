@@ -17,7 +17,6 @@ export default function rateLimit(options?: Options) {
       const tokenKey = Array.isArray(ip) ? ip[0] : ip;
 
       if (!tokenKey) {
-        res.status(500).end('Unable to identify client IP.');
         return;
       }
 
@@ -26,8 +25,7 @@ export default function rateLimit(options?: Options) {
         if (tokensRemaining > 0) {
           tokenCache.set(tokenKey, tokensRemaining - 1);
         } else {
-          res.status(429).end('Rate limit exceeded');
-          return;
+          return throw new Error('Rate limit exceeded');
         }
       } else {
         tokenCache.set(tokenKey, uniqueTokenPerInterval - 1);
