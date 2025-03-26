@@ -31,7 +31,7 @@ describe('ThemeProvider', () => {
   };
 
   it('should initialize with system preference if no theme is stored - default dark theme', () => {
-    setupMatchMedia(true);
+    setupMatchMedia(true); // Mock system preference as dark
     render(
       <ThemeProvider>
         <TestComponent />
@@ -39,8 +39,9 @@ describe('ThemeProvider', () => {
     );
     expect(screen.getByTestId('theme')).toHaveTextContent('dark');
   });
+
   it('should initialize with system preference if no theme is stored - default light theme', () => {
-    setupMatchMedia(false);
+    setupMatchMedia(false); // Mock system preference as light
     render(
       <ThemeProvider>
         <TestComponent />
@@ -50,6 +51,7 @@ describe('ThemeProvider', () => {
   });
 
   it('should toggle theme between light and dark', () => {
+    setupMatchMedia(false); // Ensure initial state is light
     render(
       <ThemeProvider>
         <TestComponent />
