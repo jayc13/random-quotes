@@ -1,32 +1,63 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import { Theme, ThemeProvider as NextThemesProvider, createTheme, PaletteMode } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import IconButton from '@mui/material/IconButton';
 
-interface ThemeContextProps {
-  theme: string;
-  setTheme: (theme: string) => void;
-}
-
-const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
-
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+const systemTheme = (): PaletteMode | undefined => {
+  if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return 'dark';
   }
-  return context;
+  return 'light';
 };
 
-const ThemeProvider: React.FC = ({ children }) => {
-  const [theme, setTheme] = useState('light');
+interface ThemeProviderProps {
+  children?: React.ReactNode;
+}
+
+const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, ...props }) => {
+  const [theme, setTheme] = useState<PaletteMode | undefined>(systemTheme());
 
   useEffect(() => {
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    setTheme(systemTheme);
+    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+      setTheme(e.matches ? 'dark' : 'light');
+    };
+
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    darkModeMediaQuery.addEventListener('change', handleSystemThemeChange);
+
+    return () => {
+      darkModeMediaQuery.removeEventListener('change', handleSystemThemeChange);
+    };
   }, []);
 
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  const muiTheme = createTheme({
+    palette: {
+      mode: theme,
+    },
+  });
+
+  const getThemeIcon = () => {
+    if (theme === 'light') {
+      return '🌞'; // Sun icon for light theme
+    }
+    return '🌜'; // Moon icon for dark theme
+  };
+
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <NextThemesProvider theme={muiTheme} {...props}>
+      <CssBaseline />
       {children}
-    </ThemeContext.Provider>
+      <IconButton
+        onClick={toggleTheme}
+        sx={{ position: 'fixed', bottom: 16, right: 16 }}
+      >
+        {getThemeIcon()}
+      </IconButton>
+    </NextThemesProvider>
   );
 };
 
