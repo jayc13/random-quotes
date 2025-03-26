@@ -16,7 +16,8 @@ describe('Integration Tests', () => {
     await handler(req, res);
 
     expect(res.statusCode).toBe(200);
-    const data = res._getJSONData();
+    console.log(res._getData());
+    const data = JSON.parse(res._getData());
     expect(data).toHaveProperty('quote');
     expect(typeof data.quote).toBe('string');
     expect(data).toHaveProperty('author');
@@ -33,7 +34,7 @@ describe('Integration Tests', () => {
     await handler(req, res);
 
     expect(res.statusCode).toBe(200);
-    const data = res._getJSONData();
+    const data = JSON.parse(res._getData());
     expect(data).toHaveProperty('quote');
     expect(typeof data.quote).toBe('string');
     expect(data).toHaveProperty('author');
@@ -50,7 +51,7 @@ describe('Integration Tests', () => {
     await handler(req, res);
 
     expect(res.statusCode).toBe(404);
-    const data = res._getJSONData();
+    const data = JSON.parse(res._getData());
     expect(data).toHaveProperty('error', `No quotes found for author: ${author}`);
   });
 
@@ -63,7 +64,7 @@ describe('Integration Tests', () => {
     await handler(req, res);
 
     expect(res.statusCode).toBe(405);
-    const data = res._getJSONData();
+    const data = JSON.parse(res._getData());
     expect(data).toHaveProperty('error', 'Method Not Allowed');
   });
 });
