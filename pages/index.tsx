@@ -18,7 +18,7 @@ const MainContainer = styled("div")(() => ({
   fontFamily: 'sans-serif',
   backgroundColor: 'secondary.main',
   color: 'secondary.contrastText',
-  backgroundImage: "url(data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3L3 1' stroke='%239C92AC' stroke-opacity='0.4'/%3E%3C/svg%3E)",
+  backgroundImage: "url(data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3L3 1' stroke='%239C92AC' stroke-opacity='0.5'/%3E%3C/svg%3E)",
   backgroundRepeat: 'repeat',
 }));
 
@@ -49,7 +49,25 @@ const AuthorText = styled("p")(() => ({
   fontFamily: 'Open Sans, sans-serif',
 }));
 
-function HomePage() {
+const NewQuoteButton = styled("button")<{ disabled?: boolean }>(({ disabled }) => ({
+  marginTop: '20px',
+  padding: '10px 20px',
+  fontSize: '1em',
+  color: 'primary.contrastText',
+  backgroundColor: disabled ? 'gray' : 'secondary.main',
+  border: 'none',
+  borderRadius: '5px',
+  cursor: disabled ? 'default' : 'pointer',
+}));
+
+const Tagline = styled("div")(() => ({
+  marginBottom: '20px',
+  fontSize: '1.2em',
+  fontWeight: 'bold',
+  fontFamily: 'Open Sans, sans-serif',
+}));
+
+const HomePage = () => {
   const [quote, setQuote] = useState<Quote | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -58,7 +76,7 @@ function HomePage() {
       try {
         const response = await fetch('/api/quote');
         if (!response.ok) {
-          throw new Error(`Failed to fetch quote`);
+          throw new Error('Failed to fetch quote');
         }
         const data: Quote = await response.json();
         setQuote(data);
@@ -115,15 +133,4 @@ function HomePage() {
   }
 }
 
-const NewQuoteButton = styled("button")<{ disabled?: boolean }>(({ disabled }) => ({
-  marginTop: '20px',
-  padding: '10px 20px',
-  fontSize: '1em',
-  color: 'primary.contrastText',
-  backgroundColor: disabled ? 'gray' : 'secondary.main',
-  border: 'none',
-  borderRadius: '5px',
-  cursor: disabled ? 'default' : 'pointer',
-}));
-
-export default HomePage
+export default HomePage;
