@@ -19,7 +19,7 @@ const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<PaletteMode | undefined>(systemTheme());
 
   useEffect(() => {
-    if (window) {
+    if (typeof window !== 'undefined') {
       const handleSystemThemeChange = (e: MediaQueryListEvent) => {
         setTheme(e.matches ? 'dark' : 'light');
       };
