@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import Head from 'next/head';
 import Loading from '../src/components/Loading';
 import ThemeProvider from '../src/components/ThemeProvider';
+import clipboardCopy from 'clipboard-copy';
 
 type Quote = {
   quote: string;
@@ -109,6 +110,9 @@ const HomePage = () => {
               <NewQuoteButton onClick={() => fetchNewQuote()} disabled={loading}>
                 New Quote
               </NewQuoteButton>
+              <CopyQuoteButton onClick={() => copyQuote()} disabled={loading}>
+                Copy Quote
+              </CopyQuoteButton>
             </>
           )}
         </QuoteContainer>
@@ -129,6 +133,12 @@ const HomePage = () => {
       setQuote({ quote: '', author: '', error: 'Failed to fetch new quote' });
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function copyQuote() {
+    if (quote && quote.quote && quote.author) {
+      await clipboardCopy(`${quote.quote} - ${quote.author}`);
     }
   }
 }

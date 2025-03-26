@@ -71,4 +71,29 @@ describe('HomePage', () => {
       expect(screen.getByText('Failed to fetch quote')).toBeInTheDocument();
     });
   });
+
+  it('copies quote and author to clipboard', async () => {
+    const fakeQuote = { quote: 'Test Quote', author: 'Test Author' };
+
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve(fakeQuote),
+      })
+    ) as jest.Mock;
+
+    const mockClipboardCopy = jest.fn();
+    jest.mock('clipboard-copy', () => mockClipboardCopy);
+
+    await act(async () => {
+      render(<HomePage />);
+    });
+
+    const copyButton = await screen.findByText('Copy Quote');
+    await act(async () => {
+      copyButton.click();
+    });
+
+    expect(mockClipboardCopy).toHaveBeenCalledWith('Test Quote - Test Author');
+  });
 });
