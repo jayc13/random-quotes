@@ -24,9 +24,7 @@ Object.defineProperty(window, 'matchMedia', {
 describe('HomePage', () => {
   it('renders loading state initially', () => {
     global.fetch = jest.fn(() =>
-      Promise.resolve({
-        json: () => ({ quote: '', author: '' }),
-      }),
+      Promise.resolve({ quote: '', author: '' }),
     ) as jest.Mock;
     render(<HomePage />);
     expect(screen.getByText('Loading...')).toBeInTheDocument();
@@ -37,9 +35,7 @@ describe('HomePage', () => {
 
   // Mock fetch response
   global.fetch = jest.fn(() =>
-    Promise.resolve({
-      json: () => Promise.resolve(fakeQuote),
-    })
+    Promise.resolve(fakeQuote);
   ) as jest.Mock;
 
   await act(async () => {
