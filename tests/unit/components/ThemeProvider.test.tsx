@@ -30,7 +30,7 @@ describe('ThemeProvider', () => {
     });
   };
 
-  it('should initialize with system preference if no theme is stored', () => {
+  it('should initialize with system preference if no theme is stored - default dark theme', () => {
     setupMatchMedia(true);
     render(
       <ThemeProvider>
@@ -38,7 +38,8 @@ describe('ThemeProvider', () => {
       </ThemeProvider>
     );
     expect(screen.getByTestId('theme')).toHaveTextContent('dark');
-
+  });
+  it('should initialize with system preference if no theme is stored - default light theme', () => {
     setupMatchMedia(false);
     render(
       <ThemeProvider>
