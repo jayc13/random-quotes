@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 
 // Utility function to get system theme
 const systemTheme = (): PaletteMode | undefined => {
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  if (window && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     return 'dark';
   }
   return 'light';
@@ -19,16 +19,18 @@ const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<PaletteMode | undefined>(systemTheme());
 
   useEffect(() => {
-    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
-      setTheme(e.matches ? 'dark' : 'light');
-    };
-
-    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    darkModeMediaQuery.addEventListener('change', handleSystemThemeChange);
-
-    return () => {
-      darkModeMediaQuery.removeEventListener('change', handleSystemThemeChange);
-    };
+    if (window) {
+      const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+        setTheme(e.matches ? 'dark' : 'light');
+      };
+  
+      const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      darkModeMediaQuery.addEventListener('change', handleSystemThemeChange);
+  
+      return () => {
+        darkModeMediaQuery.removeEventListener('change', handleSystemThemeChange);
+      };
+    }
   }, []);
 
   const toggleTheme = () => {
