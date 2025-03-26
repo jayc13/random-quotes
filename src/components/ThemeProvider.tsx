@@ -32,7 +32,7 @@ const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
   }, []);
 
   const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
   const muiTheme = createTheme({
@@ -62,4 +62,4 @@ const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
   );
 };
 
-export ThemeProvider;
+export default ThemeProvider;
