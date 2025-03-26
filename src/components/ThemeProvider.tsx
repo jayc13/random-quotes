@@ -15,11 +15,6 @@ interface ThemeProviderProps {
   children?: React.ReactNode;
 }
 
-const ThemeContext = createContext<{
-  theme: PaletteMode | undefined;
-  setTheme: React.Dispatch<React.SetStateAction<PaletteMode | undefined>>;
-} | undefined>(undefined);
-
 const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<PaletteMode | undefined>(systemTheme());
 
@@ -54,7 +49,7 @@ const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
   };
 
   return (
-    <NextThemesProvider {...props}>
+    <NextThemesProvider theme={muiTheme} {...props}>
       <CssBaseline />
       {children}
       <IconButton
