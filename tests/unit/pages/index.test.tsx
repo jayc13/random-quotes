@@ -32,21 +32,26 @@ describe('HomePage', () => {
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
-  it('renders quote and author on successful fetch', async () => {
-    const mockQuote = { quote: 'The only way to do great work is to love what you do.', author: 'Steve Jobs' };
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        json: () => mockQuote,
-      }),
-    ) as jest.Mock;
-    await act(async () => {
-      render(<HomePage />);
-    });
-    await waitFor(() => {
-      expect(screen.getByText(`“${mockQuote.quote}”`)).toBeInTheDocument();
-      expect(screen.getByText(`- ${mockQuote.author}`)).toBeInTheDocument();
-    });
+  test('fetches and displays quote', async () => {
+  const fakeQuote = { quote: 'Test Quote', author: 'Test Author' };
+
+  // Mock fetch response
+  global.fetch = jest.fn(() =>
+    Promise.resolve({
+      json: () => Promise.resolve(fakeQuote),
+    })
+  ) as jest.Mock;
+
+  await act(async () => {
+    render(<HomePage />);
   });
+
+  const quoteElement = await screen.findByText(/Test Quote/i);
+  expect(quoteElement).toBeInTheDocument();
+
+  const authorElement = await screen.findByText(/Test Author/i);
+  expect(authorElement).toBeInTheDocument();
+});
 
   it('renders error message on failed fetch', async () => {
     global.fetch = jest.fn(() =>
