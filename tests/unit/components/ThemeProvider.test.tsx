@@ -14,12 +14,11 @@ const TestComponent: React.FC = () => {
 };
 
 describe('ThemeProvider', () => {
-
-  it('should initialize with system preference if no theme is stored', () => {
+  const setupMatchMedia = (matches: boolean) => {
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
       value: jest.fn().mockImplementation((query) => ({
-        matches: query === '(prefers-color-scheme: dark)',
+        matches,
         media: query,
         onchange: null,
         addListener: jest.fn(),
@@ -29,8 +28,10 @@ describe('ThemeProvider', () => {
         dispatchEvent: jest.fn(),
       })),
     });
+  };
 
-    window.matchMedia('(prefers-color-scheme: dark)').matches = true;
+  it('should initialize with system preference if no theme is stored', () => {
+    setupMatchMedia(true);
     render(
       <ThemeProvider>
         <TestComponent />
@@ -38,7 +39,7 @@ describe('ThemeProvider', () => {
     );
     expect(screen.getByTestId('theme')).toHaveTextContent('dark');
 
-    window.matchMedia('(prefers-color-scheme: dark)').matches = false;
+    setupMatchMedia(false);
     render(
       <ThemeProvider>
         <TestComponent />
