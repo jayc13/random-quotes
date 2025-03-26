@@ -96,38 +96,38 @@ function HomePage() {
         </QuoteContainer>
       </MainContainer>
     </ThemeProvider>
-+  );
-+
-+  async function fetchNewQuote() {
-+    setLoading(true);
-+    try {
-+      const response = await fetch('/api/quote');
-+      if (!response.ok) {
-+        throw new Error('Failed to fetch quote');
-+      }
-+      const data = await response.json();
-+      setQuote(data);
-+    } catch (error) {
-+      setQuote({ quote: '', author: '', error: 'Failed to fetch new quote' });
-+    } finally {
-+      setLoading(false);
-+    }
-+  }
-+}
-+
-+const NewQuoteButton = styled("button")<{ disabled?: boolean }>(({ disabled }) => ({
-+  marginTop: '20px',
-+  padding: '10px 20px',
-+  fontSize: '1em',
-+  color: 'primary.contrastText',
-+  backgroundColor: disabled ? 'gray' : 'secondary.main',
-+  border: 'none',
-+  borderRadius: '5px',
-+  cursor: disabled ? 'default' : 'pointer',
-+}));
-+
-+
-+export default HomePage
+  );
+
+  async function fetchNewQuote() {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/quote');
+      if (!response.ok) {
+        throw new Error('Failed to fetch quote');
+      }
+      const data = await response.json();
+      setQuote(data);
+    } catch (error) {
+      setQuote({ quote: '', author: '', error: 'Failed to fetch new quote' });
+    } finally {
+      setLoading(false);
+    }
+  }
+}
+
+const NewQuoteButton = styled("button")<{ disabled?: boolean }>(({ disabled }) => ({
+  marginTop: '20px',
+  padding: '10px 20px',
+  fontSize: '1em',
+  color: 'primary.contrastText',
+  backgroundColor: disabled ? 'gray' : 'secondary.main',
+  border: 'none',
+  borderRadius: '5px',
+  cursor: disabled ? 'default' : 'pointer',
+}));
+
+
+export default HomePage
 
   );
 }
