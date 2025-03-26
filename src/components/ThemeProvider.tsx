@@ -1,33 +1,28 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import { Theme, ThemeProvider as MuiThemeProvider, createTheme, PaletteMode } from '@mui/material/styles';
+import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
+import { ThemeProvider as MuiThemeProvider, createTheme, PaletteMode } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
-import { 
-  DarkMode as DarkModeIcon, 
-  LightMode as LightModeIcon, 
-  AutoMode as AutoModeIcon
-} from '@mui/icons-material';
 
-interface ThemeContextProps {
-  theme?: PaletteMode;
-  setTheme: (theme: PaletteMode) => void;
-}
-
-const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
-
-const systemTheme = (): PaletteMode => {
-  if (typeof window !== 'undefined') {
-    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return prefersDarkMode ? 'dark' : 'light';
+const systemTheme = (): PaletteMode | undefined => {
+  if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return 'dark';
   }
   return 'light';
 };
 
-interface ThemeProviderProps {
-  children?: React.ReactNode;
+interface ThemeContextType {
+  theme: PaletteMode | undefined;
+  toggleTheme: () => void;
 }
 
-const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+interface ThemeProviderProps {
+  children?: ReactNode;
+}
+
+const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, ...props }) => {
+  
   const [theme, setTheme] = useState<PaletteMode | undefined>(() => {
     if (typeof window !== 'undefined') {
       const storedTheme = localStorage.getItem('theme') as PaletteMode | undefined;
@@ -55,7 +50,6 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     }
   }, [theme]);
 
-
   const toggleTheme = () => {
     setTheme((prevTheme) => {
       let newTheme: PaletteMode | undefined;
@@ -76,45 +70,41 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     });
   };
 
-  const muiTheme: Theme = createTheme({
+  const muiTheme = createTheme({
     palette: {
-      mode: theme === undefined ? systemTheme() : theme as PaletteMode,
-      primary: {
-        main: '#fff',
-        light: '#fff',
-        dark: '#333'
-      },
-      secondary: {
-        main: '#f0f0f0',
-        light: '#f0f0f0',
-        dark: '#444',
-      },
+      mode: theme,
     },
   });
 
   const getThemeIcon = () => {
-    switch (theme) {
-      case 'light':
-        return <LightModeIcon />;
-      case 'dark':
-        return <DarkModeIcon />;
-      default:
-        return <AutoModeIcon />;
+    if (theme === 'light') {
+      return '🌞'; // Sun icon for light theme
     }
+    return '🌜'; // Moon icon for dark theme
   };
 
-
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      <MuiThemeProvider theme={muiTheme}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <MuiThemeProvider theme={muiTheme} {...props}>
         <CssBaseline />
         {children}
-        <IconButton onClick={() => toggleTheme()} sx={{ position: 'fixed', bottom: 16, right: 16 }}>
+        <IconButton
+          onClick={toggleTheme}
+          sx={{ position: 'fixed', bottom: 16, right: 16 }}
+        >
           {getThemeIcon()}
         </IconButton>
       </MuiThemeProvider>
     </ThemeContext.Provider>
   );
+};
+
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
 };
 
 export default ThemeProvider;
