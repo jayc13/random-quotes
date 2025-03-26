@@ -25,7 +25,7 @@ export default function rateLimit(options?: Options) {
         if (tokensRemaining > 0) {
           tokenCache.set(tokenKey, tokensRemaining - 1);
         } else {
-          return throw new Error('Rate limit exceeded');
+          throw new Error('Rate limit exceeded');
         }
       } else {
         tokenCache.set(tokenKey, uniqueTokenPerInterval - 1);
