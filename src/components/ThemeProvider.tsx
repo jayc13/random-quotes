@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { Theme, ThemeProvider as MuiThemeProvider, createTheme, PaletteMode } from '@mui/material/styles';
+import { Theme, ThemeProvider as NextThemesProvider, createTheme, PaletteMode } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
 import { 
@@ -27,7 +27,7 @@ interface ThemeProviderProps {
   children?: React.ReactNode;
 }
 
-const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
+const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<PaletteMode | undefined>(systemTheme());
 
   useEffect(() => {
@@ -81,17 +81,16 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     }
   };
 
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      <MuiThemeProvider theme={muiTheme}>
+    <NextThemesProvider value={{ theme: muiTheme, setTheme }}>
         <CssBaseline />
         {children}
         <IconButton onClick={() => toggleTheme()} sx={{ position: 'fixed', bottom: 16, right: 16 }}>
           {getThemeIcon()}
         </IconButton>
-      </MuiThemeProvider>
-    </ThemeContext.Provider>
+    </NextThemesProvider>
   );
 };
 
