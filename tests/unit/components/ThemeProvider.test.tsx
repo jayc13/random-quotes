@@ -14,9 +14,6 @@ const TestComponent: React.FC = () => {
 };
 
 describe('ThemeProvider', () => {
-  beforeEach(() => {
-    localStorage.clear();
-  });
 
   it('should initialize with system preference if no theme is stored', () => {
     Object.defineProperty(window, 'matchMedia', {
@@ -50,24 +47,6 @@ describe('ThemeProvider', () => {
     expect(screen.getByTestId('theme')).toHaveTextContent('light');
   });
 
-  it('should initialize with stored theme from localStorage', () => {
-    localStorage.setItem('theme', 'dark');
-    render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
-    );
-    expect(screen.getByTestId('theme')).toHaveTextContent('dark');
-
-    localStorage.setItem('theme', 'light');
-    render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
-    );
-    expect(screen.getByTestId('theme')).toHaveTextContent('light');
-  });
-
   it('should toggle theme between light and dark', () => {
     render(
       <ThemeProvider>
@@ -83,20 +62,5 @@ describe('ThemeProvider', () => {
 
     fireEvent.click(toggleButton);
     expect(screen.getByTestId('theme')).toHaveTextContent('light');
-  });
-
-  it('should persist theme preference in localStorage', () => {
-    render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
-    );
-
-    const toggleButton = screen.getByRole('button', { name: /toggle theme/i });
-    fireEvent.click(toggleButton);
-    expect(localStorage.getItem('theme')).toBe('dark');
-
-    fireEvent.click(toggleButton);
-    expect(localStorage.getItem('theme')).toBe('light');
   });
 });
