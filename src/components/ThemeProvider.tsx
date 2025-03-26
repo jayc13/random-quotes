@@ -28,15 +28,32 @@ interface ThemeProviderProps {
 }
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<PaletteMode | undefined>(systemTheme());
+  const [theme, setTheme] = useState<PaletteMode | undefined>(() => {
+    if (typeof window !== 'undefined') {
+      const storedTheme = localStorage.getItem('theme') as PaletteMode | undefined;
+      return storedTheme || systemTheme();
+    }
+    return undefined;
+  });
 
   useEffect(() => {
-    if (window) {
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-        setTheme(event.matches ? "dark" : "light");
-      });
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('theme', theme || systemTheme());
     }
-  }, []);
+  }, [theme]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleChange = (event: MediaQueryListEvent) => {
+        if (theme === undefined) {
+          setTheme(event.matches ? "dark" : "light");
+        }
+      };
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    }
+  }, [theme]);
 
 
   const toggleTheme = () => {
@@ -49,6 +66,11 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         case 'dark':
           newTheme = 'light';
           break;
+        default:
+          newTheme = systemTheme() === 'light' ? 'dark' : 'light';
+      }
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('theme', newTheme);
       }
       return newTheme;
     });
