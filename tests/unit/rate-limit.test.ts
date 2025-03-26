@@ -74,9 +74,7 @@ describe('Rate Limiting', () => {
     expect(res.end).not.toHaveBeenCalledWith('Rate limit exceeded');
 
     // Second request should be rejected
-    await limiter.check(req, res);
-    expect(res.status).toHaveBeenCalledWith(429);
-    expect(res.end).toHaveBeenCalledWith('Rate limit exceeded');
+    await expect(limiter.check(req, res)).rejects.toThrow('Rate limit exceeded');
   });
 
   it('should apply rate limits separately for different IP addresses', async () => {
@@ -134,13 +132,9 @@ describe('Rate Limiting', () => {
     expect(res2.end).not.toHaveBeenCalledWith('Rate limit exceeded');
 
     // Second request from IP 1 should be rejected
-    await limiter.check(req1, res1);
-    expect(res1.status).toHaveBeenCalledWith(429);
-    expect(res1.end).toHaveBeenCalledWith('Rate limit exceeded');
+    await expect(limiter.check(req1, res1)).rejects.toThrow('Rate limit exceeded');
 
     // Second request from IP 2 should be rejected
-    await limiter.check(req2, res2);
-    expect(res2.status).toHaveBeenCalledWith(429);
-    expect(res2.end).toHaveBeenCalledWith('Rate limit exceeded');
+    await expect(limiter.check(req2, res2)).rejects.toThrow('Rate limit exceeded');
   });
 });
