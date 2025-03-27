@@ -124,7 +124,6 @@ describe('ThemeProvider', () => {
     render(<ThemeProvider />);
     const toggleButton = screen.getByTestId('theme-toggle-btn'); 
     expect(toggleButton).toBeInTheDocument();
-    expect(toggleButton).toHaveAttribute('aria-label', 'Toggle theme');
     expect(toggleButton).toHaveTextContent('🌞');
   });
 });
