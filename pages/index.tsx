@@ -77,25 +77,28 @@ const HomePage = () => {
   const [quote, setQuote] = useState<Quote | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchQuote() {
-      setLoading(true);
-      try {
-        const response = await fetch('/api/quote');
-        if (!response.ok) {
-          throw new Error('Failed to fetch quote');
-        }
-        const data: Quote = await response.json();
-        await delay(3 * 1000); // Add a loading of 3 seconds
-        setQuote(data);
-      } catch (error: any) {
-        setQuote({ quote: '', author: '', error: error.message });
-      } finally {
-        setLoading(false);
+  async function fetchNewQuote() {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/quote');
+      if (!response.ok) {
+        throw new Error('Failed to fetch quote');
       }
+      const data = await response.json();
+      setQuote(data);
+      await delay(3 * 1000); // Add a loading of 3 seconds
+    } catch (error) {
+      setQuote({ quote: '', author: '', error: 'Failed to fetch new quote' });
+    } finally {
+      setLoading(false);
     }
-    fetchQuote();
+  }
+
+  useEffect(() => {
+    fetchNewQuote();
   }, []);
+
+  
 
   if (loading) {
     return <Loading />;
@@ -129,22 +132,6 @@ const HomePage = () => {
       </MainContainer>
     </ThemeProvider>
   );
-
-  async function fetchNewQuote() {
-    setLoading(true);
-    try {
-      const response = await fetch('/api/quote');
-      if (!response.ok) {
-        throw new Error('Failed to fetch quote');
-      }
-      const data = await response.json();
-      setQuote(data);
-    } catch (error) {
-      setQuote({ quote: '', author: '', error: 'Failed to fetch new quote' });
-    } finally {
-      setLoading(false);
-    }
-  }
 }
 
 export default HomePage;
