@@ -109,24 +109,26 @@ const HomePage = () => {
       </Head>
       <MainContainer>
         <QuoteContainer>
-          <IconButton
-            sx={{
-              position: 'absolute',
-              top: 8,
-              right: 8,
-              margin: '8px'
-            }}
-            onClick={() => copyToClipboard(`${quote.quote} - ${quote.author}`)}
-            data-testid="copy-quote-btn"
-          >
-            <FileCopyIcon />
           </IconButton>
           {quote.error ? (
             <ErrorMessage id="error">{quote.error}</ErrorMessage>
           ) : (
             <>
               <Tagline>Your daily dose of inspiration.</Tagline>
-              <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
+              <div>
+                <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
+                <IconButton
+                  sx={{
+                    position: 'absolute',
+                    top: 8,
+                    right: 8,
+                    margin: '8px'
+                  }}
+                  onClick={() => copyToClipboard(`${quote.quote} - ${quote.author}`)}
+                  data-testid="copy-quote-btn"
+                >
+                  <FileCopyIcon />
+              </div>
               <AuthorText id="author">- {quote.author}</AuthorText>
               <NewQuoteButton onClick={() => fetchNewQuote()} disabled={loading}>
                 New Quote
