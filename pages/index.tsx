@@ -122,9 +122,9 @@ const HomePage = () => {
                   size="small"
                   sx={{
                     position: 'absolute',
-                    top: 8,
-                    right: '-8px',
-                    margin: '8px'
+                    top: '-8px',
+                    right: '-20px',
+                    margin: 0
                   }}
                   onClick={() => copyToClipboard(`${quote.quote} - ${quote.author}`)}
                   data-testid="copy-quote-btn"
