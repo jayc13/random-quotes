@@ -35,9 +35,7 @@ describe('HomePage', () => {
         json: () => Promise.resolve({ quote: '', author: '' })
       })
     ) as jest.Mock;
-    await act(async () => {
-      render(<HomePage />);
-    });
+    await act(render(<HomePage />));
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
@@ -52,10 +50,9 @@ describe('HomePage', () => {
       })
     ) as jest.Mock;
 
-    await act(async () => {
-      render(<HomePage />);
-      jest.runAllTimers(); 
-    });
+    await act(render(<HomePage />));
+
+    jest.runAllTimers();
 
     const quoteElement = await screen.findByText(/Test Quote/i);
     expect(quoteElement).toBeInTheDocument();
@@ -72,10 +69,9 @@ describe('HomePage', () => {
       })
     ) as jest.Mock;
 
-    await act(async () => {
-      render(<HomePage />);
-      jest.runAllTimers(); 
-    });
+    await act(render(<HomePage />));
+
+    jest.runAllTimers();
 
     await waitFor(() => {
       expect(screen.getByText('Failed to fetch quote')).toBeInTheDocument();
