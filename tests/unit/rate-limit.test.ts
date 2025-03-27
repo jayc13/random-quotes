@@ -137,4 +137,90 @@ describe('Rate Limiting', () => {
     // Second request from IP 2 should be rejected
     await expect(limiter.check(req2, res2)).rejects.toThrow('Rate limit exceeded');
   });
+
+  it('should not apply rate limiting when IP is missing', async () => {
+    const limiter = rateLimit({
+      interval: 1000, // 1 second
+      uniqueTokenPerInterval: 1, // 1 request per second
+    });
+
+    const req = {
+      headers: {}, // Missing 'x-forwarded-for'
+      socket: {},  // Missing 'remoteAddress'
+      // Add other required properties with default or mock values
+      query: {},
+      cookies: {},
+      body: {},
+      env: {},
+    } as Partial<NextApiRequest> as NextApiRequest;
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      end: jest.fn(),
+    } as unknown as NextApiResponse;
+
+    // Request should be allowed even without an IP
+    await limiter.check(req, res);
+    expect(res.status).not.toHaveBeenCalledWith(429);
+    expect(res.end).not.toHaveBeenCalledWith('Rate limit exceeded');
+  });
+
+  it('should apply rate limiting using socket.remoteAddress when x-forwarded-for is missing', async () => {
+    const limiter = rateLimit({
+      interval: 1000, // 1 second
+      uniqueTokenPerInterval: 1, // 1 request per second
+    });
+
+    const req = {
+      headers: {}, // Missing 'x-forwarded-for'
+      socket: {
+        remoteAddress: '192.168.1.100',
+      },
+      // Add other required properties with default or mock values
+      query: {},
+      cookies: {},
+      body: {},
+      env: {},
+    } as Partial<NextApiRequest> as NextApiRequest;
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      end: jest.fn(),
+    } as unknown as NextApiResponse;
+
+    // First request should be allowed
+    await limiter.check(req, res);
+    expect(res.status).not.toHaveBeenCalledWith(429);
+    expect(res.end).not.toHaveBeenCalledWith('Rate limit exceeded');
+
+    // Second request should be rejected
+    await expect(limiter.check(req, res)).rejects.toThrow('Rate limit exceeded');
+  });
+  it('should allow options to be undefined', async () => {
+    const limiter = rateLimit();
+
+    const req = {
+      headers: {
+        'x-forwarded-for': '127.0.0.1',
+      },
+      socket: {
+        remoteAddress: '127.0.0.1',
+      },
+      // Add other required properties with default or mock values
+      query: {},
+      cookies: {},
+      body: {},
+      env: {},
+    } as Partial<NextApiRequest> as NextApiRequest;
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      end: jest.fn(),
+    } as unknown as NextApiResponse;
+
+    // First request should be allowed
+    await limiter.check(req, res);
+    expect(res.status).not.toHaveBeenCalledWith(429);
+    expect(res.end).not.toHaveBeenCalledWith('Rate limit exceeded');
+  });
 });
