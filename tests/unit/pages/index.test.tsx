@@ -144,22 +144,26 @@ describe('HomePage', () => {
 
     await act(async () => {
       render(<HomePage />);
-
-      jest.runAllTimers();
-      const initialQuoteElement = await screen.findByText(/Initial Quote/i);
-      const initialAuthorElement = await screen.findByText(/Initial Author/i);
-  
-      expect(initialQuoteElement).toBeInTheDocument();
-      expect(initialAuthorElement).toBeInTheDocument();
-  
-      const newQuoteButton = screen.getByTestId('refresh-quote-btn');
-      
-      fireEvent.click(newQuoteButton);
-
-      jest.runAllTimers();
     });
     
+    jest.runAllTimers();
+    const initialQuoteElement = await screen.findByText(/Initial Quote/i);
+    const initialAuthorElement = await screen.findByText(/Initial Author/i);
+
+    expect(initialQuoteElement).toBeInTheDocument();
+    expect(initialAuthorElement).toBeInTheDocument();
+
+    const newQuoteButton = screen.getByTestId('refresh-quote-btn');
+    
+    fireEvent.click(newQuoteButton);
+
+    jest.runAllTimers();
+    
     jest.advanceTimersByTime(5000);
+
+    await waitFor(() => {
+      expect(screen.getByText('Loading...')).toNotBeInTheDocument();
+    });
     
     const newQuoteElement = await screen.findByText(/New Quote/i);
     const newAuthorElement = await screen.findByText(/New Author/i);
