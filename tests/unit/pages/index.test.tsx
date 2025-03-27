@@ -115,10 +115,11 @@ describe('HomePage', () => {
     });
 
     jest.runAllTimers();
-
-    const copyButton = screen.getByTestId('copy-quote-btn'); // Assuming the copy button is the only button or has a specific label/role
-    fireEvent.click(copyButton);
-
-    expect(writeTextMock).toHaveBeenCalledWith(`"${mockQuote.quote}" - ${mockQuote.author}`);
+    await waitFor(() => {
+      const copyButton = screen.getByTestId('copy-quote-btn'); // Assuming the copy button is the only button or has a specific label/role
+      fireEvent.click(copyButton);
+  
+      expect(writeTextMock).toHaveBeenCalledWith(`"${mockQuote.quote}" - ${mockQuote.author}`);
+    });
   });
 });
