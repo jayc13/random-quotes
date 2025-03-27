@@ -77,6 +77,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, ...props }) => 
         <IconButton
           onClick={toggleTheme}
           sx={{ position: 'fixed', bottom: 16, right: 16 }}
+          data-testid="theme-toggle-btn"
         >
           {getThemeIcon()}
         </IconButton>
