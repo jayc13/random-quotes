@@ -150,16 +150,17 @@ describe('HomePage', () => {
     const initialQuoteElement = await screen.findByText(/Initial Quote/i);
     const initialAuthorElement = await screen.findByText(/Initial Author/i);
 
-    await waitFor(() => {
-      expect(initialQuoteElement).toBeInTheDocument();
-      expect(initialAuthorElement).toBeInTheDocument();
+    expect(initialQuoteElement).toBeInTheDocument();
+    expect(initialAuthorElement).toBeInTheDocument();
 
-      const newQuoteButton = screen.getByTestId('refresh-quote-btn');
+    const newQuoteButton = screen.getByTestId('refresh-quote-btn');
+    
+    await waitFor(() => {
       fireEvent.click(newQuoteButton);
   
       jest.runAllTimers();
-      const newQuoteElement = await screen.findByText(/New Quote/i);
-      const newAuthorElement = await screen.findByText(/New Author/i);
+      const newQuoteElement = screen.findByText(/New Quote/i);
+      const newAuthorElement = screen.findByText(/New Author/i);
 
       expect(newQuoteElement).toBeInTheDocument();
       expect(newAuthorElement).toBeInTheDocument();
