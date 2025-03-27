@@ -37,6 +37,10 @@ describe('HomePage', () => {
     jest.useFakeTimers();
   });
 
+  afterEach(() => {
+    unmount();
+  });
+
   afterAll(() => {
     // Restore the mock
     writeTextMock.mockRestore();
@@ -50,7 +54,9 @@ describe('HomePage', () => {
       })
     ) as jest.Mock;
     
-    render(<HomePage />);
+    await act(async () => {
+      render(<HomePage />);
+    });
     
     expect(screen.getByText('Loading...')).toBeInTheDocument();
 
