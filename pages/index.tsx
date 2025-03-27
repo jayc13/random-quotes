@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
-import Head from 'next/head';
-import Loading from '../src/components/Loading';
-import ThemeProvider from '../src/components/ThemeProvider';
+import IconButton from '@mui/material/IconButton';
 import RotateRightIcon from '@mui/icons-material/RotateRight';
+import Head from 'next/head';
+import ThemeProvider from '../src/components/ThemeProvider';
+import Loading from '../src/components/Loading';
 
 type Quote = {
   quote: string;
@@ -107,9 +108,9 @@ const HomePage = () => {
               <Tagline>Your daily dose of inspiration.</Tagline>
               <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
               <AuthorText id="author">- {quote.author}</AuthorText>
-              <NewQuoteButton onClick={() => fetchNewQuote()} disabled={loading}>
-                <RotateRightIcon /> Nuew Quote
-              </NewQuoteButton>
+              <IconButton onClick={() => fetchNewQuote()} disabled={loading}>
+                <RotateRightIcon />
+              </IconButton>
             </>
           )}
         </QuoteContainer>
