@@ -22,6 +22,24 @@ Object.defineProperty(window, 'matchMedia', {
 });
 
 describe('HomePage', () => {
+  let writeTextMock: jest.Mock;
+
+  beforeAll(() => {
+    // Mock the navigator.clipboard object
+    Object.assign(navigator, {
+      clipboard: {
+        writeText: jest.fn()
+      }
+    });
+
+    writeTextMock = jest.spyOn(navigator.clipboard, 'writeText');
+  });
+
+  afterAll(() => {
+    // Restore the mock
+    writeTextMock.mockRestore();
+  });
+  
   it('renders loading state initially', () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
@@ -33,7 +51,7 @@ describe('HomePage', () => {
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
-  test('fetches and displays quote', async () => {
+  it('fetches and displays quote', async () => {
     const fakeQuote = { quote: 'Test Quote', author: 'Test Author' };
 
     // Mock fetch response to include ok: true
@@ -81,8 +99,6 @@ describe('HomePage', () => {
       })
     ) as jest.Mock;
 
-    const writeTextMock = jest.spyOn(navigator.clipboard, 'writeText');
-
     await act(async () => {
       render(<HomePage />);
     });
@@ -90,6 +106,6 @@ describe('HomePage', () => {
     const copyButton = screen.getByRole('button'); // Assuming the copy button is the only button or has a specific label/role
     fireEvent.click(copyButton);
 
-    expect(writeTextMock).toHaveBeenCalledWith(mockQuote.quote);
+    expect(writeTextMock).toHaveBeenCalledWith('expected quote text');
   });
 });
