@@ -37,7 +37,6 @@ describe('HomePage', () => {
     ) as jest.Mock;
     await act(async () => {
       render(<HomePage />);
-      jest.runAllTimers(); 
     });
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
