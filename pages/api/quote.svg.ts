@@ -19,21 +19,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   // Extract theme from query parameters and validate
   const themeParam = req.query.theme as string;
-  let backgroundColor: string, textColor: string;
 
-  switch (themeParam) {
-    case 'light':
-      backgroundColor = '#f0f0f0';
-      textColor = '#333';
-      break;
-    case 'dark':
-      backgroundColor = '#333';
-      textColor = '#f0f0f0';
-      break;
-    default:
-      backgroundColor = '#f0f0f0';
-      textColor = '#333';
-  }
+  const themes = {
+    light: {
+      backgroundColor: '#f0f0f0',
+      textColor: '#333'
+    },
+    dark: {
+      backgroundColor: '#333',
+      textColor: '#f0f0f0'
+    },
+  };
+
+  const { backgroundColor, textColor } = themes[themeParam] || themes.light;
 
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200">
