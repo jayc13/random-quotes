@@ -160,10 +160,8 @@ describe('HomePage', () => {
 
     jest.runAllTimers();
     jest.advanceTimersByTime(5000);
-
-    await waitFor(() => {
-      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
-    });
+    
+    await waitForElementToBeRemoved(() => screen.getByText('Loading...'), {timeout: 75});
     
     const newQuoteElement = await screen.findByText(/New Quote/i);
     const newAuthorElement = await screen.findByText(/New Author/i);
