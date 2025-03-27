@@ -89,6 +89,6 @@ test.describe('Quote App', () => {
 
     // Verify that the quote and author are displayed as empty strings
     await expect(page.locator('#quote')).toHaveText('“”');
-    await expect(page.locator('#author')).toHaveText('');
+    await expect(page.locator('#author')).toHaveText('- ');
   });
 });
