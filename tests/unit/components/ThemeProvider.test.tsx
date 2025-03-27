@@ -38,6 +38,8 @@ describe('ThemeProvider', () => {
       </ThemeProvider>
     );
     expect(screen.getByTestId('theme')).toHaveTextContent('dark');
+    const toggleButton = screen.getByTestId('theme-toggle-btn');
+    expect(toggleButton).toHaveTextContent('🌜'); // Assert initial icon for dark theme
   });
 
   it('should initialize with system preference if no theme is stored - default light theme', () => {
@@ -48,6 +50,8 @@ describe('ThemeProvider', () => {
       </ThemeProvider>
     );
     expect(screen.getByTestId('theme')).toHaveTextContent('light');
+    const toggleButton = screen.getByTestId('theme-toggle-btn');
+    expect(toggleButton).toHaveTextContent('🌞'); // Assert initial icon for light theme
   });
 
   it('should toggle theme between light and dark', () => {
@@ -58,8 +62,9 @@ describe('ThemeProvider', () => {
       </ThemeProvider>
     );
 
-    const toggleButton = screen.getByTestId('theme-toggle-btn'); 
+    const toggleButton = screen.getByTestId('theme-toggle-btn');
     expect(screen.getByTestId('theme')).toHaveTextContent('light'); // Assuming system preference is light
+    expect(toggleButton).toHaveTextContent('🌞'); // Assert initial icon for light theme
 
     fireEvent.click(toggleButton);
     expect(screen.getByTestId('theme')).toHaveTextContent('dark');
