@@ -35,7 +35,9 @@ describe('HomePage', () => {
         json: () => Promise.resolve({ quote: '', author: '' })
       })
     ) as jest.Mock;
-    await act(render(<HomePage />));
+    await act(async () => {
+      render(<HomePage />);
+    });
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
@@ -50,7 +52,9 @@ describe('HomePage', () => {
       })
     ) as jest.Mock;
 
-    await act(render(<HomePage />));
+    await act(async () => {
+      render(<HomePage />);
+    });
 
     jest.runAllTimers();
 
@@ -69,7 +73,9 @@ describe('HomePage', () => {
       })
     ) as jest.Mock;
 
-    await act(render(<HomePage />));
+    await act(async () => {
+      render(<HomePage />);
+    });
 
     jest.runAllTimers();
 
