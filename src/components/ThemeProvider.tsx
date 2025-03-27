@@ -32,7 +32,7 @@ interface ThemeProviderProps {
 }
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, ...props }) => {
-  const [theme, setTheme] = useState<PaletteMode | undefined>(props.initialTheme || getStoredTheme() || systemTheme());
+  const [theme, setTheme] = useState<PaletteMode | undefined>(getStoredTheme() || systemTheme());
 
   useEffect(() => {
     const handleSystemThemeChange = (e: MediaQueryListEvent) => {
