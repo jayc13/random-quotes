@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
+import { Box, IconButton } from '@mui/material';
+import FileCopyIcon from '@mui/icons-material/FileCopy';
 import Head from 'next/head';
 import Loading from '../src/components/Loading';
 import ThemeProvider from '../src/components/ThemeProvider';
@@ -21,12 +23,13 @@ const MainContainer = styled("div")(() => ({
   color: 'secondary.contrastText',
 }));
 
-const QuoteContainer = styled("div")(() => ({
+const QuoteContainer = styled(Box)(() => ({
+  position: 'relative',
   padding: '16px',
   maxWidth: '600px',
   textAlign: 'center',
   backgroundColor: 'background.paper',
-  color: 'text.primary'
+  color: 'text.primary',
 }));
 
 const ErrorMessage = styled("div")(() => ({
@@ -106,6 +109,17 @@ const HomePage = () => {
       </Head>
       <MainContainer>
         <QuoteContainer>
+          <IconButton
+            sx={{
+              position: 'absolute',
+              top: 8,
+              right: 8,
+              margin: '8px'
+            }}
+            onClick={() => copyToClipboard(quote.quote)}
+          >
+            <FileCopyIcon />
+          </IconButton>
           {quote.error ? (
             <ErrorMessage id="error">{quote.error}</ErrorMessage>
           ) : (
@@ -136,6 +150,18 @@ const HomePage = () => {
       setQuote({ quote: '', author: '', error: 'Failed to fetch new quote' });
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function copyToClipboard(text: string) {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert('Quote copied!');
+      console.log('Quote copied to clipboard!');
+      // You can add a toast notification or other visual feedback here
+    } catch (err) {
+      console.error('Failed to copy quote: ', err);
+      // Handle error (e.g., show error message to the user)
     }
   }
 }

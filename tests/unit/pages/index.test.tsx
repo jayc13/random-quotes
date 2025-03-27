@@ -1,5 +1,5 @@
 import {act} from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import HomePage from '../../../pages/index';
 
@@ -70,5 +70,26 @@ describe('HomePage', () => {
     await waitFor(() => {
       expect(screen.getByText('Failed to fetch quote')).toBeInTheDocument();
     });
+  });
+
+  it('copies quote to clipboard on button click', async () => {
+    const mockQuote = { quote: 'Test Quote', author: 'Test Author' };
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve(mockQuote),
+      })
+    ) as jest.Mock;
+
+    const writeTextMock = jest.spyOn(navigator.clipboard, 'writeText');
+
+    await act(async () => {
+      render(<HomePage />);
+    });
+
+    const copyButton = screen.getByRole('button'); // Assuming the copy button is the only button or has a specific label/role
+    fireEvent.click(copyButton);
+
+    expect(writeTextMock).toHaveBeenCalledWith(mockQuote.quote);
   });
 });
