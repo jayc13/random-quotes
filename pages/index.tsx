@@ -57,10 +57,7 @@ const NewQuoteButton = styled("button")<{ disabled?: boolean }>(({ disabled }) =
   backgroundColor: disabled ? 'gray' : 'secondary.main',
   border: 'none',
   borderRadius: '5px',
-  cursor: disabled ? 'default' : 'pointer',
-  display: 'flex',
-  alignItems: 'center',
-  gap: '8px',
+  cursor: disabled ? 'default' : 'pointer'
 }));
 
 const Tagline = styled("div")(() => ({
