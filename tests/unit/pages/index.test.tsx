@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import HomePage from '../../../pages/index';
 
+
 // Mock the fetch function
 global.fetch = jest.fn();
 
@@ -22,18 +23,27 @@ Object.defineProperty(window, 'matchMedia', {
 });
 
 describe('HomePage', () => {
-  it('renders loading state initially', () => {
+
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
+  
+  it('renders loading state initially', async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve({ quote: '', author: '' })
       })
     ) as jest.Mock;
+    
     render(<HomePage />);
+    
     expect(screen.getByText('Loading...')).toBeInTheDocument();
+
+    jest.runAllTimers();
   });
 
-  test('fetches and displays quote', async () => {
+  it('fetches and displays quote', async () => {
     const fakeQuote = { quote: 'Test Quote', author: 'Test Author' };
 
     // Mock fetch response to include ok: true
@@ -47,6 +57,8 @@ describe('HomePage', () => {
     await act(async () => {
       render(<HomePage />);
     });
+
+    jest.runAllTimers();
 
     const quoteElement = await screen.findByText(/Test Quote/i);
     expect(quoteElement).toBeInTheDocument();
@@ -66,6 +78,8 @@ describe('HomePage', () => {
     await act(async () => {
       render(<HomePage />);
     });
+
+    jest.runAllTimers();
 
     await waitFor(() => {
       expect(screen.getByText('Failed to fetch quote')).toBeInTheDocument();

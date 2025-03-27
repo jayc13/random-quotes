@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import RotateRightIcon from '@mui/icons-material/RotateRight';
 import Head from 'next/head';
-import Loading from '../src/components/Loading';
 import ThemeProvider from '../src/components/ThemeProvider';
+import Loading from '../src/components/Loading';
 
 type Quote = {
   quote: string;
@@ -56,7 +58,7 @@ const NewQuoteButton = styled("button")<{ disabled?: boolean }>(({ disabled }) =
   backgroundColor: disabled ? 'gray' : 'secondary.main',
   border: 'none',
   borderRadius: '5px',
-  cursor: disabled ? 'default' : 'pointer',
+  cursor: disabled ? 'default' : 'pointer'
 }));
 
 const Tagline = styled("div")(() => ({
@@ -67,31 +69,49 @@ const Tagline = styled("div")(() => ({
   color: 'text.primary',
 }));
 
+const delay = (durationMs: number) => {
+  return new Promise(resolve => setTimeout(resolve, durationMs));
+}
+
 const HomePage = () => {
   const [quote, setQuote] = useState<Quote | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchQuote() {
-      setLoading(true);
-      try {
-        const response = await fetch('/api/quote');
-        if (!response.ok) {
-          throw new Error('Failed to fetch quote');
-        }
-        const data: Quote = await response.json();
-        setQuote(data);
-      } catch (error: any) {
-        setQuote({ quote: '', author: '', error: error.message });
-      } finally {
-        setLoading(false);
+  async function fetchNewQuote() {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/quote');
+      if (!response.ok) {
+        throw new Error('Failed to fetch quote');
       }
+      const data = await response.json();
+      setQuote(data);
+      await delay(3 * 1000); // Add a loading of 3 seconds
+    } catch (error) {
+      setQuote({ quote: '', author: '', error: 'Failed to fetch quote' });
+    } finally {
+      setLoading(false);
     }
-    fetchQuote();
+  }
+
+  useEffect(() => {
+    fetchNewQuote();
   }, []);
 
+  
+
   if (loading) {
-    return <Loading />;
+    return (
+      <ThemeProvider>
+        <Head>
+          <title>Quote of the Day</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <MainContainer>
+          <Loading />
+        </MainContainer>
+      </ThemeProvider>
+    );
   }
 
   if (!quote) {
@@ -113,31 +133,15 @@ const HomePage = () => {
               <Tagline>Your daily dose of inspiration.</Tagline>
               <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
               <AuthorText id="author">- {quote.author}</AuthorText>
-              <NewQuoteButton onClick={() => fetchNewQuote()} disabled={loading}>
-                New Quote
-              </NewQuoteButton>
+              <IconButton onClick={() => fetchNewQuote()} disabled={loading}>
+                <RotateRightIcon />
+              </IconButton>
             </>
           )}
         </QuoteContainer>
       </MainContainer>
     </ThemeProvider>
   );
-
-  async function fetchNewQuote() {
-    setLoading(true);
-    try {
-      const response = await fetch('/api/quote');
-      if (!response.ok) {
-        throw new Error('Failed to fetch quote');
-      }
-      const data = await response.json();
-      setQuote(data);
-    } catch (error) {
-      setQuote({ quote: '', author: '', error: 'Failed to fetch new quote' });
-    } finally {
-      setLoading(false);
-    }
-  }
 }
 
 export default HomePage;
