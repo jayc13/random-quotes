@@ -69,7 +69,7 @@ const delay = (durationMs: number) => {
 const HomePage = () => {
   const [quote, setQuote] = useState<Quote | null>(null);
   const [loading, setLoading] = useState(true);
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   async function fetchNewQuote() {
     setLoading(true);
@@ -101,7 +101,7 @@ const HomePage = () => {
       closeOnClick: true,
       pauseOnHover: true,
       draggable: false,
-      theme: theme.palette.mode as TypeOptions, // Ensure the theme is correctly mapped
+      theme,
     });
   }
 
