@@ -4,7 +4,7 @@ import { Box, IconButton } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RotateRightIcon from '@mui/icons-material/RotateRight';
 import Head from 'next/head';
-import ThemeProvider from '../src/components/ThemeProvider';
+import ThemeProvider, { useTheme } from '../src/components/ThemeProvider';
 import Loading from '../src/components/Loading';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
