@@ -101,7 +101,17 @@ const HomePage = () => {
   
 
   if (loading) {
-    return <Loading />;
+    return (
+      <ThemeProvider>
+        <Head>
+          <title>Quote of the Day</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <MainContainer>
+          <Loading />;
+        </MainContainer>
+      </ThemeProvider>
+    );
   }
 
   if (!quote) {
