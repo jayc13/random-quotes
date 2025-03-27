@@ -1,5 +1,12 @@
 import {act} from 'react';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { 
+  cleanup, 
+  render, 
+  screen, 
+  waitFor, 
+  waitForElementToBeRemoved, 
+  fireEvent,
+} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import HomePage from '../../../pages/index';
 
@@ -37,6 +44,10 @@ describe('HomePage', () => {
     jest.useFakeTimers();
   });
 
+  afterEach(() => {
+    cleanup();
+  });
+
   afterAll(() => {
     // Restore the mock
     writeTextMock.mockRestore();
@@ -50,7 +61,9 @@ describe('HomePage', () => {
       })
     ) as jest.Mock;
     
-    render(<HomePage />);
+    await act(async () => {
+      render(<HomePage />);
+    });
     
     expect(screen.getByText('Loading...')).toBeInTheDocument();
 
@@ -115,10 +128,52 @@ describe('HomePage', () => {
 
     jest.runAllTimers();
     await waitFor(() => {
-      const copyButton = screen.getByTestId('copy-quote-btn'); // Assuming the copy button is the only button or has a specific label/role
+      const copyButton = screen.getByTestId('copy-quote-btn');
       fireEvent.click(copyButton);
-  
+
       expect(writeTextMock).toHaveBeenCalledWith(`"${mockQuote.quote}" - ${mockQuote.author}`);
     });
+  });
+  it('fetches and displays a new quote on button click', async () => {
+    const initialQuote = { quote: 'Initial Quote', author: 'Initial Author' };
+    const newQuote = { quote: 'New Quote', author: 'New Author' };
+
+    global.fetch = jest
+      .fn()
+      .mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(initialQuote),
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(newQuote),
+      });
+
+    await act(async () => {
+      render(<HomePage />);
+    });
+    
+    jest.runAllTimers();
+    
+    const initialQuoteElement = await screen.findByText(/Initial Quote/i);
+    const initialAuthorElement = await screen.findByText(/Initial Author/i);
+
+    expect(initialQuoteElement).toBeInTheDocument();
+    expect(initialAuthorElement).toBeInTheDocument();
+
+    const newQuoteButton = screen.getByTestId('refresh-quote-btn');
+    
+    fireEvent.click(newQuoteButton);
+
+    jest.runAllTimers();
+    jest.advanceTimersByTime(5000);
+    
+    await waitForElementToBeRemoved(() => screen.getByText('Loading...'), {timeout: 5000});
+    
+    const newQuoteElement = await screen.findByText(/New Quote/i);
+    const newAuthorElement = await screen.findByText(/New Author/i);
+    
+    expect(newQuoteElement).toBeInTheDocument();
+    expect(newAuthorElement).toBeInTheDocument();
   });
 });
