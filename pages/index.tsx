@@ -114,8 +114,10 @@ const HomePage = () => {
           ) : (
             <>
               <Tagline>Your daily dose of inspiration.</Tagline>
-              <div>
-                <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
+              <Box
+                sx={{
+                  position: 'relative'
+                }}>
                 <IconButton
                   size="small"
                   sx={{
@@ -127,9 +129,10 @@ const HomePage = () => {
                   onClick={() => copyToClipboard(`${quote.quote} - ${quote.author}`)}
                   data-testid="copy-quote-btn"
                 >
-                  <FileCopyIcon />
+                  <FileCopyIcon fontSize="small" />
                 </IconButton>
-              </div>
+                <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
+              </Box>
               <AuthorText id="author">- {quote.author}</AuthorText>
               <NewQuoteButton onClick={() => fetchNewQuote()} disabled={loading}>
                 New Quote
