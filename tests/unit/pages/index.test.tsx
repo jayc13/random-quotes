@@ -160,13 +160,11 @@ describe('HomePage', () => {
     
     await flushPromises();
     
-    const newQuoteElement = screen.findByText(/New Quote/i);
-    const newAuthorElement = screen.findByText(/New Author/i);
+    const newQuoteElement = await screen.findByText(/New Quote/i);
+    const newAuthorElement = await screen.findByText(/New Author/i);
     
-    await waitFor(() => {
-
-      expect(newQuoteElement).toBeInTheDocument();
-      expect(newAuthorElement).toBeInTheDocument();
-    });
+    
+    expect(newQuoteElement).toBeInTheDocument();
+    expect(newAuthorElement).toBeInTheDocument();
   });
 });
