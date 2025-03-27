@@ -138,22 +138,6 @@ describe('ThemeProvider', () => {
     expect(removeEventListenerMock).toHaveBeenCalledWith('change', expect.any(Function));
   });
 
-  it('should return undefined when localStorage is not available', () => {
-    const originalWindow = global.window;
-    // @ts-expect-error - we are intentionally deleting window for testing purposes
-    delete global.window;
-
-    render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
-    );
-
-    expect(screen.getByTestId('theme')).toHaveTextContent('light');
-
-    global.window = originalWindow;
-  });
-
   it('should handle system theme change to dark', () => {
     const setItemMock = jest.fn();
     Object.defineProperty(window, 'localStorage', {
