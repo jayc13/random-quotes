@@ -4,6 +4,9 @@ import '@testing-library/jest-dom';
 import HomePage from '../../../pages/index';
 
 
+// Mock the fetch function
+global.fetch = jest.fn();
+
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -22,9 +25,7 @@ Object.defineProperty(window, 'matchMedia', {
 describe('HomePage', () => {
 
   beforeAll(() => {
-    // Mock the fetch function
-    global.fetch = jest.fn();
-    global.setTimeout = jest.fn(cb => cb());
+    jest.useFakeTimers();
   });
   
   it('renders loading state initially', () => {
@@ -34,7 +35,10 @@ describe('HomePage', () => {
         json: () => Promise.resolve({ quote: '', author: '' })
       })
     ) as jest.Mock;
-    render(<HomePage />);
+    await act(async () => {
+      render(<HomePage />);
+      jest.runAllTimers(); 
+    });
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
@@ -51,6 +55,7 @@ describe('HomePage', () => {
 
     await act(async () => {
       render(<HomePage />);
+      jest.runAllTimers(); 
     });
 
     const quoteElement = await screen.findByText(/Test Quote/i);
@@ -70,6 +75,7 @@ describe('HomePage', () => {
 
     await act(async () => {
       render(<HomePage />);
+      jest.runAllTimers(); 
     });
 
     await waitFor(() => {
