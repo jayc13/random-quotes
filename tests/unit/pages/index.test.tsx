@@ -32,9 +32,8 @@ describe('HomePage', () => {
         writeText: jest.fn()
       }
     });
-
     writeTextMock = jest.spyOn(navigator.clipboard, 'writeText');
-      
+    window.alert = jest.fn();
     jest.useFakeTimers();
   });
 
