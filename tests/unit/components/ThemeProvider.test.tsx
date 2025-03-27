@@ -63,9 +63,11 @@ describe('ThemeProvider', () => {
 
     fireEvent.click(toggleButton);
     expect(screen.getByTestId('theme')).toHaveTextContent('dark');
+    expect(toggleButton).toHaveTextContent('🌜');
 
     fireEvent.click(toggleButton);
     expect(screen.getByTestId('theme')).toHaveTextContent('light');
+    expect(toggleButton).toHaveTextContent('🌞');
   });
 
   it('should initialize with stored theme from localStorage', () => {
@@ -116,14 +118,5 @@ describe('ThemeProvider', () => {
     unmount();
 
     expect(removeEventListenerMock).toHaveBeenCalledWith('change', expect.any(Function));
-  });
-
-  it('should render the toggle button with correct accessibility label and initial icon', () => {
-    setupMatchMedia(false); // Mock system preference as light initially
-
-    render(<ThemeProvider />);
-    const toggleButton = screen.getByTestId('theme-toggle-btn'); 
-    expect(toggleButton).toBeInTheDocument();
-    expect(toggleButton).toHaveTextContent('🌞');
   });
 });
