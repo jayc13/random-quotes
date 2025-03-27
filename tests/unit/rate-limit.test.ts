@@ -137,4 +137,31 @@ describe('Rate Limiting', () => {
     // Second request from IP 2 should be rejected
     await expect(limiter.check(req2, res2)).rejects.toThrow('Rate limit exceeded');
   });
+
+  it('should not apply rate limiting when IP is missing', async () => {
+    const limiter = rateLimit({
+      interval: 1000, // 1 second
+      uniqueTokenPerInterval: 1, // 1 request per second
+    });
+
+    const req = {
+      headers: {}, // Missing 'x-forwarded-for'
+      socket: {},  // Missing 'remoteAddress'
+      // Add other required properties with default or mock values
+      query: {},
+      cookies: {},
+      body: {},
+      env: {},
+    } as Partial<NextApiRequest> as NextApiRequest;
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      end: jest.fn(),
+    } as unknown as NextApiResponse;
+
+    // Request should be allowed even without an IP
+    await limiter.check(req, res);
+    expect(res.status).not.toHaveBeenCalledWith(429);
+    expect(res.end).not.toHaveBeenCalledWith('Rate limit exceeded');
+  });
 });
