@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import { Box, IconButton } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RotateRightIcon from '@mui/icons-material/RotateRight';
@@ -69,6 +69,7 @@ const delay = (durationMs: number) => {
 const HomePage = () => {
   const [quote, setQuote] = useState<Quote | null>(null);
   const [loading, setLoading] = useState(true);
+  const theme = useTheme();
 
   async function fetchNewQuote() {
     setLoading(true);
@@ -100,6 +101,7 @@ const HomePage = () => {
       closeOnClick: true,
       pauseOnHover: true,
       draggable: false,
+      theme,
     });
   }
 
