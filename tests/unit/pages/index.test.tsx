@@ -21,7 +21,7 @@ Object.defineProperty(window, 'matchMedia', {
 
 describe('HomePage', () => {
 
-  before(() => {
+  beforeAll(() => {
     // Mock the fetch function
     global.fetch = jest.fn();
     global.setTimeout = jest.fn(cb => cb());
