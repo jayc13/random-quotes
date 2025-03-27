@@ -6,6 +6,8 @@ import RotateRightIcon from '@mui/icons-material/RotateRight';
 import Head from 'next/head';
 import ThemeProvider from '../src/components/ThemeProvider';
 import Loading from '../src/components/Loading';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type Quote = {
   quote: string;
@@ -92,12 +94,29 @@ const HomePage = () => {
   async function copyToClipboard(text: string) {
     try {
       await navigator.clipboard.writeText(text);
-      alert('Quote copied!');
+      toast.success('Quote copied!', {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       console.log('Quote copied to clipboard!');
-      // You can add a toast notification or other visual feedback here
     } catch (err) {
       console.error('Failed to copy quote: ', err);
-      // Handle error (e.g., show error message to the user)
+      toast.error('Failed to copy quote.', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   }
 
@@ -158,6 +177,7 @@ const HomePage = () => {
             </>
           )}
         </QuoteContainer>
+        <ToastContainer />
       </MainContainer>
     </ThemeProvider>
   );
