@@ -67,4 +67,65 @@ describe('ThemeProvider', () => {
     fireEvent.click(toggleButton);
     expect(screen.getByTestId('theme')).toHaveTextContent('light');
   });
+
+  it('should initialize with stored theme from localStorage', () => {
+    Object.defineProperty(window, 'localStorage', {
+      value: {
+        getItem: jest.fn(() => 'dark'),
+      },
+      writable: true,
+    });
+
+    render(
+      <ThemeProvider>
+        <TestComponent />
+      </ThemeProvider>
+    );
+
+    expect(screen.getByTestId('theme')).toHaveTextContent('dark');
+  });
+
+  it('should remove event listener on unmount', () => {
+    const removeEventListenerMock = jest.fn();
+    const addEventListenerMock = jest.fn();
+    setupMatchMedia(false); // Mock system preference as light initially
+
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+        addEventListener: addEventListenerMock,
+        removeEventListener: removeEventListenerMock,
+        dispatchEvent: jest.fn(),
+      })),
+    });
+
+
+    const { unmount } = render(
+      <ThemeProvider>
+        <TestComponent />
+      </ThemeProvider>
+    );
+
+    expect(addEventListenerMock).toHaveBeenCalledWith('change', expect.any(Function));
+
+    unmount();
+
+    expect(removeEventListenerMock).toHaveBeenCalledWith('change', expect.any(Function));
+  });
+
+  it('should render the toggle button with correct accessibility label and initial icon', () => {
+    setupMatchMedia(false); // Mock system preference as light initially
+
+    render(<ThemeProvider />);
+
+    const toggleButton = screen.getByRole('button', { name: /toggle theme/i });
+    expect(toggleButton).toBeInTheDocument();
+    expect(toggleButton).toHaveAttribute('aria-label', 'Toggle theme');
+    expect(toggleButton).toHaveTextContent('🌞');
+  });
 });
