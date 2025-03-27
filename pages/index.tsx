@@ -117,10 +117,11 @@ const HomePage = () => {
               <div>
                 <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
                 <IconButton
+                  size="small"
                   sx={{
                     position: 'absolute',
                     top: 8,
-                    right: 8,
+                    right: '-8px',
                     margin: '8px'
                   }}
                   onClick={() => copyToClipboard(`${quote.quote} - ${quote.author}`)}
