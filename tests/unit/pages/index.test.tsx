@@ -1,5 +1,5 @@
 import {act} from 'react';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { cleanup, render, screen, waitFor, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import HomePage from '../../../pages/index';
 
@@ -38,7 +38,7 @@ describe('HomePage', () => {
   });
 
   afterEach(() => {
-    unmount();
+    cleanup();
   });
 
   afterAll(() => {
@@ -134,5 +134,39 @@ describe('HomePage', () => {
 
     alertSpy.mockRestore();
     consoleLogSpy.mockRestore();
+  });
+  it('fetches and displays a new quote on button click', async () => {
+    const initialQuote = { quote: 'Initial Quote', author: 'Initial Author' };
+    const newQuote = { quote: 'New Quote', author: 'New Author' };
+
+    global.fetch = jest
+      .fn()
+      .mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(initialQuote),
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(newQuote),
+      });
+
+    await act(async () => {
+      render(<HomePage />);
+    });
+
+    jest.runAllTimers();
+
+    const initialQuoteElement = await screen.findByText(/Initial Quote/i);
+    const initialAuthorElement = await screen.findByText(/Initial Author/i);
+    expect(initialQuoteElement).toBeInTheDocument();
+    expect(initialAuthorElement).toBeInTheDocument();
+
+    const newQuoteButton = screen.getByTestId('refresh-quote-btn');
+    fireEvent.click(newQuoteButton);
+
+    const newQuoteElement = await screen.findByText(/New Quote/i);
+    const newAuthorElement = await screen.findByText(/New Author/i);
+    expect(newQuoteElement).toBeInTheDocument();
+    expect(newAuthorElement).toBeInTheDocument();
   });
 });
