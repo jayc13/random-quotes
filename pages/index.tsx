@@ -69,7 +69,6 @@ const delay = (durationMs: number) => {
 const HomePage = () => {
   const [quote, setQuote] = useState<Quote | null>(null);
   const [loading, setLoading] = useState(true);
-  const { theme } = useTheme();
 
   async function fetchNewQuote() {
     setLoading(true);
