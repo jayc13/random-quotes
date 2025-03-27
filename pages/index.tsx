@@ -108,7 +108,7 @@ const HomePage = () => {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <MainContainer>
-          <Loading />;
+          <Loading />
         </MainContainer>
       </ThemeProvider>
     );
