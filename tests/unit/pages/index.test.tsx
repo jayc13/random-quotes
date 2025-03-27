@@ -5,6 +5,7 @@ import HomePage from '../../../pages/index';
 
 // Mock the fetch function
 global.fetch = jest.fn();
+global.setTimeout = jest.fn(cb => cb());
 
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
@@ -46,9 +47,6 @@ describe('HomePage', () => {
 
     await act(async () => {
       render(<HomePage />);
-      setTimeout(() => {
-        console.log("Delayed for 5 second.");
-      }, 5 * 1000);
     });
 
     const quoteElement = await screen.findByText(/Test Quote/i);
