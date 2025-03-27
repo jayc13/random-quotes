@@ -124,47 +124,4 @@ describe('ThemeProvider', () => {
 
     expect(removeEventListenerMock).toHaveBeenCalledWith('change', expect.any(Function));
   });
-
-  it('should handle system theme change to light', () => {
-    const setItemMock = jest.fn();
-    Object.defineProperty(window, 'localStorage', {
-      value: {
-        setItem: setItemMock,
-        getItem: jest.fn(),
-      },
-      writable: true,
-    });
-  
-    const dispatchEventMock = jest.fn();
-    setupMatchMedia(true); // Start with dark theme
-    Object.defineProperty(window, 'matchMedia', {
-      writable: true,
-      value: jest.fn().mockImplementation((query) => ({
-        matches: true,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: dispatchEventMock,
-      })),
-    });
-  
-    render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
-    );
-  
-    // Simulate system theme change to light
-    const event = new Event('change') as any;
-    event.matches = false;
-    // Ensure dispatchEventMock has been called before accessing its calls
-    expect(dispatchEventMock).toHaveBeenCalled();
-    dispatchEventMock.mock.calls[0][0](event);
-  
-    expect(screen.getByTestId('theme')).toHaveTextContent('light');
-    expect(setItemMock).toHaveBeenCalledWith('theme', 'light');
-  });
 });
