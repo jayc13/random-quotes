@@ -92,32 +92,17 @@ const HomePage = () => {
   }, []);
   
   async function copyToClipboard(text: string) {
-    try {
-      await navigator.clipboard.writeText(text);
-      toast.success('Quote copied!', {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      console.log('Quote copied to clipboard!');
-    } catch (err) {
-      console.error('Failed to copy quote: ', err);
-      toast.error('Failed to copy quote.', {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
+    await navigator.clipboard.writeText(text);
+    toast.success('Quote copied!', {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   }
 
   if (loading) {
