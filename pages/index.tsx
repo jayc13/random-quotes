@@ -101,7 +101,7 @@ const HomePage = () => {
       closeOnClick: true,
       pauseOnHover: true,
       draggable: false,
-      theme,
+      theme: theme.palette.mode as TypeOptions, // Ensure the theme is correctly mapped
     });
   }
 
