@@ -3,9 +3,6 @@ import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import HomePage from '../../../pages/index';
 
-// Mock the fetch function
-global.fetch = jest.fn();
-global.setTimeout = jest.fn(cb => cb());
 
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
@@ -23,6 +20,13 @@ Object.defineProperty(window, 'matchMedia', {
 });
 
 describe('HomePage', () => {
+
+  before(() => {
+    // Mock the fetch function
+    global.fetch = jest.fn();
+    global.setTimeout = jest.fn(cb => cb());
+  });
+  
   it('renders loading state initially', () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
