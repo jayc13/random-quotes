@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
+import { Box, IconButton } from '@mui/material';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RotateRightIcon from '@mui/icons-material/RotateRight';
 import Head from 'next/head';
 import ThemeProvider from '../src/components/ThemeProvider';
@@ -23,12 +24,13 @@ const MainContainer = styled("div")(() => ({
   color: 'secondary.contrastText',
 }));
 
-const QuoteContainer = styled("div")(() => ({
+const QuoteContainer = styled(Box)(() => ({
+  position: 'relative',
   padding: '16px',
   maxWidth: '600px',
   textAlign: 'center',
   backgroundColor: 'background.paper',
-  color: 'text.primary'
+  color: 'text.primary',
 }));
 
 const ErrorMessage = styled("div")(() => ({
@@ -97,8 +99,18 @@ const HomePage = () => {
   useEffect(() => {
     fetchNewQuote();
   }, []);
-
   
+  async function copyToClipboard(text: string) {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert('Quote copied!');
+      console.log('Quote copied to clipboard!');
+      // You can add a toast notification or other visual feedback here
+    } catch (err) {
+      console.error('Failed to copy quote: ', err);
+      // Handle error (e.g., show error message to the user)
+    }
+  }
 
   if (loading) {
     return (
@@ -131,7 +143,25 @@ const HomePage = () => {
           ) : (
             <>
               <Tagline>Your daily dose of inspiration.</Tagline>
-              <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
+              <Box
+                sx={{
+                  position: 'relative'
+                }}>
+                <IconButton
+                  size="small"
+                  sx={{
+                    position: 'absolute',
+                    top: '-8px',
+                    right: '-30px',
+                    margin: 0
+                  }}
+                  onClick={() => copyToClipboard(`"${quote.quote}" - ${quote.author}`)}
+                  data-testid="copy-quote-btn"
+                >
+                  <ContentCopyIcon fontSize="small" />
+                </IconButton>
+                <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
+              </Box>
               <AuthorText id="author">- {quote.author}</AuthorText>
               <IconButton onClick={() => fetchNewQuote()} disabled={loading}>
                 <RotateRightIcon />

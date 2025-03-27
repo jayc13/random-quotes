@@ -1,5 +1,5 @@
 import {act} from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import HomePage from '../../../pages/index';
 
@@ -23,9 +23,23 @@ Object.defineProperty(window, 'matchMedia', {
 });
 
 describe('HomePage', () => {
+  let writeTextMock: jest.Mock;
 
   beforeAll(() => {
+    // Mock the navigator.clipboard object
+    Object.assign(navigator, {
+      clipboard: {
+        writeText: jest.fn()
+      }
+    });
+    writeTextMock = jest.spyOn(navigator.clipboard, 'writeText');
+    window.alert = jest.fn();
     jest.useFakeTimers();
+  });
+
+  afterAll(() => {
+    // Restore the mock
+    writeTextMock.mockRestore();
   });
   
   it('renders loading state initially', async () => {
@@ -83,6 +97,28 @@ describe('HomePage', () => {
 
     await waitFor(() => {
       expect(screen.getByText('Failed to fetch quote')).toBeInTheDocument();
+    });
+  });
+
+  it('copies quote to clipboard on button click', async () => {
+    const mockQuote = { quote: 'Test Quote', author: 'Test Author' };
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve(mockQuote),
+      })
+    ) as jest.Mock;
+
+    await act(async () => {
+      render(<HomePage />);
+    });
+
+    jest.runAllTimers();
+    await waitFor(() => {
+      const copyButton = screen.getByTestId('copy-quote-btn'); // Assuming the copy button is the only button or has a specific label/role
+      fireEvent.click(copyButton);
+  
+      expect(writeTextMock).toHaveBeenCalledWith(`"${mockQuote.quote}" - ${mockQuote.author}`);
     });
   });
 });
