@@ -88,7 +88,7 @@ const HomePage = () => {
       setQuote(data);
       await delay(3 * 1000); // Add a loading of 3 seconds
     } catch (error) {
-      setQuote({ quote: '', author: '', error: 'Failed to fetch new quote' });
+      setQuote({ quote: '', author: '', error: 'Failed to fetch quote' });
     } finally {
       setLoading(false);
     }
