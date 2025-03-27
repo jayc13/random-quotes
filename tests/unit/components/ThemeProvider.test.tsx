@@ -58,7 +58,7 @@ describe('ThemeProvider', () => {
       </ThemeProvider>
     );
 
-    const toggleButton = screen.getByRole('button', { name: /toggle theme/i });
+    const toggleButton = screen.getByTestId('theme-toggle-btn'); 
     expect(screen.getByTestId('theme')).toHaveTextContent('light'); // Assuming system preference is light
 
     fireEvent.click(toggleButton);
@@ -122,8 +122,7 @@ describe('ThemeProvider', () => {
     setupMatchMedia(false); // Mock system preference as light initially
 
     render(<ThemeProvider />);
-
-    const toggleButton = screen.getByRole('button', { name: /toggle theme/i });
+    const toggleButton = screen.getByTestId('theme-toggle-btn'); 
     expect(toggleButton).toBeInTheDocument();
     expect(toggleButton).toHaveAttribute('aria-label', 'Toggle theme');
     expect(toggleButton).toHaveTextContent('🌞');
