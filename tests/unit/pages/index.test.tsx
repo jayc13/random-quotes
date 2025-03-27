@@ -3,6 +3,7 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import HomePage from '../../../pages/index';
 
+
 // Mock the fetch function
 global.fetch = jest.fn();
 
@@ -33,6 +34,8 @@ describe('HomePage', () => {
     });
 
     writeTextMock = jest.spyOn(navigator.clipboard, 'writeText');
+      
+    jest.useFakeTimers();
   });
 
   afterAll(() => {
@@ -40,15 +43,19 @@ describe('HomePage', () => {
     writeTextMock.mockRestore();
   });
   
-  it('renders loading state initially', () => {
+  it('renders loading state initially', async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve({ quote: '', author: '' })
       })
     ) as jest.Mock;
+    
     render(<HomePage />);
+    
     expect(screen.getByText('Loading...')).toBeInTheDocument();
+
+    jest.runAllTimers();
   });
 
   it('fetches and displays quote', async () => {
@@ -65,6 +72,8 @@ describe('HomePage', () => {
     await act(async () => {
       render(<HomePage />);
     });
+
+    jest.runAllTimers();
 
     const quoteElement = await screen.findByText(/Test Quote/i);
     expect(quoteElement).toBeInTheDocument();
@@ -84,6 +93,8 @@ describe('HomePage', () => {
     await act(async () => {
       render(<HomePage />);
     });
+
+    jest.runAllTimers();
 
     await waitFor(() => {
       expect(screen.getByText('Failed to fetch quote')).toBeInTheDocument();
