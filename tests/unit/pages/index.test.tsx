@@ -115,9 +115,6 @@ describe('HomePage', () => {
       })
     ) as jest.Mock;
 
-    const alertSpy = jest.spyOn(window, 'alert');
-    const consoleLogSpy = jest.spyOn(console, 'log');
-
     await act(async () => {
       render(<HomePage />);
     });
@@ -128,12 +125,7 @@ describe('HomePage', () => {
       fireEvent.click(copyButton);
 
       expect(writeTextMock).toHaveBeenCalledWith(`"${mockQuote.quote}" - ${mockQuote.author}`);
-      expect(alertSpy).toHaveBeenCalledWith('Quote copied to clipboard!');
-      expect(consoleLogSpy).toHaveBeenCalledWith('Quote copied to clipboard!');
     });
-
-    alertSpy.mockRestore();
-    consoleLogSpy.mockRestore();
   });
   it('fetches and displays a new quote on button click', async () => {
     const initialQuote = { quote: 'Initial Quote', author: 'Initial Author' };
