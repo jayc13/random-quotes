@@ -69,6 +69,10 @@ const Tagline = styled("div")(() => ({
   color: 'text.primary',
 }));
 
+const delay = (durationMs: number) => {
+  return new Promise(resolve => setTimeout(resolve, durationMs));
+}
+
 const HomePage = () => {
   const [quote, setQuote] = useState<Quote | null>(null);
   const [loading, setLoading] = useState(true);
@@ -82,9 +86,8 @@ const HomePage = () => {
           throw new Error('Failed to fetch quote');
         }
         const data: Quote = await response.json();
-        setTimeout(() => {
-          setQuote(data);
-        }, 3 * 1000); // Add a loading of 3 seconds
+        await delay(3 * 1000); // Add a loading of 3 seconds
+        setQuote(data);
       } catch (error: any) {
         setQuote({ quote: '', author: '', error: error.message });
       } finally {
