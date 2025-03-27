@@ -1,6 +1,6 @@
 import { createMocks } from 'node-mocks-http'
-import handlerQuoteJSON from '../../pages/api/quote'; // Import your API route
-import handlerQuoteSVG from '../../pages/api/quote.svg'; // Import your API route
+import handlerQuoteJSON from '../../pages/api/quote.ts'; // Import your API route
+import handlerQuoteSVG from '../../pages/api/quote.svg.ts'; // Import your API route
 
 describe('Integration Tests', () => {
 
