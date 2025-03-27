@@ -81,7 +81,9 @@ const HomePage = () => {
           throw new Error('Failed to fetch quote');
         }
         const data: Quote = await response.json();
-        setQuote(data);
+        setTimeout(() => {
+          setQuote(data);
+        }, 3 * 1000); // Add a loading of 3 seconds
       } catch (error: any) {
         setQuote({ quote: '', author: '', error: error.message });
       }
