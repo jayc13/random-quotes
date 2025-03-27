@@ -52,17 +52,6 @@ const AuthorText = styled("p")(() => ({
   color: 'text.secondary',
 }));
 
-const NewQuoteButton = styled("button")<{ disabled?: boolean }>(({ disabled }) => ({
-  marginTop: '20px',
-  padding: '10px 20px',
-  fontSize: '1em',
-  color: 'primary.contrastText',
-  backgroundColor: disabled ? 'gray' : 'secondary.main',
-  border: 'none',
-  borderRadius: '5px',
-  cursor: disabled ? 'default' : 'pointer'
-}));
-
 const Tagline = styled("div")(() => ({
   marginBottom: '20px',
   fontSize: '1.2em',
@@ -126,10 +115,6 @@ const HomePage = () => {
     );
   }
 
-  if (!quote) {
-    return null; // or a different fallback if needed
-  }
-
   return (
     <ThemeProvider>
       <Head>
@@ -138,8 +123,8 @@ const HomePage = () => {
       </Head>
       <MainContainer>
         <QuoteContainer>
-          {quote.error ? (
-            <ErrorMessage id="error">{quote.error}</ErrorMessage>
+          {(!quote || quote.error) ? (
+            <ErrorMessage id="error">{quote?.error || 'Failed to fetch quote'}</ErrorMessage>
           ) : (
             <>
               <Tagline>Your daily dose of inspiration.</Tagline>
