@@ -156,7 +156,7 @@ describe('HomePage', () => {
     const newQuoteButton = screen.getByTestId('refresh-quote-btn');
     
     fireEvent.click(newQuoteButton);
-    const flushPromises = () => new Promise(jest.requireActual("timers").setImmediate;
+    const flushPromises = () => new Promise(jest.requireActual("timers").setImmediate);
     
     await flushPromises();
     
