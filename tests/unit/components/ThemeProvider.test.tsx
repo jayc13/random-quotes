@@ -92,6 +92,23 @@ describe('ThemeProvider', () => {
     expect(screen.getByTestId('theme')).toHaveTextContent('dark');
   });
 
+  it('should initialize with stored theme from localStorage - light theme', () => {
+    Object.defineProperty(window, 'localStorage', {
+      value: {
+        getItem: jest.fn(() => 'light'),
+      },
+      writable: true,
+    });
+
+    render(
+      <ThemeProvider>
+        <TestComponent />
+      </ThemeProvider>
+    );
+
+    expect(screen.getByTestId('theme')).toHaveTextContent('light');
+  });
+
   it('should remove event listener on unmount', () => {
     const removeEventListenerMock = jest.fn();
     const addEventListenerMock = jest.fn();
