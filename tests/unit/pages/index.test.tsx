@@ -35,10 +35,12 @@ describe('HomePage', () => {
         json: () => Promise.resolve({ quote: '', author: '' })
       })
     ) as jest.Mock;
-    await act(async () => {
-      render(<HomePage />);
-    });
+    
+    render(<HomePage />);
+    
     expect(screen.getByText('Loading...')).toBeInTheDocument();
+
+    jest.runAllTimers();
   });
 
   it('fetches and displays quote', async () => {
