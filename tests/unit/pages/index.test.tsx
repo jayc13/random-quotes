@@ -103,9 +103,9 @@ describe('HomePage', () => {
       render(<HomePage />);
     });
 
-    const copyButton = screen.getByRole('button'); // Assuming the copy button is the only button or has a specific label/role
+    const copyButton = screen.getByTestId('copy-quote-btn'); // Assuming the copy button is the only button or has a specific label/role
     fireEvent.click(copyButton);
 
-    expect(writeTextMock).toHaveBeenCalledWith('expected quote text');
+    expect(writeTextMock).toHaveBeenCalledWith(`${mockQuote.quote} - ${mockQuote.author}`);
   });
 });
