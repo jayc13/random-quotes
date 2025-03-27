@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import { Box, IconButton } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RotateRightIcon from '@mui/icons-material/RotateRight';
