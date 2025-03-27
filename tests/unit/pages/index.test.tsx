@@ -1,5 +1,12 @@
 import {act} from 'react';
-import { cleanup, render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { 
+  cleanup, 
+  render, 
+  screen, 
+  waitFor, 
+  waitForElementToBeRemoved, 
+  fireEvent,
+} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import HomePage from '../../../pages/index';
 
