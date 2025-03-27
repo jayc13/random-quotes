@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { Box, IconButton } from '@mui/material';
-import FileCopyIcon from '@mui/icons-material/FileCopy';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RotateRightIcon from '@mui/icons-material/RotateRight';
 import Head from 'next/head';
 import ThemeProvider from '../src/components/ThemeProvider';
@@ -158,7 +158,7 @@ const HomePage = () => {
                   onClick={() => copyToClipboard(`"${quote.quote}" - ${quote.author}`)}
                   data-testid="copy-quote-btn"
                 >
-                  <FileCopyIcon fontSize="small" />
+                  <ContentCopyIcon fontSize="small" />
                 </IconButton>
                 <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
               </Box>
