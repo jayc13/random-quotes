@@ -116,7 +116,7 @@ const HomePage = () => {
               right: 8,
               margin: '8px'
             }}
-            onClick={() => copyToClipboard(quote.quote)}
+            onClick={() => copyToClipboard(`${quote.quote} - ${quote.author}`)}
           >
             <FileCopyIcon />
           </IconButton>
