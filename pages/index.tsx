@@ -29,7 +29,7 @@ const MainContainer = styled("div")(() => ({
 const QuoteContainer = styled(Box)(() => ({
   position: 'relative',
   padding: '16px',
-  maxWidth: '600px',
+  maxWidth: '80%',
   textAlign: 'center',
   backgroundColor: 'background.paper',
   color: 'text.primary',
@@ -41,7 +41,7 @@ const ErrorMessage = styled("div")(() => ({
 }));
 
 const QuoteText = styled("p")(() => ({
-  fontSize: '1.4em',
+  fontSize: '3em',
   fontStyle: 'italic',
   marginBottom: '10px',
   fontFamily: 'Lora, serif',
@@ -49,14 +49,14 @@ const QuoteText = styled("p")(() => ({
 }));
 
 const AuthorText = styled("p")(() => ({
-  fontSize: '1.1em',
+  fontSize: '1.4em',
   fontFamily: 'Open Sans, sans-serif',
   color: 'text.secondary',
 }));
 
 const Tagline = styled("div")(() => ({
   marginBottom: '20px',
-  fontSize: '1.2em',
+  fontSize: '1em',
   fontWeight: 'bold',
   fontFamily: 'Open Sans, sans-serif',
   color: 'text.primary',
