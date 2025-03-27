@@ -46,6 +46,9 @@ describe('HomePage', () => {
 
     await act(async () => {
       render(<HomePage />);
+      setTimeout(() => {
+        console.log("Delayed for 5 second.");
+      }, 5 * 1000);
     });
 
     const quoteElement = await screen.findByText(/Test Quote/i);
