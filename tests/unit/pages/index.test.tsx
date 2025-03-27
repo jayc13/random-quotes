@@ -156,13 +156,11 @@ describe('HomePage', () => {
     const newQuoteButton = screen.getByTestId('refresh-quote-btn');
     
     fireEvent.click(newQuoteButton);
-    const flushPromises = () => new Promise(jest.requireActual("timers").setImmediate);
     
-    await flushPromises();
+    jest.advanceTimersByTime(5000);
     
     const newQuoteElement = await screen.findByText(/New Quote/i);
     const newAuthorElement = await screen.findByText(/New Author/i);
-    
     
     expect(newQuoteElement).toBeInTheDocument();
     expect(newAuthorElement).toBeInTheDocument();
