@@ -109,7 +109,6 @@ const HomePage = () => {
       </Head>
       <MainContainer>
         <QuoteContainer>
-          </IconButton>
           {quote.error ? (
             <ErrorMessage id="error">{quote.error}</ErrorMessage>
           ) : (
@@ -128,6 +127,7 @@ const HomePage = () => {
                   data-testid="copy-quote-btn"
                 >
                   <FileCopyIcon />
+                </IconButton>
               </div>
               <AuthorText id="author">- {quote.author}</AuthorText>
               <NewQuoteButton onClick={() => fetchNewQuote()} disabled={loading}>
