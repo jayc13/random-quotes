@@ -38,6 +38,8 @@ describe('ThemeProvider', () => {
       </ThemeProvider>
     );
     expect(screen.getByTestId('theme')).toHaveTextContent('dark');
+    const toggleButton = screen.getByTestId('theme-toggle-btn');
+    expect(toggleButton).toHaveTextContent('🌜'); // Assert initial icon for dark theme
   });
 
   it('should initialize with system preference if no theme is stored - default light theme', () => {
@@ -48,6 +50,8 @@ describe('ThemeProvider', () => {
       </ThemeProvider>
     );
     expect(screen.getByTestId('theme')).toHaveTextContent('light');
+    const toggleButton = screen.getByTestId('theme-toggle-btn');
+    expect(toggleButton).toHaveTextContent('🌞'); // Assert initial icon for light theme
   });
 
   it('should toggle theme between light and dark', () => {
@@ -69,23 +73,6 @@ describe('ThemeProvider', () => {
     fireEvent.click(toggleButton);
     expect(screen.getByTestId('theme')).toHaveTextContent('light');
     expect(toggleButton).toHaveTextContent('🌞');
-  });
-
-
-
-
-
-  it('should have correct initial icon when system preference is dark', () => {
-    setupMatchMedia(true); // Ensure initial state is dark
-    render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
-    );
-
-    const toggleButton = screen.getByTestId('theme-toggle-btn');
-    expect(screen.getByTestId('theme')).toHaveTextContent('dark'); // Assuming system preference is dark
-    expect(toggleButton).toHaveTextContent('🌜'); // Assert initial icon for dark theme
   });
 
   it('should initialize with stored theme from localStorage', () => {
@@ -218,17 +205,5 @@ describe('ThemeProvider', () => {
 
     expect(screen.getByTestId('theme')).toHaveTextContent('light');
     expect(setItemMock).toHaveBeenCalledWith('theme', 'light');
-  });
-
-  it('should return correct icon for different themes', () => {
-    const { result, rerender } = renderHook(() => useTheme(), {
-      wrapper: ({ children }: { children: React.ReactNode }) => (
-        <ThemeProvider initialTheme="light">{children}</ThemeProvider>
-      ),
-    });
-    expect(result.current.getThemeIcon()).toBe('🌞');
-
-    rerender({ children: <></>, initialTheme: "dark"});
-    expect(result.current.getThemeIcon()).toBe('🌜');
   });
 });
