@@ -52,7 +52,7 @@ const AuthorText = styled("p")(() => ({
 const NewQuoteButton = styled("button")<{ disabled?: boolean }>(({ disabled }) => ({
   marginTop: '20px',
   padding: '10px 20px',
-  fontSize: '0px', /* Hide the text */
+  fontSize: '1em',
   color: 'primary.contrastText',
   backgroundColor: disabled ? 'gray' : 'secondary.main',
   border: 'none',
@@ -111,7 +111,7 @@ const HomePage = () => {
               <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
               <AuthorText id="author">- {quote.author}</AuthorText>
               <NewQuoteButton onClick={() => fetchNewQuote()} disabled={loading}>
-                <RotateRightIcon />
+                <RotateRightIcon /> Nuew Quote
               </NewQuoteButton>
             </>
           )}
