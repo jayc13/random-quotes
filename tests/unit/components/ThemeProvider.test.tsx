@@ -158,12 +158,14 @@ describe('ThemeProvider', () => {
     );
 
     // Simulate system theme change to dark
-    const event = new Event('change') as any;
-    event.matches = true;
-    dispatchEventMock.mock.calls[0][0](event);
+  const event = new Event('change') as any;
+  event.matches = true;
+  // Ensure dispatchEventMock has been called before accessing its calls
+  expect(dispatchEventMock).toHaveBeenCalled();
+  dispatchEventMock.mock.calls[0][0](event);
 
-    expect(screen.getByTestId('theme')).toHaveTextContent('dark');
-    expect(setItemMock).toHaveBeenCalledWith('theme', 'dark');
+  expect(screen.getByTestId('theme')).toHaveTextContent('dark');
+  expect(setItemMock).toHaveBeenCalledWith('theme', 'dark');
   });
 
   it('should handle system theme change to light', () => {
@@ -201,6 +203,8 @@ describe('ThemeProvider', () => {
     // Simulate system theme change to light
     const event = new Event('change') as any;
     event.matches = false;
+    // Ensure dispatchEventMock has been called before accessing its calls
+    expect(dispatchEventMock).toHaveBeenCalled();
     dispatchEventMock.mock.calls[0][0](event);
 
     expect(screen.getByTestId('theme')).toHaveTextContent('light');
