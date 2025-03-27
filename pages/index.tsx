@@ -148,7 +148,11 @@ const HomePage = () => {
                 <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
               </Box>
               <AuthorText id="author">- {quote.author}</AuthorText>
-              <IconButton onClick={() => fetchNewQuote()} disabled={loading}>
+              <IconButton 
+                onClick={() => fetchNewQuote()} 
+                disabled={loading}
+                data-testid="refresh-quote-btn"
+                >
                 <RotateRightIcon />
               </IconButton>
             </>
