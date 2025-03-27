@@ -155,10 +155,10 @@ describe('HomePage', () => {
 
     const newQuoteButton = screen.getByTestId('refresh-quote-btn');
     
-    await waitFor(() => {
-      fireEvent.click(newQuoteButton);
+    fireEvent.click(newQuoteButton);
+    await jest.runAllTimers();
   
-      jest.runAllTimers();
+    await waitFor(() => {
       const newQuoteElement = screen.findByText(/New Quote/i);
       const newAuthorElement = screen.findByText(/New Author/i);
 
