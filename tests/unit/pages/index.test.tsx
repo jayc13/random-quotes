@@ -109,16 +109,24 @@ describe('HomePage', () => {
       })
     ) as jest.Mock;
 
+    const alertSpy = jest.spyOn(window, 'alert');
+    const consoleLogSpy = jest.spyOn(console, 'log');
+
     await act(async () => {
       render(<HomePage />);
     });
 
     jest.runAllTimers();
     await waitFor(() => {
-      const copyButton = screen.getByTestId('copy-quote-btn'); // Assuming the copy button is the only button or has a specific label/role
+      const copyButton = screen.getByTestId('copy-quote-btn');
       fireEvent.click(copyButton);
-  
+
       expect(writeTextMock).toHaveBeenCalledWith(`"${mockQuote.quote}" - ${mockQuote.author}`);
+      expect(alertSpy).toHaveBeenCalledWith('Quote copied to clipboard!');
+      expect(consoleLogSpy).toHaveBeenCalledWith('Quote copied to clipboard!');
     });
+
+    alertSpy.mockRestore();
+    consoleLogSpy.mockRestore();
   });
 });
