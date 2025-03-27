@@ -28,7 +28,7 @@ describe('HomePage', () => {
     jest.useFakeTimers();
   });
   
-  it('renders loading state initially', () => {
+  it('renders loading state initially', async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: true,
@@ -42,7 +42,7 @@ describe('HomePage', () => {
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
-  test('fetches and displays quote', async () => {
+  it('fetches and displays quote', async () => {
     const fakeQuote = { quote: 'Test Quote', author: 'Test Author' };
 
     // Mock fetch response to include ok: true
