@@ -4,7 +4,7 @@ import { Box, IconButton } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RotateRightIcon from '@mui/icons-material/RotateRight';
 import Head from 'next/head';
-import ThemeProvider from '../src/components/ThemeProvider';
+import ThemeProvider, { useTheme } from '../src/components/ThemeProvider';
 import Loading from '../src/components/Loading';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -69,6 +69,7 @@ const delay = (durationMs: number) => {
 const HomePage = () => {
   const [quote, setQuote] = useState<Quote | null>(null);
   const [loading, setLoading] = useState(true);
+  const { theme } = useTheme();
 
   async function fetchNewQuote() {
     setLoading(true);
@@ -99,9 +100,8 @@ const HomePage = () => {
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
+      draggable: false,
+      theme,
     });
   }
 
