@@ -15,7 +15,7 @@ describe('Rate Limiting', () => {
 
     const req = {
       headers: {
-        'x-forwarded-for': '127.0.0.1',
+        'x-forwarded-for': ['127.0.0.1', '192.168.10.2'],
       },
       socket: {
         remoteAddress: '127.0.0.1',
