@@ -71,8 +71,10 @@ describe('HomePage', () => {
     await act(async () => {
       render(<HomePage />);
     });
+
+    const loadingComponent = screen.getByTestId('loading-component');
     
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    expect(loadingComponent).toBeInTheDocument();
 
     jest.runAllTimers();
   });
@@ -175,7 +177,7 @@ describe('HomePage', () => {
     jest.runAllTimers();
     jest.advanceTimersByTime(5000);
     
-    await waitForElementToBeRemoved(() => screen.getByText('Loading...'), {timeout: 5000});
+    await waitForElementToBeRemoved(() => screen.getByTestId('loading-component'), {timeout: 5000});
     
     const newQuoteElement = await screen.findByText(/New Quote/i);
     const newAuthorElement = await screen.findByText(/New Author/i);
