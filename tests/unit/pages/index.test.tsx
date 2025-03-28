@@ -29,6 +29,10 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 });
 
+const delay = (durationMs: number) => {
+  return new Promise(resolve => setTimeout(resolve, durationMs));
+}
+
 describe('HomePage', () => {
   let writeTextMock: jest.Mock;
 
@@ -57,7 +61,10 @@ describe('HomePage', () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: true,
-        json: () => Promise.resolve({ quote: '', author: '' })
+        json: async () => {
+          await delay(5 * 1000);
+          return { quote: '', author: '' };
+        }
       })
     ) as jest.Mock;
     
