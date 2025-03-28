@@ -34,7 +34,7 @@ test.describe('Quote App', () => {
       await route.fulfill({
         status: 500,
         contentType: 'application/json',
-        body: JSON.stringify({ error: 'Failed to fetch quote' }),
+        body: JSON.stringify({ error: 'Failed to fetch quote. Please try again' }),
       });
     });
 
