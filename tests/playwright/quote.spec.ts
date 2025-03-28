@@ -34,7 +34,7 @@ test.describe('Quote App', () => {
       await route.fulfill({
         status: 500,
         contentType: 'application/json',
-        body: JSON.stringify({ error: 'Failed to fetch quote. Please try again' }),
+        body: JSON.stringify({ error: 'Failed to fetch quote' }),
       });
     });
 
@@ -45,7 +45,7 @@ test.describe('Quote App', () => {
     await expect(page.locator('#loading')).toBeHidden();
 
     // Check for an error message or fallback content (adjust based on your app's behavior)
-    await expect(page.locator('#error')).toHaveText('Failed to fetch quote');
+    await expect(page.locator('#error')).toHaveText('Failed to fetch quote. Please try again');
   });
 
   test('should refresh the quote when the refresh button is clicked', async ({ page }) => {
