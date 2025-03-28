@@ -46,7 +46,7 @@ const LoadingText = styled.p`
 const Loading = () => {
   return (
     <ThemeProvider>
-      <LoadingContainer id="loading">
+      <LoadingContainer id="loading" data-testid="loading-component">
         <LoadingText></LoadingText>
       </LoadingContainer>
     </ThemeProvider>
