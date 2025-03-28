@@ -122,7 +122,7 @@ const HomePage = () => {
       <MainContainer>
         <QuoteContainer>
           {(!quote || quote.error) ? (
-            <ErrorMessage id="error">Failed to fetch quote. Please try again'</ErrorMessage>
+            <ErrorMessage id="error">Failed to fetch quote. Please try again</ErrorMessage>
           ) : (
             <>
               <Tagline>Your daily dose of inspiration.</Tagline>
