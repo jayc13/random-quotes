@@ -105,7 +105,7 @@ describe('HomePage', () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: false,
-        json: () => Promise.reject(new Error('Failed to fetch quote'))
+        json: () => Promise.reject(new Error('Failed to fetch quote.'))
       })
     ) as jest.Mock;
 
@@ -116,7 +116,7 @@ describe('HomePage', () => {
     jest.runAllTimers();
 
     await waitFor(() => {
-      expect(screen.getByText('Failed to fetch quote')).toBeInTheDocument();
+      expect(screen.getByText('Failed to fetch quote. Please try again')).toBeInTheDocument();
     });
   });
 
