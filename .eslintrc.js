@@ -1,6 +1,16 @@
 module.exports = [
   {
-    ignores: ["node_modules/**"],
+    ignores: [
+        '.github/**',
+        'node_modules/**',
+        'jest.config.js',
+        'package.json',
+        'run_tests.sh',
+        'tsconfig.json',
+        'vercel.json',
+        'babel.config.js',
+        'next.config.js'
+    ],
   },
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
