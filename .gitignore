@@ -3,3 +3,4 @@ node_modules/
 .next
 .swc
 coverage/
+next-env.d.ts
