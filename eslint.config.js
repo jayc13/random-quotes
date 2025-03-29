@@ -9,6 +9,7 @@ const compat = new FlatCompat({
     ignores: [
       '.github/**',
       'node_modules/**',
+      '.next/**',
       'jest.config.js',
       'package.json',
       'package-lock.json',
