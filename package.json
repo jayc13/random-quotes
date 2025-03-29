@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
     "test-unit": "jest --testPathPattern=tests/unit --detectOpenHandles --no-cache ",
     "test-integration": "jest --testPathPattern=tests/integration --detectOpenHandles --no-cache ",
     "test-e2e": "npx playwright test"
