@@ -1,8 +1,11 @@
-const { FlatCompat } = require('@eslint/eslintrc');
-const compat = new FlatCompat();
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import js from "@eslint/js";
+import { FlatCompat } from "@eslint/eslintrc";
 
-module.exports = [
-  {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const compat = new FlatCompat({
     ignores: [
       '.github/**',
       'node_modules/**',
@@ -15,15 +18,8 @@ module.exports = [
       'babel.config.js',
       'next.config.js'
     ],
-  },
-  ...compat.extends("next", "next/core-web-vitals"),
-  {
-    files: ["**/*.{js,jsx,ts,tsx}"],
-    languageOptions: {
-      parser: require.resolve("@typescript-eslint/parser"),
-      parserOptions: {
-        project: "./tsconfig.json",
-      },
-    },
-  },
-];
+    baseDirectory: __dirname,
+    recommendedConfig: js.configs.recommended,
+    allConfig: js.configs.all
+});
+export default [...compat.extends("next/core-web-vitals")];
