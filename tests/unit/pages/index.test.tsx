@@ -1,4 +1,4 @@
-import {act} from 'react';
+import React, {act} from 'react';
 import { 
   cleanup, 
   render, 
@@ -44,7 +44,6 @@ describe('HomePage', () => {
       }
     });
     writeTextMock = jest.spyOn(navigator.clipboard, 'writeText');
-    window.alert = jest.fn();
     jest.useFakeTimers();
   });
 
@@ -134,9 +133,13 @@ describe('HomePage', () => {
     });
 
     jest.runAllTimers();
-    await waitFor(() => {
-      const copyButton = screen.getByTestId('copy-quote-btn');
+    const copyButton = screen.getByTestId('copy-quote-btn');
+
+    await act(async () => {
       fireEvent.click(copyButton);
+    });
+
+    await waitFor(() => {
 
       expect(writeTextMock).toHaveBeenCalledWith(`"${mockQuote.quote}" - ${mockQuote.author}`);
     });
