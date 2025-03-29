@@ -5,6 +5,7 @@ module.exports = [
         'node_modules/**',
         'jest.config.js',
         'package.json',
+        'package-lock.json',
         'run_tests.sh',
         'tsconfig.json',
         'vercel.json',
