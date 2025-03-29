@@ -1,27 +1,10 @@
-import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
+import React, { createContext, useCallback, useState, useEffect, useContext, ReactNode } from 'react';
 import { ThemeProvider as MuiThemeProvider, createTheme, PaletteMode } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
 
-const getStoredTheme = (): PaletteMode | undefined => {
-  if (typeof window !== 'undefined') {
-    const storedTheme = localStorage.getItem('theme') as PaletteMode;
-    if (storedTheme) {
-      return storedTheme;
-    }
-  }
-  return undefined;
-};
-
-const systemTheme = (): PaletteMode | undefined => {
-  if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    return 'dark';
-  }
-  return 'light';
-};
-
 interface ThemeContextType {
-  theme: PaletteMode | undefined;
+  theme: PaletteMode | 'system' | undefined;
   toggleTheme: () => void;
 }
 
@@ -32,12 +15,24 @@ interface ThemeProviderProps {
 }
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, ...props }) => {
-  const [theme, setTheme] = useState<PaletteMode | undefined>(getStoredTheme() || systemTheme());
+  const [theme, setTheme] = useState<PaletteMode | 'system'>('system');
+
+  const systemTheme = useCallback((): PaletteMode => {
+    return typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }, []);
 
   useEffect(() => {
+    const getStoredTheme = (): PaletteMode | 'system' => {
+      return (localStorage.getItem('theme') as PaletteMode | 'system') || 'system';
+    };
+
+    const storedTheme = getStoredTheme();
+    setTheme(storedTheme);
+
     const handleSystemThemeChange = (e: MediaQueryListEvent) => {
-      setTheme(e.matches ? 'dark' : 'light');
-      localStorage.setItem('theme', e.matches ? 'dark' : 'light');
+      if (getStoredTheme() === 'system') {
+        setTheme(e.matches ? 'dark' : 'light');
+      }
     };
 
     const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -46,11 +41,16 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, ...props }) => 
     return () => {
       darkModeMediaQuery.removeEventListener('change', handleSystemThemeChange);
     };
-  }, []);
+  }, [systemTheme]);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => {
-      const newTheme = prevTheme === 'light' ? 'dark' : 'light';
+      const themeTransitions: { [key in PaletteMode | 'system']: PaletteMode | 'system' } = {
+        light: 'dark',
+        dark: 'system',
+        system: 'light',
+      };
+      const newTheme = themeTransitions[prevTheme];
       localStorage.setItem('theme', newTheme);
       return newTheme;
     });
@@ -58,15 +58,17 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, ...props }) => 
 
   const muiTheme = createTheme({
     palette: {
-      mode: theme,
+      mode: theme === 'system' ? systemTheme() : theme,
     },
   });
 
   const getThemeIcon = () => {
-    if (theme === 'light') {
-      return '🌞'; // Sun icon for light theme
-    }
-    return '🌜'; // Moon icon for dark theme
+    const icons = {
+      light: '🌞', // Sun icon for light theme
+      dark: '🌜', // Moon icon for dark theme
+      system: '🖥️', // Computer icon for system theme
+    };
+    return icons[theme];
   };
 
   return (
