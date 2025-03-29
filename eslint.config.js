@@ -1,6 +1,3 @@
-const { FlatCompat } = require('@eslint/eslintrc');
-const compat = new FlatCompat();
-
 module.exports = [
   {
     ignores: [
@@ -18,7 +15,6 @@ module.exports = [
   },
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
-    ...compat.extends("next", "next/core-web-vitals"),
     parser: "@typescript-eslint/parser",
     parserOptions: {
       project: "./tsconfig.json",
