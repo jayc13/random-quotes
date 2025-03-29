@@ -16,9 +16,9 @@ module.exports = [
       'next.config.js'
     ],
   },
+  ...compat.extends("next", "next/core-web-vitals"),
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
-    ...compat.extends("next", "next/core-web-vitals"),
     languageOptions: {
       parser: "@typescript-eslint/parser",
       parserOptions: {
