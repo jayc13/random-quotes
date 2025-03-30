@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest } from 'next';
 
 type Options = {
   uniqueTokenPerInterval?: number;
@@ -8,11 +8,10 @@ type Options = {
 export default function rateLimit(options?: Options) {
   const tokenCache = new Map();
 
-  const interval = options?.interval ?? 60 * 1000;
   const uniqueTokenPerInterval = options?.uniqueTokenPerInterval ?? 500;
 
   return {
-    check: async (req: NextApiRequest, res: NextApiResponse) => {
+    check: async (req: NextApiRequest) => {
       const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
       const tokenKey = Array.isArray(ip) ? ip[0] : ip;
 

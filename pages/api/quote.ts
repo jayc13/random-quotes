@@ -22,7 +22,7 @@ export default async function handler(
   }
 
   try {
-    await limiter.check(req, res);
+    await limiter.check(req);
   } catch {
     return res.status(429).json({ error: 'Rate limit exceeded' });
   }

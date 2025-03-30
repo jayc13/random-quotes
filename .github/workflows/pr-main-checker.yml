@@ -30,19 +30,23 @@ jobs:
         with:
           node-version: '20'
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Build app
         run: npm run build
       - name: Lint Check
         run: npm run lint
       - name: Run unit tests
-        run: npm run test-unit -- --coverage
+        run: npm run test-unit
       - name: Upload coverage reports
         uses: actions/upload-artifact@v4
         with:
           name: coverage
           path: coverage/
           retention-days: 30
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
   integration-test:
     name: "Integration Tests"
     needs: [build-check]
@@ -64,7 +68,7 @@ jobs:
         with:
           node-version: '20'
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Run Integration tests
         run: npm run test-integration
   e2e-test:
@@ -88,7 +92,7 @@ jobs:
         with:
           node-version: '20'
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Setup Playwright
         run: npx playwright install
       - name: Run E2E tests
