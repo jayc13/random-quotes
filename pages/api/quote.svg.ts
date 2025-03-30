@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import quotes from './quotes.json';
-import rateLimit from './rate-limit';
+import rateLimit from '../services/rate-limit';
 
 const limiter = rateLimit({
   interval: 60 * 1000, // 1 minute

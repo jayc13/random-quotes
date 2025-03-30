@@ -1,4 +1,4 @@
-import rateLimit from '../../pages/api/rate-limit';
+import rateLimit from '../../../pages/services/rate-limit';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 describe('Rate Limiting', () => {
@@ -33,12 +33,12 @@ describe('Rate Limiting', () => {
     } as unknown as NextApiResponse;
 
     // First request should be allowed
-    await limiter.check(req, res);
+    await limiter.check(req);
     expect(res.status).not.toHaveBeenCalledWith(429);
     expect(res.end).not.toHaveBeenCalledWith('Rate limit exceeded');
 
     // Second request should also be allowed
-    await limiter.check(req, res);
+    await limiter.check(req);
     expect(res.status).not.toHaveBeenCalledWith(429);
     expect(res.end).not.toHaveBeenCalledWith('Rate limit exceeded');
   });
@@ -69,12 +69,12 @@ describe('Rate Limiting', () => {
     } as unknown as NextApiResponse;
 
     // First request should be allowed
-    await limiter.check(req, res);
+    await limiter.check(req);
     expect(res.status).not.toHaveBeenCalledWith(429);
     expect(res.end).not.toHaveBeenCalledWith('Rate limit exceeded');
 
     // Second request should be rejected
-    await expect(limiter.check(req, res)).rejects.toThrow('Rate limit exceeded');
+    await expect(limiter.check(req)).rejects.toThrow('Rate limit exceeded');
   });
 
   it('should apply rate limits separately for different IP addresses', async () => {
@@ -111,31 +111,17 @@ describe('Rate Limiting', () => {
       env: {},
     } as Partial<NextApiRequest> as NextApiRequest;
 
-    const res1 = {
-      status: jest.fn().mockReturnThis(),
-      end: jest.fn(),
-    } as unknown as NextApiResponse;
-
-    const res2 = {
-      status: jest.fn().mockReturnThis(),
-      end: jest.fn(),
-    } as unknown as NextApiResponse;
-
     // First request from IP 1 should be allowed
-    await limiter.check(req1, res1);
-    expect(res1.status).not.toHaveBeenCalledWith(429);
-    expect(res1.end).not.toHaveBeenCalledWith('Rate limit exceeded');
+    await limiter.check(req1);
 
     // First request from IP 2 should be allowed
-    await limiter.check(req2, res2);
-    expect(res2.status).not.toHaveBeenCalledWith(429);
-    expect(res2.end).not.toHaveBeenCalledWith('Rate limit exceeded');
+    await limiter.check(req2);
 
     // Second request from IP 1 should be rejected
-    await expect(limiter.check(req1, res1)).rejects.toThrow('Rate limit exceeded');
+    await expect(limiter.check(req1)).rejects.toThrow('Rate limit exceeded');
 
     // Second request from IP 2 should be rejected
-    await expect(limiter.check(req2, res2)).rejects.toThrow('Rate limit exceeded');
+    await expect(limiter.check(req2)).rejects.toThrow('Rate limit exceeded');
   });
 
   it('should not apply rate limiting when IP is missing', async () => {
@@ -160,7 +146,7 @@ describe('Rate Limiting', () => {
     } as unknown as NextApiResponse;
 
     // Request should be allowed even without an IP
-    await limiter.check(req, res);
+    await limiter.check(req);
     expect(res.status).not.toHaveBeenCalledWith(429);
     expect(res.end).not.toHaveBeenCalledWith('Rate limit exceeded');
   });
@@ -189,12 +175,12 @@ describe('Rate Limiting', () => {
     } as unknown as NextApiResponse;
 
     // First request should be allowed
-    await limiter.check(req, res);
+    await limiter.check(req);
     expect(res.status).not.toHaveBeenCalledWith(429);
     expect(res.end).not.toHaveBeenCalledWith('Rate limit exceeded');
 
     // Second request should be rejected
-    await expect(limiter.check(req, res)).rejects.toThrow('Rate limit exceeded');
+    await expect(limiter.check(req)).rejects.toThrow('Rate limit exceeded');
   });
   it('should allow options to be undefined', async () => {
     const limiter = rateLimit();
@@ -219,7 +205,7 @@ describe('Rate Limiting', () => {
     } as unknown as NextApiResponse;
 
     // First request should be allowed
-    await limiter.check(req, res);
+    await limiter.check(req);
     expect(res.status).not.toHaveBeenCalledWith(429);
     expect(res.end).not.toHaveBeenCalledWith('Rate limit exceeded');
   });

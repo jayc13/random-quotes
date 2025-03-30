@@ -2,10 +2,19 @@ import { createMocks } from 'node-mocks-http'
 import handlerQuoteJSON from '../../pages/api/quote.ts'; // Import your API route
 import handlerQuoteSVG from '../../pages/api/quote.svg.ts'; // Import your API route
 
+
+ 
+declare global {
+  const requestCounts: Map<string, number[]> | undefined;
+  const cleanupInterval: NodeJS.Timeout;
+}
+ 
+
 describe('Integration Tests', () => {
 
+
   afterAll(() => {
-    clearInterval(global.cleanupInterval);
+    clearInterval(globalThis.cleanupInterval);
   });
   
   describe('GET /api/quote', () => {

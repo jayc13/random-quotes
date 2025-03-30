@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { promises as fs } from 'fs';
 import path from 'path';
-import rateLimit from './rate-limit';
+import rateLimit from '../services/rate-limit';
 
 type Quote = {
   quote: string;
