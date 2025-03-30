@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
-    "test-unit": "jest --testPathPattern=tests/unit --detectOpenHandles --no-cache --coverage --reporters=jest-junit",
-    "test-integration": "jest --testPathPattern=tests/integration --detectOpenHandles --no-cache --coverage --reporters=jest-junit",
+    "test-unit": "jest --config=jest.unit.config.ts",
+    "test-integration": "jest --config=jest.integration.config.ts",
     "test-e2e": "npx playwright test",
     "test": "npm run test-unit && npm run test-integration && npm run test-e2e"
   },

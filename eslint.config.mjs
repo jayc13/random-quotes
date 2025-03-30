@@ -26,7 +26,6 @@ export default defineConfig([
       'node_modules/*',
       'coverage/*',
       'test-results/*',
-      'jest.config.js',
       'package.json',
       'package-lock.json',
       'run_tests.sh',
