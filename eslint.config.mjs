@@ -1,39 +1,30 @@
-import { defineConfig } from "eslint/config";
-import globals from "globals";
-import js from "@eslint/js";
-import tslint from "typescript-eslint";
-import pluginReact from "eslint-plugin-react";
+import generated from '@typescript-eslint/eslint-plugin';
+import eslintPluginReact from 'eslint-plugin-react';
+import eslintPluginJest from 'eslint-plugin-jest';
 
-
-export default defineConfig([
-  {
-    settings: {
-      react: {
-        version: "detect",
-      },
-    }
-  },
-  { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
-  { files: ["**/*.js"], languageOptions: { sourceType: "script" } },
-  { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"], languageOptions: { globals: {...globals.browser, ...globals.node} } },
-  { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"], plugins: { js }, extends: ["js/recommended"] },
-  tslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
+export default [
   {
     ignores: [
-      ".next/*",
-      '.github/*',
-      'node_modules/*',
-      'coverage/*',
-      'test-results/*',
-      'jest.config.js',
-      'package.json',
-      'package-lock.json',
-      'run_tests.sh',
-      'tsconfig.json',
-      'vercel.json',
-      'babel.config.js',
-      'next.config.js'
-    ],
+      'node_modules',
+      '.next',
+      'coverage',
+      '.idea',
+      '.swc',
+      'test-results'
+    ]
   },
-]);
+  {
+    plugins: {
+      '@typescript-eslint': generated,
+      'react': eslintPluginReact,
+      'jest': eslintPluginJest
+    },
+    rules: {
+      'semi': ['error', 'always'],
+      'quotes': ['error', 'single'],
+      'react/jsx-uses-react': 'off',
+      'react/react-in-jsx-scope': 'off',
+      '@typescript-eslint/no-unused-vars': 'error',
+    }
+  }
+];

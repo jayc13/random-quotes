@@ -150,7 +150,7 @@ const HomePage = () => {
                 onClick={() => fetchNewQuote()} 
                 disabled={loading}
                 data-testid="refresh-quote-btn"
-                >
+              >
                 <RotateRightIcon />
               </IconButton>
             </>
