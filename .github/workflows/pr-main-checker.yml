@@ -37,13 +37,13 @@ jobs:
         run: npm run lint
       - name: Run unit tests
         run: npm run test-unit
-      - name: Upload coverage reports
+      - name: Upload unit-tests coverage reports
         uses: actions/upload-artifact@v4
         with:
-          name: coverage
+          name: coverage-unit
           path: coverage/
           retention-days: 30
-      - name: Upload coverage reports to Codecov
+      - name: Upload unit-tests  coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -71,6 +71,16 @@ jobs:
         run: npm ci
       - name: Run Integration tests
         run: npm run test-integration
+      - name: Upload integration-tests coverage reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-integration
+          path: coverage/
+          retention-days: 30
+      - name: Upload integration-tests  coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
   e2e-test:
     name: "E2E Tests"
     needs: [build-check]
