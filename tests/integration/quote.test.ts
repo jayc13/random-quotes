@@ -74,3 +74,38 @@ describe('GET /api/quote', () => {
     expect(data).toHaveProperty('error', 'Method Not Allowed');
   });
 });
+
+describe('GET /api/categories', () => {
+  it('should return a list of categories', async () => {
+    const {req, res} = createMocks({
+      method: 'GET',
+      url: '/api/categories',
+    });
+
+    // Assuming the handler for categories is in a file named categories.ts
+    const handlerCategories = (await import('../../pages/api/categories')).default;
+    await handlerCategories(req, res);
+
+    expect(res.statusCode).toBe(200);
+    const data = JSON.parse(res._getData());
+    expect(Array.isArray(data)).toBe(true);
+    expect(data).toEqual(expect.arrayContaining(['inspirational', 'funny', 'motivational']));
+  });
+
+  it('should return 405 for non-GET requests', async () => {
+    const methods = ['POST', 'PUT', 'DELETE'];
+
+    for (const method of methods) {
+      const {req, res} = createMocks({
+        method: method,
+        url: '/api/categories',
+      });
+
+      // Assuming the handler for categories is in a file named categories.ts
+      const handlerCategories = (await import('../../pages/api/categories')).default;
+      await handlerCategories(req, res);
+
+      expect(res.statusCode).toBe(405);
+    }
+  });
+});
