@@ -52,7 +52,6 @@ describe('getRandomQuote', () => {
 
   it('handle exception when the quotes json is bad-formatted', async () => {
     jest.spyOn(fs, 'readFile').mockResolvedValue(`Random file content`);
-
     await expect(getRandomQuote()).rejects.toThrow('No quotes found');
 
   });

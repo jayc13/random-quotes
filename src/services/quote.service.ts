@@ -40,6 +40,11 @@ export async function getRandomQuote(query?: GetRandomQuoteQuery): Promise<Quote
 
   const quotes = await loadQuotes();
   let filtered = filterByAuthor(quotes, author);
+
+  if (!filtered.length) {
+    throw new Error('No quotes found');
+  }
+
   const randomIndex = Math.floor(Math.random() * filtered.length);
   return filtered[randomIndex];
 }
