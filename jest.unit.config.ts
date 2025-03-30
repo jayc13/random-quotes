@@ -22,7 +22,6 @@ const config: Config = {
   coverageDirectory: 'coverage',
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
   reporters: ['default', 'jest-junit'],
-  detectOpenHandles: true,
   cache: false
 };
 

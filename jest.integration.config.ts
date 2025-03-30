@@ -12,7 +12,7 @@ const config: Config = {
   collectCoverage: true,
   coverageDirectory: 'coverage',
   coveragePathIgnorePatterns: [
-    '<rootDir>/pages/services/',
+    '<rootDir>/src/services/',
   ],
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
   reporters: ['default', 'jest-junit'],
