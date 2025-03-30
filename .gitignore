@@ -4,3 +4,4 @@ node_modules/
 .swc
 coverage/
 next-env.d.ts
+test-results/

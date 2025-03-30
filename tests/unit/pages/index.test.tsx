@@ -34,7 +34,7 @@ const delay = (durationMs: number) => {
 }
 
 describe('HomePage', () => {
-  let writeTextMock: jest.Mock;
+  let writeTextMock: jest.SpyInstance;
 
   beforeAll(() => {
     // Mock the navigator.clipboard object

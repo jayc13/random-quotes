@@ -9,7 +9,7 @@ const limiter = rateLimit({
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    await limiter.check(req, res);
+    await limiter.check(req);
   } catch {
     return res.status(429).send('Rate limit exceeded');
   }

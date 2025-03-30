@@ -7,7 +7,7 @@ import ThemeProvider, { useTheme } from '../../../src/components/ThemeProvider';
 import { MediaQueryListEvent} from "mock-match-media";
 
 const TestComponent: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme() || {};
   return (
     <div>
       <span data-testid="theme">{theme}</span>
@@ -19,7 +19,7 @@ const TestComponent: React.FC = () => {
 describe('ThemeProvider', () => {
 
   it('should initialize with system preference if no theme is stored - default light theme', () => {
-    window.matchMedia = jest.fn().mockImplementation(query => ({
+    window.matchMedia = jest.fn().mockImplementation(() => ({
       matches: false,
       dispatchEvent: jest.fn(),
       addEventListener: jest.fn(),

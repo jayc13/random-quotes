@@ -75,7 +75,7 @@ const HomePage = () => {
       }
       const data = await response.json();
       setQuote(data);
-    } catch (error) {
+    } catch {
       setQuote({ quote: '', author: '', error: 'Failed to fetch quote' });
     } finally {
       setLoading(false);
@@ -83,7 +83,7 @@ const HomePage = () => {
   }
 
   useEffect(() => {
-    fetchNewQuote();
+    fetchNewQuote().then();
   }, []);
   
   async function copyToClipboard(text: string) {

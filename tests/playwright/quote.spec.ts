@@ -53,11 +53,11 @@ test.describe('Quote App', () => {
     await expect(page.locator('#loading')).toBeHidden();
 
     // Get the initial quote and author
-    const initialQuote = await page.locator('#quote').textContent();
-    const initialAuthor = await page.locator('#author').textContent();
+    const initialQuote = await page.locator('#quote').textContent() || '';
+    const initialAuthor = await page.locator('#author').textContent() || '';
 
     // Click the refresh button (assuming it's the IconButton containing RotateRightIcon)
-    await page.locator('svg[data-testid="RotateRightIcon"]').click();
+    await page.locator('[data-testid="refresh-quote-btn"]').click();
 
     // Wait for the quote and author to update (you might need to adjust the timeout)
     await expect(page.locator('#loading')).toBeHidden();
