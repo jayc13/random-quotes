@@ -13,6 +13,34 @@ describe('GET /api/quote.svg', () => {
     clearInterval(globalThis.cleanupInterval);
   });
 
+  it('should return a quote by a specific author', async () => {
+    const author = 'Steve Jobs';
+    const {req, res} = createMocks({
+      method: 'GET',
+      url: `/api/quote.svg?author=${author}`,
+    });
+
+    await handlerQuoteSVG(req, res);
+
+    expect(res.statusCode).toBe(200);
+    const svg = res._getData();
+    expect(svg).toContain(author);
+  });
+
+  it('should return 404 when author is not found', async () => {
+    const author = 'Unknown Author';
+    const {req, res} = createMocks({
+      method: 'GET',
+      url: `/api/quote.svg?author=${author}`,
+    });
+
+    await handlerQuoteSVG(req, res);
+
+    expect(res.statusCode).toBe(404);
+    const svg = res._getData();
+    expect(svg).toContain(`No quotes found for author: ${author}`);
+  });
+
   it('should return a 200 status code and an SVG image with default theme when no theme is provided', async () => {
     const {req, res} = createMocks({
       method: 'GET',

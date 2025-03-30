@@ -1,6 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import quotes from './quotes.json';
 import rateLimit from '../../src/services/rate-limit';
+import {
+  GetRandomQuoteQuery,
+  getRandomQuote, Quote,
+} from '../../src/services/quote.service.ts';
 
 const limiter = rateLimit({
   interval: 60 * 1000, // 1 minute
@@ -14,8 +17,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(429).send('Rate limit exceeded');
   }
 
-  const randomIndex = Math.floor(Math.random() * quotes.length);
-  const { quote, author } = quotes[randomIndex];
+  const filters: GetRandomQuoteQuery = {
+    author: req.query.author as string,
+  };
+
+  let quote: Quote;
+
+  try {
+    quote = await getRandomQuote(filters);
+  } catch (error) {
+    return res.status(404).json({ error: error.message });
+  }
 
   // Extract theme from query parameters and validate
   const themeParam = req.query.theme as string;
@@ -37,10 +49,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200">
        <rect fill="${backgroundColor}"/>
       <text x="20" y="40" font-family="Arial" font-size="16" fill="${textColor}" text-anchor="start">
-        <tspan x="20" dy="0">${quote}</tspan>
+        <tspan x="20" dy="0">${quote.quote}</tspan>
       </text>
       <text x="780" y="8em" font-family="Arial" font-size="14" fill="${themeParam === 'dark' ? '#f0f0f0' : '#777'}" text-anchor="end">
-        - ${author}
+        - ${quote.author}
       </text>
     </svg>
   `;
