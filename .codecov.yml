@@ -1,0 +1,91 @@
+codecov:
+  require_ci_to_pass: yes
+
+coverage:
+  precision: 2
+  round: down
+  range: "70...100"
+  status:
+    project:
+      default:
+        target: auto
+        threshold: 1%
+        base: auto
+        branches:
+          - main
+        if_ci_failed: error
+    patch:
+      default:
+        target: 80%
+        threshold: 1%
+        base: auto
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: no
+      macro: no
+
+comment:
+  layout: "reach,diff,flags,files,footer"
+  behavior: default
+  require_changes: no
+
+ignore:
+  - "tests/**/*"
+  - "**/*.test.{ts,tsx,js,jsx}"
+  - ".github/**/*"
+  - ".next/**/*"
+  - ".swc/**/*"
+  - ".test-results/**/*"
+  - "node_modules/**/*"
+  - ".gitignore"
+  - "babel.config.js"
+  - "eslint.config.mjs"
+  - "jest.config.ts"
+  - "next.config.js"
+  - "next-env.d.ts"
+  - "package.json"
+  - "package-lock.json"
+  - "playwright.config.ts"
+  - "README.md"
+  - "run_tests.sh"
+  - "tsconfig.json"
+  - "vercel.json"
+
+flags:
+  unit:
+    paths:
+      - src/
+    carryforward: true
+  integration:
+    paths:
+      - src/
+    carryforward: true
+  e2e:
+    paths:
+      - src/
+    carryforward: true
+
+component_management:
+  default_rules:  # default rules that will be inherited by all components
+    statuses:
+      - type: project # in this case every component that doens't have a status defined will have a project type one
+        target: auto
+        branches:
+          - "!main"
+  individual_components:
+    - component_id: module_components
+      name: Components
+      paths:
+        - src/components/**
+    - component_id: module_api
+      name: API
+      paths:
+        - pages/api/**
+    - component_id: module_pages
+      name: Pages
+      paths:
+        - pages/index.tsx
