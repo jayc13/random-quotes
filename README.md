@@ -2,6 +2,9 @@
 
 A web application built with Next.js that displays random quotes.
 
+[![codecov](https://codecov.io/gh/jayc13/random-quotes/graph/badge.svg?token=rofYF5rEBI)](https://codecov.io/gh/jayc13/random-quotes)
+[![Production Deployment](https://github.com/jayc13/random-quotes/actions/workflows/prod-deployment.yml/badge.svg)](https://github.com/jayc13/random-quotes/actions/workflows/prod-deployment.yml)
+
 ## Installation and Setup
 
 To run this project locally, you will need to have Node.js and npm (or yarn) installed on your system.
