@@ -13,6 +13,10 @@
     "test-e2e": "npx playwright test",
     "test": "npm run test-unit && npm run test-integration && npm run test-e2e"
   },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
