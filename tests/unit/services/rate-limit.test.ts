@@ -1,4 +1,4 @@
-import rateLimit from '../../../pages/services/rate-limit';
+import rateLimit from '../../../src/services/rate-limit';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 describe('Rate Limiting', () => {
@@ -14,18 +14,23 @@ describe('Rate Limiting', () => {
     });
 
     const req = {
-      headers: {
-        'x-forwarded-for': ['127.0.0.1', '192.168.10.2'],
-      },
-      socket: {
-        remoteAddress: '127.0.0.1',
-      },
-      // Add other required properties with default or mock values
-      query: {},
-      cookies: {},
-      body: {},
-      env: {},
-    } as Partial<NextApiRequest> as NextApiRequest;
+headers: {
+  'x-forwarded-for': ['127.0.0.1', '192.168.10.2'],
+},
+socket: {
+  remoteAddress: '127.0.0.1',
+  // Add other required properties with default or mock values
+  destroySoon: jest.fn(),
+  write: jest.fn(),
+  connect: jest.fn(),
+  setEncoding: jest.fn(),
+  // Add other required properties with default or mock values
+},
+query: {},
+cookies: {},
+body: {},
+env: {},
+    } as unknown as NextApiRequest;
 
     const res = {
       status: jest.fn().mockReturnThis(),
@@ -53,15 +58,16 @@ describe('Rate Limiting', () => {
       headers: {
         'x-forwarded-for': '127.0.0.1',
       },
-      socket: {
-        remoteAddress: '127.0.0.1',
-      },
-      // Add other required properties with default or mock values
+        destroySoon: jest.fn(),
+        write: jest.fn(),
+        connect: jest.fn(),
+        setEncoding: jest.fn(),
+        // Add other required properties with default or mock values
       query: {},
       cookies: {},
       body: {},
       env: {},
-    } as Partial<NextApiRequest> as NextApiRequest;
+      } as unknown as NextApiRequest;
 
     const res = {
       status: jest.fn().mockReturnThis(),
@@ -90,12 +96,16 @@ describe('Rate Limiting', () => {
       socket: {
         remoteAddress: '192.168.1.1',
       },
+      destroySoon: jest.fn(),
+      write: jest.fn(),
+      connect: jest.fn(),
+      setEncoding: jest.fn(),
       // Add other required properties with default or mock values
       query: {},
       cookies: {},
       body: {},
       env: {},
-    } as Partial<NextApiRequest> as NextApiRequest;
+    } as unknown as NextApiRequest;
 
     const req2 = {
       headers: {
@@ -104,12 +114,16 @@ describe('Rate Limiting', () => {
       socket: {
         remoteAddress: '192.168.1.2',
       },
+      destroySoon: jest.fn(),
+      write: jest.fn(),
+      connect: jest.fn(),
+      setEncoding: jest.fn(),
       // Add other required properties with default or mock values
       query: {},
       cookies: {},
       body: {},
       env: {},
-    } as Partial<NextApiRequest> as NextApiRequest;
+    } as unknown as NextApiRequest;
 
     // First request from IP 1 should be allowed
     await limiter.check(req1);
@@ -192,12 +206,16 @@ describe('Rate Limiting', () => {
       socket: {
         remoteAddress: '127.0.0.1',
       },
+      destroySoon: jest.fn(),
+      write: jest.fn(),
+      connect: jest.fn(),
+      setEncoding: jest.fn(),
       // Add other required properties with default or mock values
       query: {},
       cookies: {},
       body: {},
       env: {},
-    } as Partial<NextApiRequest> as NextApiRequest;
+    } as unknown as NextApiRequest;
 
     const res = {
       status: jest.fn().mockReturnThis(),
