@@ -22,7 +22,7 @@ async function loadQuotes(): Promise<QuotesCollection> {
     const data = await fs.readFile(filePath, 'utf8');
     return JSON.parse(data);
   } catch {
-    return [];
+    return {};
   }
 }
 
