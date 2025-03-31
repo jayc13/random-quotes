@@ -1,11 +1,5 @@
-import {createMocks} from 'node-mocks-http'
-import handlerCategories from '../../pages/api/categories.ts'; // Import your API route
-
-
-declare global {
-  const requestCounts: Map<string, number[]> | undefined;
-  const cleanupInterval: NodeJS.Timeout;
-}
+import {createMocks, RequestMethod} from 'node-mocks-http'
+import handlerCategories from '../../pages/api/categories.ts';
 
 
 describe('GET /api/categories', () => {
@@ -23,13 +17,13 @@ describe('GET /api/categories', () => {
     await handlerCategories(req, res);
 
     expect(res.statusCode).toBe(200);
-    const data = JSON.parse(res._getData());
+    const data = res._getJSONData();
     expect(Array.isArray(data)).toBe(true);
-    expect(data).toEqual(expect.arrayContaining(['inspirational', 'funny', 'motivational']));
+    expect(data.length).toBeGreaterThan(0);
   });
 
   it('should return 405 for non-GET requests', async () => {
-    const methods = ['POST', 'PUT', 'DELETE'];
+    const methods: RequestMethod[] = ['POST', 'PUT', 'DELETE'];
 
     for (const method of methods) {
       const {req, res} = createMocks({

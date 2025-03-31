@@ -1,21 +1,27 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import fs from 'fs';
-import path from 'path';
+import rateLimit from "../../src/services/rate-limit.ts";
+import {
+  Category,
+  getAllCategories,
+} from '../../src/services/category.service.ts';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'GET') {
-    // Read categories from categories.json
-    const filePath = path.join(process.cwd(), 'pages', 'api', 'categories.json');
-    try {
-      const jsonData = fs.readFileSync(filePath, 'utf-8');
-      const categories: string[] = JSON.parse(jsonData);
-      res.status(200).json(categories);
-    } catch (error) {
-      console.error('Error reading categories.json:', error);
-      res.status(500).json({ error: 'Failed to read categories' });
-    }
-  } else {
-    // Method not allowed
-    res.status(405).end();
+
+const limiter = rateLimit({
+  interval: 60 * 1000, // 1 minute
+  uniqueTokenPerInterval: 100, // Max 100 requests per minute
+});
+
+export default  async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method Not Allowed' });
   }
+
+  try {
+    await limiter.check(req);
+  } catch {
+    return res.status(429).json({ error: 'Rate limit exceeded' });
+  }
+
+  const categories: Category[] = await getAllCategories();
+  res.status(200).json(categories);
 }

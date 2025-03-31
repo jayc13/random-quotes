@@ -1,1 +1,11 @@
-["inspirational", "funny", "motivational"]
+[
+  {
+    "name":"Motivation"
+  },
+  {
+    "name":"Wisdom"
+  },
+  {
+    "name":"Love"
+  }
+]
