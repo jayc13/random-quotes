@@ -1,70 +1,2408 @@
-[
-  {"quote": "The only way to do great work is to love what you do.", "author": "Steve Jobs"},
-  {"quote": "Innovation distinguishes between a leader and a follower.", "author": "Steve Jobs"},
-  {"quote": "Strive not to be a success, but rather to be of value.", "author": "Albert Einstein"},
-  {"quote": "The mind is everything. What you think you become.", "author": "Buddha"},
-  {"quote": "The best and most beautiful things in the world cannot be seen or even touched - they must be felt with the heart.", "author": "Helen Keller"},
-  {"quote": "It is during our darkest moments that we must focus to see the light.", "author": "Aristotle"},
-  {"quote": "Do not go where the path may lead, go instead where there is no path and leave a trail.", "author": "Ralph Waldo Emerson"},
-  {"quote": "The only limit to our realization of tomorrow will be our doubts of today.", "author": "Franklin D. Roosevelt"},
-  {"quote": "The purpose of our lives is to be happy.", "author": "Dalai Lama"},
-  {"quote": "Life is what happens when you're busy making other plans.", "author": "John Lennon"},
-  {"quote": "Get busy living or get busy dying.", "author": "Stephen King"},
-  {"quote": "You only live once, but if you do it right, once is enough.", "author": "Mae West"},
-  {"quote": "Many of life's failures are people who did not realize how close they were to success when they gave up.", "author": "Thomas A. Edison"},
-  {"quote": "If you want to live a happy life, tie it to a goal, not to people or things.", "author": "Albert Einstein"},
-  {"quote": "Never let the fear of striking out keep you from playing the game.", "author": "Babe Ruth"},
-  {"quote": "Money and success don’t change people; they merely amplify what is already there.", "author": "Will Smith"},
-  {"quote": "Your time is limited, so don't waste it living someone else's life.", "author": "Steve Jobs"},
-  {"quote": "Not how long, but how well you have lived is the main thing.", "author": "Seneca"},
-  {"quote": "If life were predictable it would cease to be life, and be without flavor.", "author": "Eleanor Roosevelt"},
-  {"quote": "The whole secret of a successful life is to find out what is one’s destiny to do, and then do it.", "author": "Henry Ford"},
-  {"quote": "Inspiration comes from within yourself. One has to be positive. When you’re positive, good things happen.", "author": "Deep Roy"},
-  {"quote": "Life is 10% what happens to us and 90% how we react to it.", "author": "Charles R. Swindoll"},
-  {"quote": "The best revenge is massive success.", "author": "Frank Sinatra"},
-  {"quote": "The mind is everything. What you think you become.", "author": "Buddha"},
-  {"quote": "The only impossible journey is the one you never begin.", "author": "Tony Robbins"},
-  {"quote": "If you spend too much time thinking about a thing, you'll never get it done.", "author": "Bruce Lee"},
-  {"quote": "Eighty percent of success is showing up.", "author": "Woody Allen"},
-  {"quote": "Winning isn't everything, but wanting to win is.", "author": "Vince Lombardi"},
-  {"quote": "I am thankful for all of those who said NO to me. It’s because of them I’m doing it myself.", "author": "Wayne W. Dyer"},
-  {"quote": "The only person you are destined to become is the person you decide to be.", "author": "Ralph Waldo Emerson"},
-  {"quote": "It does not matter how slowly you go as long as you do not stop.", "author": "Confucius"},
-  {"quote": "Our greatest weakness lies in giving up. The most certain way to succeed is always to try just one more time.", "author": "Thomas A. Edison"},
-  {"quote": "You miss 100% of the shots you don't take.", "author": "Wayne Gretzky"},
-  {"quote": "Whether you think you can or you think you can’t, you’re right.", "author": "Henry Ford"},
-  {"quote": "The secret of getting ahead is getting started.", "author": "Mark Twain"},
-  {"quote": "Well done is better than well said.", "author": "Benjamin Franklin"},
-  {"quote": "A successful man is one who can lay a firm foundation with the bricks others have thrown at him.", "author": "David Brinkley"},
-  {"quote": "Never, never, never give up.", "author": "Winston Churchill"},
-  {"quote": "There is little success where there is little laughter.", "author": "Andrew Carnegie"},
-  {"quote": "The only place where success comes before work is in the dictionary.", "author": "Vidal Sassoon"},
-  {"quote": "If you are not willing to risk the usual, you will have to settle for the ordinary.", "author": "Jim Rohn"},
-  {"quote": "The ones who are crazy enough to think they can change the world, are the ones that do.", "author": "Anonymous"},
-  {"quote": "Success is not final, failure is not fatal: It is the courage to continue that counts.", "author": "Winston Churchill"},
-  {"quote": "It is better to fail in originality than to succeed in imitation.", "author": "Herman Melville"},
-  {"quote": "The road to success and the road to failure are almost exactly the same.", "author": "Colin R. Davis"},
-  {"quote": "Success usually comes to those who are too busy to be looking for it.", "author": "Henry David Thoreau"},
-  {"quote": "Develop success from failures. Discouragement and failure are two of the surest stepping stones to success.", "author": "Dale Carnegie"},
-  {"quote": "Don't be distracted by criticism. Remember the only taste of success some people get is to take a bite out of you.", "author": "Zig Ziglar"},
-  {"quote": "Setting goals is the first step in turning the invisible into the visible.", "author": "Tony Robbins"},
-  {"quote": "I find that the harder I work, the more luck I seem to have.", "author": "Thomas Jefferson"},
-  {"quote": "Success is liking yourself, liking what you do, and liking how you do it.", "author": "Maya Angelou"},
-  {"quote": "The difference between a successful person and others is not a lack of strength, not a lack of knowledge, but rather a lack in will.", "author": "Vince Lombardi"},
-  {"quote": "I owe my success to having listened respectfully to the very best advice, and then going away and doing the exact opposite.", "author": "G. K. Chesterton"},
-  {"quote": "It's not about better time management. It's about better life management", "author": "Alexandra of The Productivity Show"},
-  {"quote": "The key to success is to focus on goals, not obstacles.", "author": "Unknown"},
-  {"quote": "The key to success is to focus on goals, not obstacles.", "author": "Unknown"},
-  {"quote": "If you are not willing to risk the usual, you will have to settle for the ordinary.", "author": "Jim Rohn"},
-  {"quote": "The mind is everything. What you think you become.", "author": "Buddha"},
-  {"quote": "Eighty percent of success is showing up.", "author": "Woody Allen"},
-  {"quote": "Develop success from failures. Discouragement and failure are two of the surest stepping stones to success.", "author": "Dale Carnegie"},
-  {"quote": "The only person you are destined to become is the person you decide to be.", "author": "Ralph Waldo Emerson"},
-  {"quote": "Your time is limited, so don't waste it living someone else's life.", "author": "Steve Jobs"},
-  {"quote": "Not how long, but how well you have lived is the main thing.", "author": "Seneca"},
-  {"quote": "If life were predictable it would cease to be life, and be without flavor.", "author": "Eleanor Roosevelt"},
-  {"quote": "The whole secret of a successful life is to find out what is one’s destiny to do, and then do it.", "author": "Henry Ford"},
-  {"quote": "Inspiration comes from within yourself. One has to be positive. When you’re positive, good things happen.", "author": "Deep Roy"},
-  {"quote": "Life is 10% what happens to us and 90% how we react to it.", "author": "Charles R. Swindoll"},
-  {"quote": "The best revenge is massive success.", "author": "Frank Sinatra"}
-]
+{
+    "Motivation": [
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "author": "Winston Churchill"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Act as if what you do makes a difference. It does.",
+            "author": "William James"
+        }
+    ],
+    "Wisdom": [
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        },
+        {
+            "quote": "An unexamined life is not worth living.",
+            "author": "Socrates"
+        },
+        {
+            "quote": "Knowing yourself is the beginning of all wisdom.",
+            "author": "Aristotle"
+        },
+        {
+            "quote": "Do what you can, with what you have, where you are.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Turn your wounds into wisdom.",
+            "author": "Oprah Winfrey"
+        },
+        {
+            "quote": "In the middle of every difficulty lies opportunity.",
+            "author": "Albert Einstein"
+        }
+    ],
+    "Love": [
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        },
+        {
+            "quote": "The best thing to hold onto in life is each other.",
+            "author": "Audrey Hepburn"
+        },
+        {
+            "quote": "Love is not about how many days, months, or years you have been together. It is all about how much you love each other every day.",
+            "author": "Unknown"
+        },
+        {
+            "quote": "We are shaped and fashioned by what we love.",
+            "author": "Johann Wolfgang von Goethe"
+        },
+        {
+            "quote": "Where there is love there is life.",
+            "author": "Mahatma Gandhi"
+        },
+        {
+            "quote": "To love and be loved is to feel the sun from both sides.",
+            "author": "David Viscott"
+        }
+    ]
+}

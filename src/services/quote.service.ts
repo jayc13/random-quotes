@@ -1,22 +1,28 @@
 import { promises as fs } from 'fs';
 import path from 'path';
+import {Category, getCategory} from "./category.service.ts";
 
 export type Quote = {
   quote: string;
   author: string;
 };
 
+export type QuotesCollection = {
+  [category: string]: Quote[];
+};
+
 export interface GetRandomQuoteQuery {
   author?: string
+  category?: string
 }
 
-async function loadQuotes(): Promise<Quote[]> {
+async function loadQuotes(): Promise<QuotesCollection> {
   const filePath = path.join(process.cwd(), 'pages/api/quotes.json');
   try {
     const data = await fs.readFile(filePath, 'utf8');
     return JSON.parse(data);
   } catch {
-    return [];
+    return {};
   }
 }
 
@@ -35,10 +41,16 @@ const filterByAuthor = (quotes: Quote[], author?: string) => {
 
 export async function getRandomQuote(query?: GetRandomQuoteQuery): Promise<Quote> {
   const {
-    author
+    author,
+    category,
   } = query || {};
 
-  const quotes = await loadQuotes();
+  const quotesCollection: QuotesCollection = await loadQuotes();
+
+  const filteredCategory: Category = await getCategory(category);
+
+  const quotes = quotesCollection[filteredCategory.name] || [];
+
   let filtered = filterByAuthor(quotes, author);
 
   if (!filtered.length) {

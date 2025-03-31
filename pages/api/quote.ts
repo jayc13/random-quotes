@@ -27,6 +27,7 @@ export default async function handler(
 
   const filters: GetRandomQuoteQuery = {
     author: req.query.author as string,
+    category: req.query.category as string,
   };
 
   let quote: Quote;
