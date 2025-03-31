@@ -54,6 +54,8 @@ describe('HomePage', () => {
   afterAll(() => {
     // Restore the mock
     writeTextMock.mockRestore();
+    jest.restoreAllMocks(); // Restores all spies created with jest.spyOn
+    jest.useRealTimers();
   });
 
   it('renders loading state initially', async () => {

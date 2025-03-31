@@ -14,7 +14,6 @@ const CategorySelector = ({ onChange }) => {
         const data = await response.json();
         setCategories(data);
       } catch (error) {
-        console.error('Error fetching categories:', error);
         setCategories([]);
       } finally {
         setLoading(false);
@@ -41,6 +40,7 @@ const CategorySelector = ({ onChange }) => {
         onChange={handleCategoryChange}
         labelId="category-select"
         id="category-select"
+        data-testid="category-select"
         label="Category"
         value={selectedCategory}
         defaultValue='random'
