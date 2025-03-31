@@ -8,6 +8,7 @@ import ThemeProvider from '../src/components/ThemeProvider';
 import Loading from '../src/components/Loading';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CategorySelector from '../src/components/CategorySelector'; // Import CategorySelector
 
 type Quote = {
   quote: string;
@@ -17,6 +18,7 @@ type Quote = {
 
 const MainContainer = styled("div")(() => ({
   display: 'flex',
+  flexDirection: 'column', // Changed to column
   justifyContent: 'center',
   alignItems: 'center',
   minHeight: '100vh',
@@ -24,6 +26,12 @@ const MainContainer = styled("div")(() => ({
   fontFamily: 'sans-serif',
   backgroundColor: 'background.default',
   color: 'secondary.contrastText',
+}));
+
+const CategorySelectorContainer = styled(Box)(() => ({ // Added container for CategorySelector
+  position: 'absolute',
+  top: '20px',
+  right: '20px',
 }));
 
 const QuoteContainer = styled(Box)(() => ({
@@ -65,11 +73,16 @@ const Tagline = styled("div")(() => ({
 const HomePage = () => {
   const [quote, setQuote] = useState<Quote | null>(null);
   const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState(''); // State for selected category
 
-  async function fetchNewQuote() {
+  async function fetchNewQuote(category?: string) { // Modified to accept category
     setLoading(true);
     try {
-      const response = await fetch('/api/quote');
+      let url = '/api/quote';
+      if (category) {
+        url += `?category=${category}`; // Add category as query parameter
+      }
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Failed to fetch quote');
       }
@@ -85,6 +98,11 @@ const HomePage = () => {
   useEffect(() => {
     fetchNewQuote().then();
   }, []);
+
+  const handleCategoryChange = (categoryId: string) => { // Function to handle category change
+    setSelectedCategory(categoryId);
+    fetchNewQuote(categoryId).then(); // Fetch new quote based on selected category
+  };
   
   async function copyToClipboard(text: string) {
     await navigator.clipboard.writeText(text);
@@ -120,6 +138,9 @@ const HomePage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainContainer>
+        <CategorySelectorContainer>
+          <CategorySelector onChange={handleCategoryChange} />
+        </CategorySelectorContainer>
         <QuoteContainer>
           {(!quote || quote.error) ? (
             <ErrorMessage id="error">Failed to fetch quote. Please try again</ErrorMessage>
@@ -147,7 +168,7 @@ const HomePage = () => {
               </Box>
               <AuthorText id="author">- {quote.author}</AuthorText>
               <IconButton 
-                onClick={() => fetchNewQuote()} 
+                onClick={() => fetchNewQuote(selectedCategory)} // Pass selected category on refresh
                 disabled={loading}
                 data-testid="refresh-quote-btn"
               >

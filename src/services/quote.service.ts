@@ -53,6 +53,13 @@ export async function getRandomQuote(query?: GetRandomQuoteQuery): Promise<Quote
 
   let filtered = filterByAuthor(quotes, author);
 
+  if (!filtered.length && category) {
+    // If no quotes found for the specified category, get a quote from a random category
+    const randomCategory = await getCategory();
+    const randomCategoryQuotes = quotesCollection[randomCategory.name] || [];
+    filtered = filterByAuthor(randomCategoryQuotes, author);
+  }
+
   if (!filtered.length) {
     throw new Error('No quotes found');
   }
