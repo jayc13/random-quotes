@@ -1,12 +1,12 @@
 import rateLimit from '../../../src/services/rate-limit';
-import { NextApiRequest, NextApiResponse } from 'next';
+import {NextApiRequest, NextApiResponse} from 'next';
 
 describe('Rate Limiting', () => {
 
   afterAll(() => {
     clearInterval(global.cleanupInterval);
   });
-  
+
   it('should allow requests within the limit', async () => {
     const limiter = rateLimit({
       interval: 1000, // 1 second
@@ -14,22 +14,22 @@ describe('Rate Limiting', () => {
     });
 
     const req = {
-headers: {
-  'x-forwarded-for': ['127.0.0.1', '192.168.10.2'],
-},
-socket: {
-  remoteAddress: '127.0.0.1',
-  // Add other required properties with default or mock values
-  destroySoon: jest.fn(),
-  write: jest.fn(),
-  connect: jest.fn(),
-  setEncoding: jest.fn(),
-  // Add other required properties with default or mock values
-},
-query: {},
-cookies: {},
-body: {},
-env: {},
+      headers: {
+        'x-forwarded-for': ['127.0.0.1', '192.168.10.2'],
+      },
+      socket: {
+        remoteAddress: '127.0.0.1',
+        // Add other required properties with default or mock values
+        destroySoon: jest.fn(),
+        write: jest.fn(),
+        connect: jest.fn(),
+        setEncoding: jest.fn(),
+        // Add other required properties with default or mock values
+      },
+      query: {},
+      cookies: {},
+      body: {},
+      env: {},
     } as unknown as NextApiRequest;
 
     const res = {
@@ -58,16 +58,16 @@ env: {},
       headers: {
         'x-forwarded-for': '127.0.0.1',
       },
-        destroySoon: jest.fn(),
-        write: jest.fn(),
-        connect: jest.fn(),
-        setEncoding: jest.fn(),
-        // Add other required properties with default or mock values
+      destroySoon: jest.fn(),
+      write: jest.fn(),
+      connect: jest.fn(),
+      setEncoding: jest.fn(),
+      // Add other required properties with default or mock values
       query: {},
       cookies: {},
       body: {},
       env: {},
-      } as unknown as NextApiRequest;
+    } as unknown as NextApiRequest;
 
     const res = {
       status: jest.fn().mockReturnThis(),

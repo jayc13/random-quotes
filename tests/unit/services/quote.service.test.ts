@@ -21,9 +21,6 @@ jest.mock("../../../src/services/category.service.ts", () => {
 
 describe('getRandomQuote', () => {
 
-  beforeAll(() => {
-  })
-
   it('returns a random quote when no author is specified', async () => {
     jest.spyOn(fs, 'readFile').mockResolvedValue(JSON.stringify(mockQuotes));
 
