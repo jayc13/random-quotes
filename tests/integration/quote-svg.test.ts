@@ -2,11 +2,6 @@ import {createMocks} from 'node-mocks-http'
 import handlerQuoteSVG from '../../pages/api/quote.svg.ts';
 
 
-declare global {
-  const requestCounts: Map<string, number[]> | undefined;
-  const cleanupInterval: NodeJS.Timeout;
-}
-
 describe('GET /api/quote.svg', () => {
 
   afterAll(() => {

@@ -2,12 +2,6 @@ import {createMocks} from 'node-mocks-http'
 import handlerQuoteJSON from '../../pages/api/quote.ts'; // Import your API route
 
 
-declare global {
-  const requestCounts: Map<string, number[]> | undefined;
-  const cleanupInterval: NodeJS.Timeout;
-}
-
-
 describe('GET /api/quote', () => {
 
   afterAll(() => {
