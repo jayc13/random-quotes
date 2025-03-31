@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
-import { Box, IconButton } from '@mui/material';
+import React, {useState, useEffect} from 'react';
+import {styled} from '@mui/material/styles';
+import {Box, IconButton, Tooltip} from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RotateRightIcon from '@mui/icons-material/RotateRight';
 import Head from 'next/head';
 import ThemeProvider from '../src/components/ThemeProvider';
 import Loading from '../src/components/Loading';
-import { ToastContainer, toast } from 'react-toastify';
+import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CategorySelector from '../src/components/CategorySelector'; // Import CategorySelector
 
@@ -28,10 +28,28 @@ const MainContainer = styled("div")(() => ({
   color: 'secondary.contrastText',
 }));
 
-const CategorySelectorContainer = styled(Box)(() => ({ // Added container for CategorySelector
+const CategorySelectorContainer = styled(Box)(() => ({
   position: 'absolute',
   top: '20px',
   right: '20px',
+}));
+
+const RefreshQuoteButton = styled(IconButton)(() => ({
+  position: 'absolute',
+  bottom: '20px',
+  left: '20px',
+  root: {
+    "&.Mui-disabled": {
+      pointerEvents: "auto"
+    }
+  }
+}));
+
+const CopyQuoteButton = styled(IconButton)(() => ({
+  position: 'absolute',
+  top: '-8px',
+  right: '-30px',
+  margin: 0
 }));
 
 const QuoteContainer = styled(Box)(() => ({
@@ -89,7 +107,7 @@ const HomePage = () => {
       const data = await response.json();
       setQuote(data);
     } catch {
-      setQuote({ quote: '', author: '', error: 'Failed to fetch quote' });
+      setQuote({quote: '', author: '', error: 'Failed to fetch quote'});
     } finally {
       setLoading(false);
     }
@@ -103,7 +121,7 @@ const HomePage = () => {
     setSelectedCategory(categoryId);
     fetchNewQuote(categoryId).then(); // Fetch new quote based on selected category
   };
-  
+
   async function copyToClipboard(text: string) {
     await navigator.clipboard.writeText(text);
     toast.success('Quote copied!', {
@@ -117,67 +135,58 @@ const HomePage = () => {
     });
   }
 
-  if (loading) {
-    return (
-      <ThemeProvider>
-        <Head>
-          <title>Quote of the Day</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <MainContainer>
-          <Loading />
-        </MainContainer>
-      </ThemeProvider>
-    );
-  }
-
   return (
     <ThemeProvider>
       <Head>
         <title>Quote of the Day</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.ico"/>
       </Head>
       <MainContainer>
         <CategorySelectorContainer>
-          <CategorySelector onChange={handleCategoryChange} />
+          <CategorySelector onChange={handleCategoryChange}/>
         </CategorySelectorContainer>
-        <QuoteContainer>
-          {(!quote || quote.error) ? (
-            <ErrorMessage id="error">Failed to fetch quote. Please try again</ErrorMessage>
-          ) : (
-            <>
-              <Tagline>Your daily dose of inspiration.</Tagline>
-              <Box
-                sx={{
-                  position: 'relative'
-                }}>
-                <IconButton
-                  size="small"
+        {
+          loading && <Loading/>
+        }
+        {
+          !loading &&
+          <QuoteContainer>
+            {(!quote || quote.error) ? (
+              <ErrorMessage id="error">Failed to fetch quote. Please try again</ErrorMessage>
+            ) : (
+              <>
+                <Tagline>Your daily dose of inspiration.</Tagline>
+                <Box
                   sx={{
-                    position: 'absolute',
-                    top: '-8px',
-                    right: '-30px',
-                    margin: 0
-                  }}
-                  onClick={() => copyToClipboard(`"${quote.quote}" - ${quote.author}`)}
-                  data-testid="copy-quote-btn"
-                >
-                  <ContentCopyIcon fontSize="small" />
-                </IconButton>
-                <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
-              </Box>
-              <AuthorText id="author">- {quote.author}</AuthorText>
-              <IconButton 
-                onClick={() => fetchNewQuote(selectedCategory)} // Pass selected category on refresh
-                disabled={loading}
-                data-testid="refresh-quote-btn"
-              >
-                <RotateRightIcon />
-              </IconButton>
-            </>
-          )}
-        </QuoteContainer>
-        <ToastContainer />
+                    position: 'relative'
+                  }}>
+                  <Tooltip title="Copy quote" placement="top" arrow>
+                    <CopyQuoteButton
+                      size="small"
+                      onClick={() => copyToClipboard(`"${quote.quote}" - ${quote.author}`)}
+                      data-testid="copy-quote-btn"
+                    >
+                      <ContentCopyIcon fontSize="small"/>
+                    </CopyQuoteButton>
+                  </Tooltip>
+                  <QuoteText id="quote">&ldquo;{quote.quote}&rdquo;</QuoteText>
+                </Box>
+                <AuthorText id="author">- {quote.author}</AuthorText>
+              </>
+            )}
+          </QuoteContainer>
+        }
+        <Tooltip title={loading ? '' : 'Refresh quote'} placement="right" arrow>
+          <RefreshQuoteButton
+            onClick={() => fetchNewQuote(selectedCategory)}
+            disabled={loading}
+            data-testid="refresh-quote-btn"
+            loading={loading}
+          >
+            <RotateRightIcon/>
+          </RefreshQuoteButton>
+        </Tooltip>
+        <ToastContainer/>
       </MainContainer>
     </ThemeProvider>
   );

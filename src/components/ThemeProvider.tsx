@@ -1,7 +1,8 @@
-import React, { createContext, useCallback, useState, useEffect, useContext, ReactNode } from 'react';
-import { ThemeProvider as MuiThemeProvider, createTheme, PaletteMode } from '@mui/material/styles';
+import React, {createContext, useCallback, useState, useEffect, useContext, ReactNode} from 'react';
+import {ThemeProvider as MuiThemeProvider, createTheme, PaletteMode} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
+import { Tooltip } from '@mui/material';
 
 interface ThemeContextType {
   theme: PaletteMode | 'system' | undefined;
@@ -14,7 +15,7 @@ interface ThemeProviderProps {
   children?: ReactNode;
 }
 
-const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, ...props }) => {
+const ThemeProvider: React.FC<ThemeProviderProps> = ({children, ...props}) => {
   const [theme, setTheme] = useState<PaletteMode | 'system'>('system');
 
   const systemTheme = useCallback((): PaletteMode => {
@@ -72,17 +73,19 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, ...props }) => 
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{theme, toggleTheme}}>
       <MuiThemeProvider theme={muiTheme} {...props}>
-        <CssBaseline />
+        <CssBaseline/>
         {children}
-        <IconButton
-          onClick={toggleTheme}
-          sx={{ position: 'fixed', bottom: 16, right: 16 }}
-          data-testid="theme-toggle-btn"
-        >
-          {getThemeIcon()}
-        </IconButton>
+        <Tooltip title="Change theme" placement="left" arrow>
+          <IconButton
+            onClick={toggleTheme}
+            sx={{position: 'fixed', bottom: 16, right: 16}}
+            data-testid="theme-toggle-btn"
+          >
+            {getThemeIcon()}
+          </IconButton>
+        </Tooltip>
       </MuiThemeProvider>
     </ThemeContext.Provider>
   );
