@@ -44,6 +44,11 @@ const CategorySelector = ({ onChange }) => {
         label="Category"
         value={selectedCategory}
         defaultValue='random'
+        sx={{
+          "& fieldset": {
+            border: "none",
+          },
+        }}
       >
         <MenuItem value="random" defaultChecked>Random</MenuItem>
         {categories.map((category) => (

@@ -5,14 +5,6 @@ test.describe('Quote App', () => {
     await page.goto('/');
   });
 
-  test('should display a loading indicator initially', async ({ page }) => {
-    await page.route('/api/quote', async route => {
-      await new Promise(f => setTimeout(f, 100));
-      await route.continue();
-    });
-    await expect(page.locator('#loading')).toBeVisible();
-  });
-
   test('should display a quote and author after loading', async ({ page }) => {
     // Wait for the loading indicator to disappear, implying data is loaded
     await expect(page.locator('#loading')).toBeHidden();

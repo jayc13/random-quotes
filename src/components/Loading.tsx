@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import ThemeProvider from './ThemeProvider'
 
 
 const LoadingContainer = styled.div`
@@ -37,12 +36,10 @@ const LoadingText = styled.p`
 
 const Loading = () => {
   return (
-    <ThemeProvider>
-      <LoadingContainer id="loading">  
+      <LoadingContainer id="loading">
         <Spinner />
         <LoadingText>Loading...</LoadingText>
       </LoadingContainer>
-    </ThemeProvider>
   );
 };
 
