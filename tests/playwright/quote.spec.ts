@@ -2,7 +2,15 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Quote App', () => {
   test.beforeEach(async ({ page }) => {
+    const getQuoteRequest = page.waitForResponse(resp => {
+      return resp.url().includes('/api/quote') && resp.status() === 200
+    });
+    const getCategoriesRequest = page.waitForResponse(resp => {
+      return resp.url().includes('/api/categories') && resp.status() === 200
+    });
     await page.goto('/');
+    await getQuoteRequest;
+    await getCategoriesRequest;
   });
 
   test('should display a quote and author after loading', async ({ page }) => {
@@ -41,26 +49,18 @@ test.describe('Quote App', () => {
   });
 
   test('should refresh the quote when the refresh button is clicked', async ({ page }) => {
-    // Wait for the initial quote to load
-    await expect(page.locator('#loading')).toBeHidden();
-
-    // Get the initial quote and author
-    const initialQuote = await page.locator('#quote').textContent() || '';
-    const initialAuthor = await page.locator('#author').textContent() || '';
-
-    // Click the refresh button (assuming it's the IconButton containing RotateRightIcon)
+    const responsePromise = page.waitForResponse(resp => {
+      return resp.url().includes('/api/quote') && resp.status() === 200
+    });
     await page.locator('[data-testid="refresh-quote-btn"]').click();
+    const response = await responsePromise;
 
-    // Wait for the quote and author to update (you might need to adjust the timeout)
+    const responseBody = await response.json();
+
     await expect(page.locator('#loading')).toBeHidden();
-    await expect(page.locator('#quote')).not.toHaveText(initialQuote, { timeout: 5000 });
-    await expect(page.locator('#author')).not.toHaveText(initialAuthor, { timeout: 5000 });
 
-    // Verify that the new quote and author are not empty
-    const newQuote = await page.locator('#quote').textContent();
-    const newAuthor = await page.locator('#author').textContent();
-    expect(newQuote).toBeTruthy();
-    expect(newAuthor).toBeTruthy();
+    await expect(page.locator('#quote')).toHaveText(`“${responseBody.quote}”`);
+    await expect(page.locator('#author')).toHaveText(`- ${responseBody.author}`);
   });
 
   test('should handle an empty quote list', async ({ page }) => {
@@ -82,5 +82,72 @@ test.describe('Quote App', () => {
     // Verify that the quote and author are displayed as empty strings
     await expect(page.locator('#quote')).toHaveText('“”');
     await expect(page.locator('#author')).toHaveText('- ');
+  });
+
+  test('should re-fetch a quote after changing the category', async ({ page }) => {
+    await page.locator('[data-testid="category-select"]').click();
+    const categories = await page.locator('ul[aria-labelledby="category-select"] li').all();
+    const texts: string[] = [];
+    for (const item of categories) {
+      const text = await item.innerText();
+      texts.push(text);
+    }
+
+    const randomCategory = texts[Math.floor(Math.random() * (texts.length - 1)) + 1];
+
+    const getQuoteRequest = page.waitForResponse(resp => {
+      return resp.url().includes('/api/quote') && resp.status() === 200
+    });
+
+    await page.locator(`li:has-text("${randomCategory}")`).click();
+
+    const getQuoteResponse = await getQuoteRequest;
+    const responseBody = await getQuoteResponse.json();
+    const requestedURL = new URL(getQuoteResponse.request().url())
+
+    expect(requestedURL.searchParams.get('category')).toBe(randomCategory.toLowerCase());
+    await expect(page.locator('#loading')).toBeHidden();
+    await expect(page.locator('#quote')).toHaveText(`“${responseBody.quote}”`);
+    await expect(page.locator('#author')).toHaveText(`- ${responseBody.author}`);
+  });
+
+  test('refreshing the quote with a category selected', async ({ page }) => {
+    await page.locator('[data-testid="category-select"]').click();
+    const categories = await page.locator('ul[aria-labelledby="category-select"] li').all();
+    const texts: string[] = [];
+    for (const item of categories) {
+      const text = await item.innerText();
+      texts.push(text);
+    }
+
+    const randomCategory = texts[Math.floor(Math.random() * (texts.length - 1)) + 1];
+
+    const getQuoteRequest = page.waitForResponse(resp => {
+      return resp.url().includes('/api/quote') && resp.status() === 200
+    });
+
+    await page.locator(`li:has-text("${randomCategory}")`).click();
+
+    const getQuoteResponse = await getQuoteRequest;
+    const responseBody = await getQuoteResponse.json();
+    const requestedURL = new URL(getQuoteResponse.request().url())
+
+    expect(requestedURL.searchParams.get('category')).toBe(randomCategory.toLowerCase());
+    await expect(page.locator('#loading')).toBeHidden();
+    await expect(page.locator('#quote')).toHaveText(`“${responseBody.quote}”`);
+    await expect(page.locator('#author')).toHaveText(`- ${responseBody.author}`);
+
+
+    await page.locator('[data-testid="refresh-quote-btn"]').click();
+
+    const getRefreshQuoteResponse = await getQuoteRequest;
+    const responseRefreshBody = await getRefreshQuoteResponse.json();
+    const requestedRefreshURL = new URL(getRefreshQuoteResponse.request().url())
+
+    expect(requestedRefreshURL.searchParams.get('category')).toBe(randomCategory.toLowerCase());
+    await expect(page.locator('#loading')).toBeHidden();
+    await expect(page.locator('#quote')).toHaveText(`“${responseRefreshBody.quote}”`);
+    await expect(page.locator('#author')).toHaveText(`- ${responseRefreshBody.author}`);
+
   });
 });
