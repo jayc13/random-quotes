@@ -1,12 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { promises as fs } from 'fs';
-import path from 'path';
 import rateLimit from '../../src/services/rate-limit';
-
-type Quote = {
-  quote: string;
-  author: string;
-};
+import {
+  Quote,
+  getRandomQuote,
+  GetRandomQuoteQuery,
+} from '../../src/services/quote.service.ts';
 
 const limiter = rateLimit({
   interval: 60 * 1000, // 1 minute
@@ -27,26 +25,17 @@ export default async function handler(
     return res.status(429).json({ error: 'Rate limit exceeded' });
   }
 
-  const filePath = path.join(process.cwd(), 'pages/api/quotes.json');
-  const jsonData = await fs.readFile(filePath, 'utf8');
-  const quotes: Quote[] = JSON.parse(jsonData);
+  const filters: GetRandomQuoteQuery = {
+    author: req.query.author as string,
+  };
 
-  if (req.query.author) {
-    const author = req.query.author as string;
-    const filteredQuotes = quotes.filter((quote) => quote.author === author);
+  let quote: Quote;
 
-    if (filteredQuotes.length === 0) {
-      return res
-        .status(404)
-        .json({ error: `No quotes found for author: ${author}` });
-    }
-
-    const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
-    const selectedQuote: Quote = filteredQuotes[randomIndex];
-    return res.status(200).json(selectedQuote);
-  } else {
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    const selectedQuote: Quote = quotes[randomIndex];
-    return res.status(200).json(selectedQuote);
+  try {
+    quote = await getRandomQuote(filters);
+  } catch (error) {
+    return res.status(404).json({ error: error.message });
   }
+
+  return res.status(200).json(quote);
 }
