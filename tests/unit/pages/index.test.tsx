@@ -5,7 +5,7 @@ import {
   screen,
   waitFor,
   waitForElementToBeRemoved,
-  fireEvent,
+  fireEvent, within,
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import HomePage from '../../../pages/index';
@@ -211,5 +211,58 @@ describe('HomePage', () => {
 
     expect(newQuoteElement).toBeInTheDocument();
     expect(newAuthorElement).toBeInTheDocument();
+  });
+
+  describe('Category component', () => {
+    it('On category change, fetches a new quote', async () => {
+      const initialQuote = {quote: 'Initial Quote', author: 'Initial Author'};
+      const newQuote = {quote: 'New Quote', author: 'New Author'};
+
+      const quotes = [initialQuote, newQuote];
+
+      let index = 0;
+
+      jest
+        .spyOn(global, 'fetch')
+        .mockImplementation((url) => {
+          if (url === '/api/categories') return {
+            ok: true,
+            json: () => Promise.resolve([{ name: 'Technology' }, { name: 'Philosophy' }])
+          }
+          return Promise.resolve({
+            ok: true,
+            json: () => Promise.resolve(quotes[index++])
+          })
+        });
+
+      await act(async () => {
+        render(<HomePage/>);
+      });
+
+      jest.runAllTimers();
+
+      const initialQuoteElement = await screen.findByText(/Initial Quote/i);
+      const initialAuthorElement = await screen.findByText(/Initial Author/i);
+
+      expect(initialQuoteElement).toBeInTheDocument();
+      expect(initialAuthorElement).toBeInTheDocument();
+
+      const categorySelect = screen.getByTestId('category-select');
+      const combobox = within(categorySelect).getByRole('combobox');
+      fireEvent.mouseDown(combobox);
+      const options = screen.getAllByRole('option');
+      fireEvent.click(options[1]);
+
+      jest.runAllTimers();
+      jest.advanceTimersByTime(5000);
+
+      await waitForElementToBeRemoved(() => screen.getByText('Loading...'), {timeout: 5000});
+
+      const newQuoteElement = await screen.findByText(/New Quote/i);
+      const newAuthorElement = await screen.findByText(/New Author/i);
+
+      expect(newQuoteElement).toBeInTheDocument();
+      expect(newAuthorElement).toBeInTheDocument();
+    });
   });
 });
