@@ -4,13 +4,12 @@ import {Box, IconButton, Tooltip} from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RotateRightIcon from '@mui/icons-material/RotateRight';
 import Head from 'next/head';
-import ThemeProvider from '../src/components/ThemeProvider';
-import Loading from '../src/components/Loading';
 import {ToastContainer, toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import CategorySelector from '../src/components/CategorySelector'; // Import CategorySelector
-import LanguageProvider, { useLanguage } from '../src/context/LanguageContext';
+import Loading from '../src/components/Loading';
+import CategorySelector from '../src/components/CategorySelector';
 import LanguageSelector from '../src/components/LanguageSelector';
+import { useLanguage } from '../src/context/LanguageContext';
+import 'react-toastify/dist/ReactToastify.css';
 
 type Quote = {
   quote: string;
@@ -139,7 +138,7 @@ const HomePage = () => {
   }
 
   return (
-    <LanguageProvider>
+    <>
       <Head>
         <title>{translate("Quote of the Day")}</title>
         <link rel="icon" href="/favicon.ico"/>
@@ -197,7 +196,7 @@ const HomePage = () => {
         </Tooltip>
         <ToastContainer/>
       </MainContainer>
-    </LanguageProvider>
+    </>
   );
 }
 

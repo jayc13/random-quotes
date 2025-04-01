@@ -9,6 +9,7 @@ import {
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import HomePage from '../../../pages/index';
+import LanguageProvider from '../../../src/providers/LangProvider';
 
 
 // Mock the fetch function
@@ -70,7 +71,7 @@ describe('HomePage', () => {
     ) as jest.Mock;
 
     await act(async () => {
-      render(<HomePage/>);
+      render(<LanguageProvider><HomePage/></LanguageProvider>);
     });
 
     expect(screen.getByText('Loading...')).toBeInTheDocument();
@@ -95,7 +96,7 @@ describe('HomePage', () => {
       });
 
     await act(async () => {
-      render(<HomePage/>);
+      render(<LanguageProvider><HomePage/></LanguageProvider>);
     });
 
     jest.runAllTimers();
@@ -122,7 +123,7 @@ describe('HomePage', () => {
       });
 
     await act(async () => {
-      render(<HomePage/>);
+      render(<LanguageProvider><HomePage/></LanguageProvider>);
     });
 
     jest.runAllTimers();
@@ -149,7 +150,7 @@ describe('HomePage', () => {
       });
 
     await act(async () => {
-      render(<HomePage/>);
+      render(<LanguageProvider><HomePage/></LanguageProvider>);
     });
 
     jest.runAllTimers();
@@ -186,7 +187,7 @@ describe('HomePage', () => {
       });
 
     await act(async () => {
-      render(<HomePage/>);
+      render(<LanguageProvider><HomePage/></LanguageProvider>);
     });
 
     jest.runAllTimers();
@@ -236,7 +237,7 @@ describe('HomePage', () => {
         });
 
       await act(async () => {
-        render(<HomePage/>);
+        render(<LanguageProvider><HomePage/></LanguageProvider>);
       });
 
       jest.runAllTimers();

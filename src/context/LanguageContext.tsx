@@ -5,13 +5,22 @@ import pt from '../translations/pt.json';
 import fr from '../translations/fr.json';
 import it from '../translations/it.json';
 
-const LanguageContext = createContext();
 
-export const useLanguage = () => useContext(LanguageContext);
+export type LanguageType = 'en' | 'es' | 'pt' | 'fr' | 'it';
+
+interface LanguageContextType {
+  language: LanguageType;
+  setLanguage: React.Dispatch<React.SetStateAction<string>>;
+  translate: (key: string) => string;
+}
+
+const LanguageContext = createContext<LanguageContextType|undefined>(undefined);
 
 const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('en'); // Default language is English
+  const [language, setLanguage] = useState<LanguageType>('en'); // Default language is English
   const [translations, setTranslations] = useState(en); // Initialize with English translations
+
+  const translate = (key: string) => translations[key] || key;
 
   useEffect(() => {
     switch (language) {
@@ -35,8 +44,6 @@ const LanguageProvider = ({ children }) => {
     }
   }, [language]);
 
-  const translate = (key) => translations[key] || key;
-
   const value = {
     language,
     setLanguage,
@@ -51,3 +58,11 @@ const LanguageProvider = ({ children }) => {
 };
 
 export default LanguageProvider;
+
+export const useLanguage = () => {
+  const langContext = useContext(LanguageContext);
+  if (!langContext) {
+    throw new Error("useLanguage must be used within a LanguageProvider");
+  }
+  return langContext;
+};

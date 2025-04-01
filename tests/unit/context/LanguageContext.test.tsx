@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import LanguageProvider, { useLanguage } from '../../src/context/LanguageContext';
+import LanguageProvider, { useLanguage } from '../../../src/context/LanguageContext';
 
 const TestComponent = () => {
   const { language, setLanguage, translate } = useLanguage();
