@@ -2,7 +2,7 @@ import React, {act} from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import ThemeProvider, { useTheme } from '../../../src/components/ThemeProvider';
+import ThemeProvider, { useTheme } from '../../../src/providers/ThemeProvider.tsx';
 
 import { MediaQueryListEvent} from "mock-match-media";
 

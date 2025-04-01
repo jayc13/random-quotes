@@ -4,11 +4,12 @@ import {Box, IconButton, Tooltip} from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RotateRightIcon from '@mui/icons-material/RotateRight';
 import Head from 'next/head';
-import ThemeProvider from '../src/components/ThemeProvider';
-import Loading from '../src/components/Loading';
 import {ToastContainer, toast} from 'react-toastify';
+import Loading from '../src/components/Loading';
+import CategorySelector from '../src/components/CategorySelector';
+import LanguageSelector from '../src/components/LanguageSelector';
+import { useLanguage } from '../src/context/LanguageContext';
 import 'react-toastify/dist/ReactToastify.css';
-import CategorySelector from '../src/components/CategorySelector'; // Import CategorySelector
 
 type Quote = {
   quote: string;
@@ -18,7 +19,7 @@ type Quote = {
 
 const MainContainer = styled("div")(() => ({
   display: 'flex',
-  flexDirection: 'column', // Changed to column
+  flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
   minHeight: '100vh',
@@ -80,7 +81,7 @@ const AuthorText = styled("p")(() => ({
   color: 'text.secondary',
 }));
 
-const Tagline = styled("div")(() => ({
+const Tagline = styled("h1")(() => ({
   marginBottom: '20px',
   fontSize: '1em',
   fontWeight: 'bold',
@@ -90,24 +91,28 @@ const Tagline = styled("div")(() => ({
 
 const HomePage = () => {
   const [quote, setQuote] = useState<Quote | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState(''); // State for selected category
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const { translate } = useLanguage();
 
-  async function fetchNewQuote(category?: string) { // Modified to accept category
+  async function fetchNewQuote(category?: string) {
     setLoading(true);
     try {
       let url = '/api/quote';
       if (category) {
-        url += `?category=${category}`; // Add category as query parameter
+        url += `?category=${category}`;
       }
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Failed to fetch quote');
+        throw new Error(translate('Failed to fetch quote. Please try again'));
       }
       const data = await response.json();
       setQuote(data);
+      setError(null);
     } catch {
-      setQuote({quote: '', author: '', error: 'Failed to fetch quote'});
+      setQuote(null);
+      setError(translate('Failed to fetch quote. Please try again'));
     } finally {
       setLoading(false);
     }
@@ -117,14 +122,14 @@ const HomePage = () => {
     fetchNewQuote().then();
   }, []);
 
-  const handleCategoryChange = (categoryId: string) => { // Function to handle category change
+  const handleCategoryChange = (categoryId: string) => {
     setSelectedCategory(categoryId);
-    fetchNewQuote(categoryId).then(); // Fetch new quote based on selected category
+    fetchNewQuote(categoryId).then();
   };
 
   async function copyToClipboard(text: string) {
     await navigator.clipboard.writeText(text);
-    toast.success('Quote copied!', {
+    toast.success(translate('Quote copied!'), {
       position: "bottom-right",
       autoClose: 3000,
       hideProgressBar: false,
@@ -136,31 +141,33 @@ const HomePage = () => {
   }
 
   return (
-    <ThemeProvider>
+    <>
       <Head>
-        <title>Quote of the Day</title>
+        <title>{translate("Quote of the Day")}</title>
         <link rel="icon" href="/favicon.ico"/>
       </Head>
       <MainContainer>
+        <Box sx={{ position: 'absolute', top: '20px', left: '20px' }}>
+          <LanguageSelector />
+        </Box>
         <CategorySelectorContainer>
           <CategorySelector onChange={handleCategoryChange}/>
         </CategorySelectorContainer>
         {
-          loading && <Loading/>
+          ( loading ) && <Loading/>
         }
         {
           !loading &&
           <QuoteContainer>
-            {(!quote || quote.error) ? (
-              <ErrorMessage id="error">Failed to fetch quote. Please try again</ErrorMessage>
-            ) : (
+            {!!error && <ErrorMessage id="error">{error}</ErrorMessage>}
+            {(quote !== null && !error) &&
               <>
-                <Tagline>Your daily dose of inspiration.</Tagline>
+                <Tagline data-testid="title">{translate("Your daily dose of inspiration.")}</Tagline>
                 <Box
                   sx={{
                     position: 'relative'
                   }}>
-                  <Tooltip title="Copy quote" placement="top" arrow>
+                  <Tooltip title={translate("Copy quote")} placement="top" arrow>
                     <CopyQuoteButton
                       size="small"
                       onClick={() => copyToClipboard(`"${quote.quote}" - ${quote.author}`)}
@@ -173,10 +180,10 @@ const HomePage = () => {
                 </Box>
                 <AuthorText id="author">- {quote.author}</AuthorText>
               </>
-            )}
+            }
           </QuoteContainer>
         }
-        <Tooltip title={loading ? '' : 'Refresh quote'} placement="right" arrow>
+        <Tooltip title={loading ? '' : translate('Refresh quote')} placement="right" arrow>
           <RefreshQuoteButton
             onClick={() => fetchNewQuote(selectedCategory)}
             disabled={loading}
@@ -188,7 +195,7 @@ const HomePage = () => {
         </Tooltip>
         <ToastContainer/>
       </MainContainer>
-    </ThemeProvider>
+    </>
   );
 }
 

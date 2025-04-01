@@ -9,6 +9,7 @@ const config: Config = {
   preset: 'ts-jest',
   coverageProvider: 'v8',
   testEnvironment: 'jsdom',
+  silent: true,
   roots: [
     "./tests/unit/"
   ],
