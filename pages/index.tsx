@@ -8,6 +8,7 @@ import ThemeProvider from '../src/components/ThemeProvider';
 import Loading from '../src/components/Loading';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LanguageSelector from '../src/components/LanguageSelector';
 import CategorySelector from '../src/components/CategorySelector'; // Import CategorySelector
 
 type Quote = {
@@ -26,6 +27,12 @@ const MainContainer = styled("div")(() => ({
   fontFamily: 'sans-serif',
   backgroundColor: 'background.default',
   color: 'secondary.contrastText',
+}));
+
+const LanguageSelectorContainer = styled(Box)(() => ({
+  position: 'absolute',
+  top: '20px',
+  left: '20px',
 }));
 
 const CategorySelectorContainer = styled(Box)(() => ({
@@ -91,14 +98,22 @@ const Tagline = styled("div")(() => ({
 const HomePage = () => {
   const [quote, setQuote] = useState<Quote | null>(null);
   const [loading, setLoading] = useState(true);
+  const [selectedLanguage, setSelectedLanguage] = useState('en'); // State for selected language
   const [selectedCategory, setSelectedCategory] = useState(''); // State for selected category
 
-  async function fetchNewQuote(category?: string) { // Modified to accept category
+  async function fetchNewQuote(category?: string, lang?: string) { // Modified to accept category and language
     setLoading(true);
     try {
       let url = '/api/quote';
+      const params = new URLSearchParams();
       if (category) {
-        url += `?category=${category}`; // Add category as query parameter
+        params.append('category', category);
+      }
+      if (lang) {
+        params.append('lang', lang);
+      }
+      if (params.toString()) {
+        url += `?${params.toString()}`;
       }
       const response = await fetch(url);
       if (!response.ok) {
@@ -114,12 +129,16 @@ const HomePage = () => {
   }
 
   useEffect(() => {
-    fetchNewQuote().then();
-  }, []);
+    fetchNewQuote(undefined, selectedLanguage).then();
+  }, [selectedLanguage]);
 
   const handleCategoryChange = (categoryId: string) => { // Function to handle category change
     setSelectedCategory(categoryId);
-    fetchNewQuote(categoryId).then(); // Fetch new quote based on selected category
+    fetchNewQuote(categoryId, selectedLanguage).then(); // Fetch new quote based on selected category and language
+  };
+
+  const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedLanguage(event.target.value);
   };
 
   async function copyToClipboard(text: string) {
@@ -142,11 +161,14 @@ const HomePage = () => {
         <link rel="icon" href="/favicon.ico"/>
       </Head>
       <MainContainer>
+        <LanguageSelectorContainer>
+          <LanguageSelector onChange={handleLanguageChange} value={selectedLanguage} />
+        </LanguageSelectorContainer>
         <CategorySelectorContainer>
-          <CategorySelector onChange={handleCategoryChange}/>
+          <CategorySelector onChange={handleCategoryChange} />
         </CategorySelectorContainer>
         {
-          loading && <Loading/>
+          loading && <Loading />
         }
         {
           !loading &&

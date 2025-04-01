@@ -12,11 +12,12 @@ export type QuotesCollection = {
 };
 
 export interface GetRandomQuoteQuery {
-  author?: string
-  category?: string
+  author?: string;
+  category?: string;
+  lang?: string;
 }
 
-async function loadQuotes(): Promise<QuotesCollection> {
+async function loadQuotes(): Promise<Record<string, QuotesCollection>> {
   const filePath = path.join(process.cwd(), 'pages/api/quotes.json');
   try {
     const data = await fs.readFile(filePath, 'utf8');
@@ -45,11 +46,16 @@ export async function getRandomQuote(query?: GetRandomQuoteQuery): Promise<Quote
     category,
   } = query || {};
 
-  const quotesCollection: QuotesCollection = await loadQuotes();
+  const allQuotes = await loadQuotes();
+  const langQuotes = allQuotes[lang || 'en'] || allQuotes['en'] || {};
+
+  if (Object.keys(langQuotes).length === 0) {
+    throw new Error('No quotes found');
+  }
 
   const filteredCategory: Category = await getCategory(category);
 
-  const quotes = quotesCollection[filteredCategory.name] || [];
+  const quotes = langQuotes[filteredCategory.name] || [];
 
   let filtered = filterByAuthor(quotes, author);
 
