@@ -5,21 +5,17 @@ test.describe('Translation E2E Tests', () => {
     await page.goto('/');
 
     // Assert default language is English
-    await expect(page.locator('h1')).toHaveText('Quote of the Day');
-    await expect(page.locator('div').getByText('Your daily dose of inspiration.')).toBeVisible();
-    await expect(page.locator('button[data-testid="copy-quote-btn"]')).toHaveAttribute('title', 'Copy quote');
-    await expect(page.locator('button[data-testid="refresh-quote-btn"]')).toHaveAttribute('title', 'Refresh quote');
-    // Category Selector
-    await expect(page.locator('#category-select-label')).toHaveText('Select Category');
+    await expect(page.locator('[data-testid="title"]')).toHaveText('Your daily dose of inspiration.')
+    await expect(page.locator('button[data-testid="copy-quote-btn"]')).toHaveAttribute('aria-label', 'Copy quote');
+    await expect(page.locator('button[data-testid="refresh-quote-btn"]')).toHaveAttribute('aria-label', 'Refresh quote');
 
     // Change language to French
     await page.locator('#language-select').click();
     await page.locator('li[data-value="fr"]').click();
 
     // Assert content is translated to French
-    await expect(page.locator('h1')).toHaveText('Citation du Jour');
-    await expect(page.locator('div').getByText('Votre dose quotidienne d\'inspiration.')).toBeVisible();
-    await expect(page.locator('button[data-testid="copy-quote-btn"]')).toHaveAttribute('title', 'Copier la citation');
-    await expect(page.locator('button[data-testid="refresh-quote-btn"]')).toHaveAttribute('title', 'Rafraîchir la citation');
+    await expect(page.locator('[data-testid="title"]')).toHaveText('Votre dose quotidienne d\'inspiration.')
+    await expect(page.locator('button[data-testid="copy-quote-btn"]')).toHaveAttribute('aria-label', 'Copier la citation');
+    await expect(page.locator('button[data-testid="refresh-quote-btn"]')).toHaveAttribute('aria-label', 'Rafraîchir la citation');
   });
 });

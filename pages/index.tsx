@@ -81,7 +81,7 @@ const AuthorText = styled("p")(() => ({
   color: 'text.secondary',
 }));
 
-const Tagline = styled("div")(() => ({
+const Tagline = styled("h1")(() => ({
   marginBottom: '20px',
   fontSize: '1em',
   fontWeight: 'bold',
@@ -111,7 +111,7 @@ const HomePage = () => {
       setQuote(data);
       setError(null);
     } catch {
-      setQuote({quote: '', author: ''});
+      setQuote(null);
       setError(translate('Failed to fetch quote. Please try again'));
     } finally {
       setLoading(false);
@@ -154,15 +154,15 @@ const HomePage = () => {
           <CategorySelector onChange={handleCategoryChange}/>
         </CategorySelectorContainer>
         {
-          ( loading || !quote) && <Loading/>
+          ( loading ) && <Loading/>
         }
         {
           !loading &&
           <QuoteContainer>
-            {!!error && <ErrorMessage>{error}</ErrorMessage>}
+            {!!error && <ErrorMessage id="error">{error}</ErrorMessage>}
             {(quote !== null && !error) &&
               <>
-                <Tagline>{translate("Your daily dose of inspiration.")}</Tagline>
+                <Tagline data-testid="title">{translate("Your daily dose of inspiration.")}</Tagline>
                 <Box
                   sx={{
                     position: 'relative'
