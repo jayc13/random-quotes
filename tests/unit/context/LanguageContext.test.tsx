@@ -58,4 +58,31 @@ describe('LanguageContext', () => {
 
     expect(screen.getByTestId('translated-text')).toHaveTextContent('nonExistentKey');
   });
+
+  it('should fallback to English translations for unsupported language', () => {
+    const TestComponentWithCustomLanguage = () => {
+      const { setLanguage, translate } = useLanguage();
+      React.useEffect(() => {
+        setLanguage('nonExistentLanguage');
+      }, [setLanguage]);
+      return <p data-testid="translated-text">{translate('Quote of the Day')}</p>;
+    };
+
+    render(
+      <LanguageProvider>
+        <TestComponentWithCustomLanguage />
+      </LanguageProvider>
+    );
+
+    expect(screen.getByTestId('translated-text')).toHaveTextContent('Quote of the Day');
+  });
+
+  it('should throw error when useLanguage is used outside of LanguageProvider', () => {
+    const TestComponent = () => {
+      useLanguage();
+      return <div />;
+    };
+
+    expect(() => render(<TestComponent />)).toThrow('useLanguage must be used within a LanguageProvider');
+  });
 });

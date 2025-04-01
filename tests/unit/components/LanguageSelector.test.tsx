@@ -15,7 +15,13 @@ describe('LanguageSelector', () => {
     expect(screen.getByRole('combobox')).toHaveTextContent('🇬🇧');
   });
 
-  it('should update the selected language when a new language is selected', () => {
+  it.each([
+    [1, 'es', '🇪🇸'],
+    [2, 'pt', '🇵🇹'],
+    [3, 'fr', '🇫🇷'],
+    [4, 'it', '🇮🇹'],
+    [0, 'en', '🇬🇧'],
+  ])('should update the selected language when a new language is selected', (index: number, lang: string, flag: string) => {
     const TestComponent = () => {
       const { language } = useLanguage();
       return (
@@ -39,10 +45,10 @@ describe('LanguageSelector', () => {
 
     const options = screen.getAllByRole('option');
 
-    fireEvent.click(options[1]);
+    fireEvent.click(options[index]);
 
-    expect(screen.getByTestId('language')).toHaveTextContent('es');
+    expect(screen.getByTestId('language')).toHaveTextContent(lang);
 
-    expect(screen.getByRole('combobox')).toHaveTextContent('🇪🇸');
+    expect(screen.getByRole('combobox')).toHaveTextContent(flag);
   });
 });
