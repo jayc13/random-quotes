@@ -1,13 +1,13 @@
 import ThemeProvider from '../src/providers/ThemeProvider.tsx';
-import LanguageProvider from '../src/context/LanguageContext';
+import LanguageContext from '../src/context/LanguageContext';
 import Index from './index';
 
 export default function RandomQuotes() {
   return (
-    <LanguageProvider>
+    <LanguageContext>
       <ThemeProvider>
         <Index/>
       </ThemeProvider>
-    </LanguageProvider>
+    </LanguageContext>
   );
 }

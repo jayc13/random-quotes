@@ -9,7 +9,7 @@ const TestComponent = () => {
     <div>
       <p data-testid="language">{language}</p>
       <button onClick={() => setLanguage('fr')} data-testid="set-language-fr">Set to French</button>
-      <p data-testid="translated-text">{translate('welcome')}</p>
+      <p data-testid="translated-text">{translate('Quote of the Day')}</p>
     </div>
   );
 };
@@ -23,7 +23,7 @@ describe('LanguageContext', () => {
     );
 
     expect(screen.getByTestId('language')).toHaveTextContent('en');
-    expect(screen.getByTestId('translated-text')).toHaveTextContent('Welcome');
+    expect(screen.getByTestId('translated-text')).toHaveTextContent('Quote of the Day');
   });
 
   it('should update the language and translations when setLanguage is called', () => {
@@ -36,17 +36,26 @@ describe('LanguageContext', () => {
     fireEvent.click(screen.getByTestId('set-language-fr'));
 
     expect(screen.getByTestId('language')).toHaveTextContent('fr');
-    expect(screen.getByTestId('translated-text')).toHaveTextContent('Bienvenue');
+    expect(screen.getByTestId('translated-text')).toHaveTextContent('Citation du Jour');
   });
 
   it('should return the key if translation is not found', () => {
+
+    const TestComponent = () => {
+      const { translate } = useLanguage();
+      return (
+        <div>
+          <p data-testid="translated-text">{translate('nonExistentKey')}</p>
+        </div>
+      );
+    }
+
     render(
       <LanguageProvider>
         <TestComponent />
       </LanguageProvider>
     );
 
-    const { translate } = useLanguage();
-    expect(translate('nonExistentKey')).toBe('nonExistentKey');
+    expect(screen.getByTestId('translated-text')).toHaveTextContent('nonExistentKey');
   });
 });

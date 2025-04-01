@@ -91,6 +91,7 @@ const Tagline = styled("div")(() => ({
 
 const HomePage = () => {
   const [quote, setQuote] = useState<Quote | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('');
   const { translate } = useLanguage();
@@ -104,12 +105,14 @@ const HomePage = () => {
       }
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error(translate('Failed to fetch quote'));
+        throw new Error(translate('Failed to fetch quote. Please try again'));
       }
       const data = await response.json();
       setQuote(data);
+      setError(null);
     } catch {
-      setQuote({quote: '', author: '', error: translate('Failed to fetch quote. Please try again')});
+      setQuote({quote: '', author: ''});
+      setError(translate('Failed to fetch quote. Please try again'));
     } finally {
       setLoading(false);
     }
@@ -151,17 +154,13 @@ const HomePage = () => {
           <CategorySelector onChange={handleCategoryChange}/>
         </CategorySelectorContainer>
         {
-          loading && <Loading/>
+          ( loading || !quote) && <Loading/>
         }
         {
           !loading &&
           <QuoteContainer>
-            {(!quote || quote.error) ? (
-              <ErrorMessage id="error">
-                {/* Display error from quote object, if available, otherwise use translation */}
-                {quote?.error || translate("Failed to fetch quote. Please try again")}
-              </ErrorMessage>
-            ) : (
+            {!!error && <ErrorMessage>{error}</ErrorMessage>}
+            {(quote !== null && !error) &&
               <>
                 <Tagline>{translate("Your daily dose of inspiration.")}</Tagline>
                 <Box
@@ -181,7 +180,7 @@ const HomePage = () => {
                 </Box>
                 <AuthorText id="author">- {quote.author}</AuthorText>
               </>
-            )}
+            }
           </QuoteContainer>
         }
         <Tooltip title={loading ? '' : translate('Refresh quote')} placement="right" arrow>

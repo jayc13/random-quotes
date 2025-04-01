@@ -1,8 +1,8 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import React, {act} from 'react';
+import {render, screen, fireEvent, within} from '@testing-library/react';
 import '@testing-library/jest-dom';
-import LanguageProvider from '../../src/context/LanguageContext';
-import LanguageSelector from '../../src/components/LanguageSelector';
+import LanguageProvider, {useLanguage} from '../../../src/context/LanguageContext';
+import LanguageSelector from '../../../src/components/LanguageSelector';
 
 describe('LanguageSelector', () => {
   it('should render the language selector with the default language selected', () => {
@@ -12,18 +12,37 @@ describe('LanguageSelector', () => {
       </LanguageProvider>
     );
 
-    expect(screen.getByRole('combobox')).toHaveValue('en');
+    expect(screen.getByRole('combobox')).toHaveTextContent('🇬🇧');
   });
 
   it('should update the selected language when a new language is selected', () => {
+    const TestComponent = () => {
+      const { language } = useLanguage();
+      return (
+        <div>
+          <p data-testid="language">{language}</p>
+        </div>
+      );
+    };
+
     render(
       <LanguageProvider>
+        <TestComponent />
         <LanguageSelector />
       </LanguageProvider>
     );
 
-    fireEvent.change(screen.getByRole('combobox'), { target: { value: 'fr' } });
+    const languageSelect = screen.getByTestId('language-select');
 
-    expect(screen.getByRole('combobox')).toHaveValue('fr');
+    const combobox = within(languageSelect).getByRole('combobox');
+    fireEvent.mouseDown(combobox);
+
+    const options = screen.getAllByRole('option');
+
+    fireEvent.click(options[1]);
+
+    expect(screen.getByTestId('language')).toHaveTextContent('es');
+
+    expect(screen.getByRole('combobox')).toHaveTextContent('🇪🇸');
   });
 });

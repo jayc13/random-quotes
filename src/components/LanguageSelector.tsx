@@ -16,6 +16,7 @@ const LanguageSelector = () => {
         displayEmpty
         input={<OutlinedInput />}
         id="language-select"
+        data-testId="language-select"
         value={language}
         label="Language"
         sx={{
