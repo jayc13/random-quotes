@@ -30,7 +30,7 @@ test.describe('Quote App', () => {
 
   test('should handle errors during quote fetching', async ({ page }) => {
     // Mock the API to simulate an error
-    await page.route('/api/quote', async route => {
+    await page.route('/api/quote?lang=en', async route => {
       await route.fulfill({
         status: 500,
         contentType: 'application/json',
@@ -65,7 +65,7 @@ test.describe('Quote App', () => {
 
   test('should handle an empty quote list', async ({ page }) => {
     // Mock the /api/quote endpoint to return an empty list
-    await page.route('/api/quote', async route => {
+    await page.route('/api/quote?lang=en', async route => {
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
