@@ -1,27 +1,50 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import {Category, getCategory} from "./category.service.ts";
+import { Category, getCategory } from "./category.service.ts";
 import {
   DEFAULT_LANG,
   translateText,
   validateLanguage
 } from "./translate.service.ts";
 
+/**
+ * Represents a quote with the text and the author.
+ */
 export type Quote = {
   quote: string;
   author: string;
 };
 
+/**
+ * Represents a collection of quotes categorized by category.
+ */
 export type QuotesCollection = {
   [category: string]: Quote[];
 };
 
+/**
+ * Query parameters for retrieving a random quote.
+ */
 export interface GetRandomQuoteQuery {
-  author?: string
-  category?: string
-  lang?: string
+  /**
+   * The author of the quote.
+   */
+  author?: string;
+  /**
+   * The category of the quote.
+   */
+  category?: string;
+  /**
+   * The language code for the quote. Defaults to the default language.
+   */
+  lang?: string;
 }
 
+/**
+ * Loads the quotes from the JSON file.
+ *
+ * @returns {Promise<QuotesCollection>} - A promise that resolves to a collection of quotes.
+ */
 async function loadQuotes(): Promise<QuotesCollection> {
   const filePath = path.join(process.cwd(), 'pages/api/quotes.json');
   try {
@@ -32,9 +55,16 @@ async function loadQuotes(): Promise<QuotesCollection> {
   }
 }
 
+/**
+ * Filters quotes by the specified author.
+ *
+ * @param {Quote[]} quotes - The array of quotes to filter.
+ * @param {string} [author] - The author to filter by.
+ * @returns {Quote[]} - The filtered array of quotes.
+ * @throws {Error} - If no quotes are found for the specified author.
+ */
 const filterByAuthor = (quotes: Quote[], author?: string) => {
-
-  if (!author) return quotes
+  if (!author) return quotes;
 
   const filtered = quotes.filter((q) => q.author === author);
 
@@ -45,6 +75,16 @@ const filterByAuthor = (quotes: Quote[], author?: string) => {
   return filtered;
 };
 
+/**
+ * Retrieves a random quote based on the provided query parameters.
+ *
+ * @param {GetRandomQuoteQuery} [query] - The query parameters for retrieving the quote.
+ * @param {string} [query.author] - The author of the quote.
+ * @param {string} [query.category] - The category of the quote.
+ * @param {string} [query.lang=DEFAULT_LANG] - The language code for the quote.
+ * @returns {Promise<Quote>} - A promise that resolves to a random quote.
+ * @throws {Error} - If no quotes are found.
+ */
 export async function getRandomQuote(query?: GetRandomQuoteQuery): Promise<Quote> {
   const {
     author,
@@ -69,12 +109,8 @@ export async function getRandomQuote(query?: GetRandomQuoteQuery): Promise<Quote
   const randomIndex = Math.floor(Math.random() * filtered.length);
   const selectedQuote = filtered[randomIndex];
 
-  console.log({lang})
-
   if (lang !== DEFAULT_LANG) {
     validateLanguage(lang);
-
-    console.log('Translating quote to:', lang);
 
     selectedQuote.quote = await translateText({
       sourceLang: DEFAULT_LANG,
