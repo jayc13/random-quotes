@@ -1,11 +1,32 @@
-[
-  {
-    "name":"Motivation"
-  },
-  {
-    "name":"Wisdom"
-  },
-  {
-    "name":"Love"
-  }
-]
+{
+  "en": [
+    { "id": "motivation", "name": "Motivation" },
+    { "id": "wisdom", "name": "Wisdom" },
+    { "id": "love", "name": "Love" }
+  ],
+  "es": [
+    { "id": "motivation", "name": "Motivación" },
+    { "id": "wisdom", "name": "Sabiduría" },
+    { "id": "love", "name": "Amor" }
+  ],
+  "pt": [
+    { "id": "motivation", "name": "Motivação" },
+    { "id": "wisdom", "name": "Sabedoria" },
+    { "id": "love", "name": "Amor" }
+  ],
+  "fr": [
+    { "id": "motivation", "name": "Motivation" },
+    { "id": "wisdom", "name": "Sagesse" },
+    { "id": "love", "name": "Amour" }
+  ],
+  "it": [
+    { "id": "motivation", "name": "Motivazione" },
+    { "id": "wisdom", "name": "Saggezza" },
+    { "id": "love", "name": "Amore" }
+  ],
+  "de": [
+    { "id": "motivation", "name": "Motivation" },
+    { "id": "wisdom", "name": "Weisheit" },
+    { "id": "love", "name": "Liebe" }
+  ]
+}

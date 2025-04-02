@@ -12,11 +12,13 @@ jest.mock('path', () => ({
 }));
 
 describe('Category Service', () => {
-  const mockCategories = [
-    { name: 'Category 1' },
-    { name: 'Category 2' },
-    { name: 'Category 3' }
-  ];
+  const mockCategories = {
+    en: [
+      { id: 'category1', name: 'Category 1' },
+      { id: 'category2', name: 'Category 2' },
+      { id: 'category3', name: 'Category 3' }
+    ]
+  };
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -28,7 +30,7 @@ describe('Category Service', () => {
 
       const result = await getAllCategories();
 
-      expect(result).toEqual(mockCategories);
+      expect(result).toEqual(mockCategories['en']);
     });
 
     it('returns empty array when file does not exist', async () => {
@@ -46,23 +48,29 @@ describe('Category Service', () => {
     });
 
     it('returns matching category when provided category exists', async () => {
-      const result = await getCategory('Category 2');
+      const result = await getCategory({
+        expectedCategory: 'category2',
+      });
 
-      expect(result).toEqual({ name: 'Category 2' });
+      expect(result).toEqual({ id: 'category2', name: 'Category 2' });
     });
 
     it('returns matching category regardless of case', async () => {
-      const result = await getCategory('category 1');
+      const result = await getCategory({
+        expectedCategory: 'category1',
+      });
 
-      expect(result).toEqual({ name: 'Category 1' });
+      expect(result).toEqual({ id: 'category1', name: 'Category 1' });
     });
 
     it('returns random category when provided category does not exist', async () => {
       jest.spyOn(global.Math, 'random').mockReturnValue(0.5);
 
-      const result = await getCategory('NonExistent');
+      const result = await getCategory({
+        expectedCategory: 'Nonexistent Category',
+      });
 
-      expect(result).toEqual({ name: 'Category 2' });
+      expect(result).toEqual({ id: 'category2', name: 'Category 2' });
     });
 
     it('returns random category when no category is provided', async () => {
@@ -70,21 +78,25 @@ describe('Category Service', () => {
 
       const result = await getCategory();
 
-      expect(result).toEqual({ name: 'Category 3' });
+      expect(result).toEqual({ id: 'category3', name: 'Category 3' });
     });
 
     it('returns random category when empty string is provided', async () => {
       jest.spyOn(global.Math, 'random').mockReturnValue(0);
 
-      const result = await getCategory('');
+      const result = await getCategory({
+        expectedCategory: '',
+      });
 
-      expect(result).toEqual({ name: 'Category 1' });
+      expect(result).toEqual({ id: 'category1', name: 'Category 1' });
     });
 
     it('handles empty categories array gracefully', async () => {
       jest.spyOn(fs, 'readFile').mockResolvedValue(JSON.stringify([]));
 
-      const result = await getCategory('Any Category');
+      const result = await getCategory({
+        expectedCategory: 'Nonexistent Category',
+      });
 
       expect(result).toBeUndefined();
     });
