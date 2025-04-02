@@ -1,12 +1,13 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import en from '../translations/en.json';
 import es from '../translations/es.json';
+import de from '../translations/de.json';
 import pt from '../translations/pt.json';
 import fr from '../translations/fr.json';
 import it from '../translations/it.json';
 
 
-export type LanguageType = 'en' | 'es' | 'pt' | 'fr' | 'it';
+export type LanguageType = 'en' | 'es' | 'de' | 'pt' | 'fr' | 'it';
 
 interface LanguageContextType {
   language: LanguageType;
@@ -29,6 +30,9 @@ const LanguageProvider = ({ children }) => {
         break;
       case 'es':
         setTranslations(es);
+        break;
+      case 'de':
+        setTranslations(de);
         break;
       case 'pt':
         setTranslations(pt);

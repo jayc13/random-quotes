@@ -7,5 +7,6 @@
   "Failed to fetch quote. Please try again": "Échec de la récupération de la citation. Veuillez réessayer",
   "Quote copied!": "Citation copiée !",
   "Category": "Catégorie",
-    "Change theme": "Changer le thème"
+  "Change theme": "Changer le thème",
+  "Random": "Aléatoire"
 }
