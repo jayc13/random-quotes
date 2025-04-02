@@ -85,9 +85,12 @@ describe('HomePage', () => {
     jest
       .spyOn(global, 'fetch')
       .mockImplementation((url) => {
-        if (url === '/api/categories') return {
+        if (url.toString().startsWith('/api/categories')) return {
           ok: true,
-          json: () => Promise.resolve([])
+          json: () => Promise.resolve([
+            {id: 'technology', name: 'Technology'},
+            {id: 'philosophy', name: 'Philosophy'}
+          ])
         }
         return Promise.resolve({
           ok: true,
@@ -112,9 +115,12 @@ describe('HomePage', () => {
     jest
       .spyOn(global, 'fetch')
       .mockImplementation((url) => {
-        if (url === '/api/categories') return {
+        if (url.toString().startsWith('/api/categories')) return {
           ok: true,
-          json: () => Promise.resolve([])
+          json: () => Promise.resolve([
+            {id: 'technology', name: 'Technology'},
+            {id: 'philosophy', name: 'Philosophy'}
+          ])
         }
         return Promise.resolve({
           ok: false,
@@ -139,9 +145,12 @@ describe('HomePage', () => {
     jest
       .spyOn(global, 'fetch')
       .mockImplementation((url) => {
-        if (url === '/api/categories') return {
+        if (url.toString().startsWith('/api/categories')) return {
           ok: true,
-          json: () => Promise.resolve([])
+          json: () => Promise.resolve([
+            {id: 'technology', name: 'Technology'},
+            {id: 'philosophy', name: 'Philosophy'}
+          ])
         }
         return Promise.resolve({
           ok: true,
@@ -176,9 +185,12 @@ describe('HomePage', () => {
     jest
       .spyOn(global, 'fetch')
       .mockImplementation((url) => {
-        if (url === '/api/categories') return {
+        if (url.toString().startsWith('/api/categories')) return {
           ok: true,
-          json: () => Promise.resolve([])
+          json: () => Promise.resolve([
+            {id: 'technology', name: 'Technology'},
+            {id: 'philosophy', name: 'Philosophy'}
+          ])
         }
         return Promise.resolve({
           ok: true,
@@ -226,7 +238,7 @@ describe('HomePage', () => {
       jest
         .spyOn(global, 'fetch')
         .mockImplementation((url) => {
-          if (url === '/api/categories') return {
+          if (url.toString().startsWith('/api/categories')) return {
             ok: true,
             json: () => Promise.resolve([{ name: 'Technology' }, { name: 'Philosophy' }])
           }
@@ -252,7 +264,7 @@ describe('HomePage', () => {
       const combobox = within(categorySelect).getByRole('combobox');
       fireEvent.mouseDown(combobox);
       const options = screen.getAllByRole('option');
-      fireEvent.click(options[1]);
+      fireEvent.click(options[2]);
 
       jest.runAllTimers();
       jest.advanceTimersByTime(5000);
