@@ -19,6 +19,10 @@ export function getSupportedLanguages(): string[] {
 export async function translateText(options: TranslateTextOptions): Promise<string> {
   const { sourceLang, targetLang, text } = options;
 
+  if (!getSupportedLanguages().includes(targetLang)) {
+    throw new Error(`Unsupported target language: ${targetLang}`);
+  }
+
   const endpoints = [
     "https://emergency-tas-backup1.uncoverclimatix.workers.dev/translate",
     "https://655.mtis.workers.dev/translate",
