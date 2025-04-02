@@ -31,6 +31,7 @@ const LanguageSelector = () => {
       >
         <MenuItem value="en">🇬🇧</MenuItem>
         <MenuItem value="es">🇪🇸</MenuItem>
+        <MenuItem value="de">🇩🇪</MenuItem>
         <MenuItem value="pt">🇵🇹</MenuItem>
         <MenuItem value="fr">🇫🇷</MenuItem>
         <MenuItem value="it">🇮🇹</MenuItem>

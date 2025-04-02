@@ -1,10 +1,9 @@
 import React, {act} from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-
-import ThemeProvider, { useTheme } from '../../../src/providers/ThemeProvider.tsx';
-
 import { MediaQueryListEvent} from "mock-match-media";
+import ThemeProvider, { useTheme } from '../../../src/providers/ThemeProvider.tsx';
+import LanguageProvider from '../../../src/context/LanguageContext.tsx';
 
 const TestComponent: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -31,9 +30,11 @@ describe('ThemeProvider', () => {
     }));
 
     render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider>
+          <TestComponent />
+        </ThemeProvider>
+      </LanguageProvider>
     );
 
     const themeElement = screen.getByTestId('theme');
@@ -49,9 +50,11 @@ describe('ThemeProvider', () => {
     }));
 
     render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider>
+          <TestComponent />
+        </ThemeProvider>
+      </LanguageProvider>
     );
 
     const themeToggleBtn = screen.getByTestId('theme-toggle-btn');
@@ -62,9 +65,11 @@ describe('ThemeProvider', () => {
     localStorage.setItem('theme', 'light');
 
     render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider>
+          <TestComponent />
+        </ThemeProvider>
+      </LanguageProvider>
     );
 
     const themeToggleBtn = screen.getByTestId('theme-toggle-btn');
@@ -75,9 +80,11 @@ describe('ThemeProvider', () => {
     localStorage.setItem('theme', 'dark');
 
     render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider>
+          <TestComponent />
+        </ThemeProvider>
+      </LanguageProvider>
     );
 
     const themeToggleBtn = screen.getByTestId('theme-toggle-btn');
@@ -86,9 +93,11 @@ describe('ThemeProvider', () => {
 
   it('should toggle theme between light and dark', () => {
     render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider>
+          <TestComponent />
+        </ThemeProvider>
+      </LanguageProvider>
     );
 
     const themeToggleBtn = screen.getByTestId('theme-toggle-btn');
@@ -113,9 +122,11 @@ describe('ThemeProvider', () => {
     }));
 
     const { unmount } = render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider>
+          <TestComponent />
+        </ThemeProvider>
+      </LanguageProvider>
     );
 
     unmount();
@@ -144,9 +155,11 @@ describe('ThemeProvider', () => {
 
     await act(async () => {
       render(
-        <ThemeProvider>
-          <TestComponent/>
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <TestComponent />
+          </ThemeProvider>
+        </LanguageProvider>
       );
     });
 
@@ -183,9 +196,11 @@ describe('ThemeProvider', () => {
 
     await act(async () => {
       render(
-        <ThemeProvider>
-          <TestComponent />
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <TestComponent />
+          </ThemeProvider>
+        </LanguageProvider>
       );
     });
 
@@ -214,9 +229,11 @@ describe('ThemeProvider', () => {
 
     await act(async () => {
       render(
-        <ThemeProvider>
-          <TestComponent />
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <TestComponent />
+          </ThemeProvider>
+        </LanguageProvider>
       );
     });
 
@@ -239,9 +256,11 @@ describe('ThemeProvider', () => {
 
     await act(async () => {
       render(
-        <ThemeProvider>
-          <TestComponent />
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <TestComponent />
+          </ThemeProvider>
+        </LanguageProvider>
       );
     });
 

@@ -5,5 +5,8 @@
   "Refresh quote": "Refresh quote",
   "Failed to fetch quote": "Failed to fetch quote",
   "Failed to fetch quote. Please try again": "Failed to fetch quote. Please try again",
-  "Quote copied!": "Quote copied!"
+  "Quote copied!": "Quote copied!",
+  "Category": "Category",
+  "Change theme": "Change theme",
+  "Random": "Random"
 }

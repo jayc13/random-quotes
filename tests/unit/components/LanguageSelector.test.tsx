@@ -17,9 +17,10 @@ describe('LanguageSelector', () => {
 
   it.each([
     [1, 'es', '🇪🇸'],
-    [2, 'pt', '🇵🇹'],
-    [3, 'fr', '🇫🇷'],
-    [4, 'it', '🇮🇹'],
+    [2, 'de', '🇩🇪'],
+    [3, 'pt', '🇵🇹'],
+    [4, 'fr', '🇫🇷'],
+    [5, 'it', '🇮🇹'],
     [0, 'en', '🇬🇧'],
   ])('should update the selected language when a new language is selected', (index: number, lang: string, flag: string) => {
     const TestComponent = () => {
