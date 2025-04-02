@@ -122,8 +122,8 @@ test.describe('Quote App', () => {
 
     const randomCategory = texts[Math.floor(Math.random() * (texts.length - 1)) + 1];
 
-    const getQuoteRequest = page.waitForResponse(resp => {
-      return resp.url().includes('/api/quote') && resp.status() === 200
+    const getQuoteRequest = page.waitForResponse((resp) => {
+      return resp.url().includes('/api/quote') && resp.request().method() === 'GET';
     });
 
     await page.locator(`li:has-text("${randomCategory}")`).click();
@@ -137,10 +137,12 @@ test.describe('Quote App', () => {
     await expect(page.locator('#quote')).toHaveText(`“${responseBody.quote}”`);
     await expect(page.locator('#author')).toHaveText(`- ${responseBody.author}`);
 
-
+    const getRefreshQuoteRequest = page.waitForResponse((resp) => {
+      return resp.url().includes('/api/quote') && resp.request().method() === 'GET';
+    });
     await page.locator('[data-testid="refresh-quote-btn"]').click();
 
-    const getRefreshQuoteResponse = await getQuoteRequest;
+    const getRefreshQuoteResponse = await getRefreshQuoteRequest;
     const responseRefreshBody = await getRefreshQuoteResponse.json();
     const requestedRefreshURL = new URL(getRefreshQuoteResponse.request().url())
 
