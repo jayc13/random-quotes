@@ -117,8 +117,6 @@ export async function getRandomQuote(query?: GetRandomQuoteQuery): Promise<Quote
       targetLang: lang,
       text: selectedQuote.quote,
     });
-
-    console.log({selectedQuote})
   }
 
   return selectedQuote;
