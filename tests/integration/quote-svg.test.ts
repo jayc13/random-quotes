@@ -110,7 +110,7 @@ describe('GET /api/quote.svg', () => {
 
   describe('Categories', () => {
     it('should return a quote from a specific category', async () => {
-      const category = 'Technology';
+      const category = 'technology';
       const { req, res } = createMocks({
         method: 'GET',
         url: `/api/quote.svg?category=${category}`,
