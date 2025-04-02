@@ -47,7 +47,9 @@ export async function getRandomQuote(query?: GetRandomQuoteQuery): Promise<Quote
 
   const quotesCollection: QuotesCollection = await loadQuotes();
 
-  const filteredCategory: Category = await getCategory(category);
+  const filteredCategory: Category = await getCategory({
+    expectedCategory: category,
+  });
 
   const quotes = quotesCollection[filteredCategory.name] || [];
 
