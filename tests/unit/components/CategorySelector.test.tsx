@@ -1,6 +1,7 @@
-import { act } from 'react';
+import {act} from 'react';
 import {render, screen, fireEvent, waitFor, within} from '@testing-library/react';
 import CategorySelector from '../../../src/components/CategorySelector';
+import LanguageContext from '../../../src/context/LanguageContext';
 import '@testing-library/jest-dom';
 
 
@@ -12,7 +13,10 @@ describe('CategorySelector', () => {
     originalFetch = global.fetch;
     global.fetch = jest.fn(() => Promise.resolve({
       ok: true,
-      json: () => Promise.resolve([{ name: 'Technology' }, { name: 'Philosophy' }])
+      json: () => Promise.resolve([
+        {id: 'technology', name: 'Technology'},
+        {id: 'philosophy', name: 'Philosophy'}
+      ])
     }));
   });
 
@@ -22,14 +26,22 @@ describe('CategorySelector', () => {
 
   it('renders without crashing', async () => {
     await act(async () => {
-      render(<CategorySelector onChange={jest.fn()} />);
+      render(
+        <LanguageContext>
+          <CategorySelector onChange={jest.fn()}/>
+        </LanguageContext>
+      );
     });
     await waitFor(() => expect(screen.getByTestId('category-select')).toBeInTheDocument());
   });
 
   it('displays categories fetched from API', async () => {
     await act(async () => {
-      render(<CategorySelector onChange={jest.fn()} />);
+      render(
+        <LanguageContext>
+          <CategorySelector onChange={jest.fn()}/>
+        </LanguageContext>
+      );
     });
 
     const categorySelect = screen.getByTestId('category-select');
@@ -51,7 +63,11 @@ describe('CategorySelector', () => {
     const handleChange = jest.fn();
 
     await act(async () => {
-      render(<CategorySelector onChange={handleChange} />);
+      render(
+        <LanguageContext>
+          <CategorySelector onChange={handleChange}/>
+        </LanguageContext>
+      );
     });
 
     const categorySelect = screen.getByTestId('category-select');
@@ -72,7 +88,11 @@ describe('CategorySelector', () => {
     }));
 
     await act(async () => {
-      render(<CategorySelector onChange={jest.fn()} />);
+      render(
+        <LanguageContext>
+          <CategorySelector onChange={jest.fn()}/>
+        </LanguageContext>
+      );
     });
 
     await waitFor(() => expect(screen.queryByLabelText(/Category/i)).not.toBeInTheDocument());
@@ -80,7 +100,11 @@ describe('CategorySelector', () => {
 
   it('displays "Random" as default selected category', async () => {
     await act(async () => {
-      render(<CategorySelector onChange={jest.fn()} />);
+      render(
+        <LanguageContext>
+          <CategorySelector onChange={jest.fn()}/>
+        </LanguageContext>
+      );
     });
 
     const categorySelect = screen.getByTestId('category-select');
