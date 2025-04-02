@@ -51,7 +51,7 @@ export async function getRandomQuote(query?: GetRandomQuoteQuery): Promise<Quote
     expectedCategory: category,
   });
 
-  const quotes = quotesCollection[filteredCategory.name] || [];
+  const quotes = quotesCollection[filteredCategory.id] || [];
 
   let filtered = filterByAuthor(quotes, author);
 

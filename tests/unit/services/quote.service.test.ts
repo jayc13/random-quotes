@@ -1,13 +1,14 @@
 import { promises as fs } from 'fs';
 import { QuotesCollection, getRandomQuote } from '../../../src/services/quote.service';
+import { GetCategoryOptions } from "../../../src/services/category.service.ts";
 
 
 const mockQuotes: QuotesCollection = {
-  'Category 1': [
+  category1: [
     { quote: 'Quote 1', author: 'Author 1' },
-    { quote: 'Quote 2', author: 'Author 2' },
+    { quote: 'Quote 2', author: 'Author 1' },
   ],
-  'Category 2': [
+  category2: [
     { quote: 'Quote 3', author: 'Author 4' },
     { quote: 'Quote 4', author: 'Author 5' },
   ],
@@ -15,7 +16,13 @@ const mockQuotes: QuotesCollection = {
 
 jest.mock("../../../src/services/category.service.ts", () => {
   return {
-    getCategory: async (category) => ({name: category || 'Category 1'}),
+    getCategory: async (options?: GetCategoryOptions) => {
+      const { expectedCategory } = options || {};
+      return {
+        id: expectedCategory || 'category1',
+        name: 'Category Mock Name',
+      };
+    },
   }
 });
 
@@ -44,13 +51,13 @@ describe('getRandomQuote', () => {
   it('throws an error if no quotes are found for the specified author', async () => {
     jest.spyOn(fs, 'readFile').mockResolvedValue(JSON.stringify(mockQuotes));
 
-    await expect(getRandomQuote({ author: 'Author 2', category: 'Category 2' })).rejects.toThrow('No quotes found');
+    await expect(getRandomQuote({ author: 'Author 2', category: 'category2' })).rejects.toThrow('No quotes found');
   });
 
   it('returns a random quote when multiple quotes by the specified author exist', async () => {
     jest.spyOn(fs, 'readFile').mockResolvedValue(JSON.stringify(mockQuotes));
 
-    const result = await getRandomQuote({ author: 'Author 1' });
+    const result = await getRandomQuote({ author: 'Author 1', category: 'category1' });
     expect(['Quote 1', 'Quote 2']).toContain(result.quote);
   });
 

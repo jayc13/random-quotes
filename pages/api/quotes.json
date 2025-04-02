@@ -1,5 +1,5 @@
 {
-    "Motivation": [
+    "motivation": [
         {
             "quote": "The only way to do great work is to love what you do.",
             "author": "Steve Jobs"
@@ -801,7 +801,7 @@
             "author": "William James"
         }
     ],
-    "Wisdom": [
+    "wisdom": [
         {
             "quote": "An unexamined life is not worth living.",
             "author": "Socrates"
@@ -1603,7 +1603,7 @@
             "author": "Albert Einstein"
         }
     ],
-    "Love": [
+    "love": [
         {
             "quote": "The best thing to hold onto in life is each other.",
             "author": "Audrey Hepburn"
