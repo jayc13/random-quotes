@@ -240,7 +240,10 @@ describe('HomePage', () => {
         .mockImplementation((url) => {
           if (url.toString().startsWith('/api/categories')) return {
             ok: true,
-            json: () => Promise.resolve([{ name: 'Technology' }, { name: 'Philosophy' }])
+            json: () => Promise.resolve([
+              {id: 'technology', name: 'Technology'},
+              {id: 'philosophy', name: 'Philosophy'}
+            ])
           }
           return Promise.resolve({
             ok: true,
