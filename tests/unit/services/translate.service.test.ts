@@ -10,7 +10,7 @@ describe('translateText', () => {
   describe('translateText()', () => {
     it('translates text successfully with the first endpoint', async () => {
       const options = { sourceLang: 'en', targetLang: 'fr', text: 'Hello' };
-      const mockResponse = { translatedText: 'Bonjour' };
+      const mockResponse = {response: { translated_text: 'Bonjour' }};
 
       fetch.mockResolvedValueOnce({
         ok: true,
@@ -19,12 +19,25 @@ describe('translateText', () => {
 
       const result = await translateText(options);
 
-      expect(result).toEqual(mockResponse);
+      expect(result).toEqual(mockResponse.response.translated_text);
+    });
+    it('should return the text to translate if the api signature is no as expected', async () => {
+      const options = { sourceLang: 'en', targetLang: 'fr', text: 'Hello' };
+      const mockResponse = { bad: { jsonFormat: 'not ok' } };
+
+      fetch.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockResponse,
+      });
+
+      const result = await translateText(options);
+
+      expect(result).toEqual('Hello');
     });
 
     it('tries multiple endpoints until one succeeds', async () => {
       const options = { sourceLang: 'en', targetLang: 'fr', text: 'Hello' };
-      const mockResponse = { translatedText: 'Bonjour' };
+      const mockResponse = {response: { translated_text: 'Bonjour' }};
 
       fetch.mockResolvedValueOnce({
         ok: false,
@@ -37,7 +50,7 @@ describe('translateText', () => {
 
       const result = await translateText(options);
 
-      expect(result).toEqual(mockResponse);
+      expect(result).toEqual(mockResponse.response.translated_text);
     });
 
     it('throws an error if all endpoints fail', async () => {

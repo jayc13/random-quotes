@@ -69,14 +69,20 @@ export async function getRandomQuote(query?: GetRandomQuoteQuery): Promise<Quote
   const randomIndex = Math.floor(Math.random() * filtered.length);
   const selectedQuote = filtered[randomIndex];
 
+  console.log({lang})
+
   if (lang !== DEFAULT_LANG) {
     validateLanguage(lang);
+
+    console.log('Translating quote to:', lang);
 
     selectedQuote.quote = await translateText({
       sourceLang: DEFAULT_LANG,
       targetLang: lang,
       text: selectedQuote.quote,
     });
+
+    console.log({selectedQuote})
   }
 
   return selectedQuote;

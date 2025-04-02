@@ -99,7 +99,7 @@ const HomePage = () => {
   async function fetchNewQuote(category?: string) {
     setLoading(true);
     try {
-      let url = `/api/quote?=language={${language}}`;
+      let url = `/api/quote?lang=${language}`;
       if (category) {
         url += `&category=${category}`;
       }

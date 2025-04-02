@@ -82,7 +82,7 @@ export async function translateText(options: TranslateTextOptions): Promise<stri
 
   // Print the result or an error message
   if (result !== null) {
-    return result;
+    return result?.response?.translated_text || text;
   }
   throw new Error("Translation failed after trying all endpoints.");
 }
