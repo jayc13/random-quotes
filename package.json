@@ -10,8 +10,8 @@
     "lint-fix": "eslint . --fix",
     "test-unit": "jest --config=jest.unit.config.ts",
     "test-integration": "jest --config=jest.integration.config.ts",
-    "test-e2e": "npx playwright test",
-    "test-e2e-open": "npx playwright test --headed",
+    "test-e2e": "playwright test",
+    "test-e2e-open": "playwright test --ui",
     "test": "npm run test-unit && npm run test-integration && npm run test-e2e"
   },
   "dependencies": {
