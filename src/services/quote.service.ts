@@ -1,6 +1,11 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import {Category, getCategory} from "./category.service.ts";
+import {
+  DEFAULT_LANG,
+  translateText,
+  validateLanguage
+} from "./translate.service.ts";
 
 export type Quote = {
   quote: string;
@@ -14,6 +19,7 @@ export type QuotesCollection = {
 export interface GetRandomQuoteQuery {
   author?: string
   category?: string
+  lang?: string
 }
 
 async function loadQuotes(): Promise<QuotesCollection> {
@@ -43,6 +49,7 @@ export async function getRandomQuote(query?: GetRandomQuoteQuery): Promise<Quote
   const {
     author,
     category,
+    lang = DEFAULT_LANG,
   } = query || {};
 
   const quotesCollection: QuotesCollection = await loadQuotes();
@@ -60,5 +67,17 @@ export async function getRandomQuote(query?: GetRandomQuoteQuery): Promise<Quote
   }
 
   const randomIndex = Math.floor(Math.random() * filtered.length);
-  return filtered[randomIndex];
+  const selectedQuote = filtered[randomIndex];
+
+  if (lang !== DEFAULT_LANG) {
+    validateLanguage(lang);
+
+    selectedQuote.quote = await translateText({
+      sourceLang: DEFAULT_LANG,
+      targetLang: lang,
+      text: selectedQuote.quote,
+    });
+  }
+
+  return selectedQuote;
 }

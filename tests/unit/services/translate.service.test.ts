@@ -66,14 +66,13 @@ describe('translateText', () => {
       await expect(translateText(options)).rejects.toThrow('Translation failed after trying all endpoints.');
     });
   });
-  describe('validateLanguage', () => {
-    it('does not throw an error for supported language codes', () => {
-      expect(() => validateLanguage('en')).not.toThrow();
-      expect(() => validateLanguage('fr')).not.toThrow();
-    });
 
-    it('throws an error for unsupported language codes', () => {
-      expect(() => validateLanguage('xx')).toThrow('Unsupported target language: xx');
-    });
+  it('does not throw an error for supported language codes', () => {
+    expect(() => validateLanguage('en')).not.toThrow();
+    expect(() => validateLanguage('fr')).not.toThrow();
+  });
+
+  it('throws an error for unsupported language codes', () => {
+    expect(() => validateLanguage('xx')).toThrow('Unsupported target language: xx');
   });
 });

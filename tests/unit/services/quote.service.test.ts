@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import { QuotesCollection, getRandomQuote } from '../../../src/services/quote.service';
 import { GetCategoryOptions } from "../../../src/services/category.service.ts";
-
+import {DEFAULT_LANG, validateLanguage, translateText} from "../../../src/services/translate.service.ts";
 
 const mockQuotes: QuotesCollection = {
   category1: [
@@ -27,11 +27,26 @@ jest.mock("../../../src/services/category.service.ts", () => {
   }
 });
 
+jest.mock("../../../src/services/translate.service.ts", () => {
+  const original = jest.requireActual("../../../src/services/translate.service.ts");
+  return {
+    ...original,
+    translateText: jest.fn(),
+    validateLanguage: jest.fn(),
+  };
+});
+
 describe('getRandomQuote', () => {
 
-  it('returns a random quote when no author is specified', async () => {
+  beforeEach(() => {
     jest.spyOn(fs, 'readFile').mockResolvedValue(JSON.stringify(mockQuotes));
+  });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('returns a random quote when no author is specified', async () => {
     const result = await getRandomQuote();
     expect(result).toBeDefined();
   });
@@ -66,5 +81,26 @@ describe('getRandomQuote', () => {
     jest.spyOn(fs, 'readFile').mockResolvedValue(`Random file content`);
     await expect(getRandomQuote()).rejects.toThrow('No quotes found');
 
+  });
+
+  it('returns a translated quote for non\-default language', async () => {
+
+    const translateTextMock = translateText.mockImplementation(() => ('Cita traducida'));
+    validateLanguage.mockImplementation(() => {});
+
+    const result = await getRandomQuote({ author: 'Author 1', category: 'category1', lang: 'es' });
+
+    expect(translateTextMock).toHaveBeenCalledWith({
+      sourceLang: DEFAULT_LANG,
+      targetLang: 'es',
+      text: expect.any(String),
+    });
+    expect(result.quote).toEqual('Cita traducida');
+  });
+
+  it('throws an error when the provided language is invalid', async () => {
+    validateLanguage.mockImplementation(() => {throw new Error('Invalid language');});
+
+    await expect(getRandomQuote({ lang: 'invalid' })).rejects.toThrow('Invalid language');
   });
 });
