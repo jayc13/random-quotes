@@ -36,4 +36,16 @@ describe('GET /api/categories', () => {
       expect(res.statusCode).toBe(405);
     }
   });
+
+  it('should return 404 for unsupported language', async () => {
+    const { req, res } = createMocks({
+      method: 'GET',
+      url: '/api/categories?lang=xx'
+    });
+
+    await handlerCategories(req, res);
+
+    expect(res.statusCode).toBe(404);
+    expect(res._getJSONData()).toEqual({ error: 'Lang "xx" not supported' });
+  });
 });

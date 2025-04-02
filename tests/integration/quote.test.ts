@@ -134,7 +134,7 @@ describe('GET /api/quote', () => {
 
     it('should return 404 when author is not found in the specific category', async () => {
       const author = 'Steve Jobs';
-      const category = 'Love';
+      const category = 'love';
       const { req, res } = createMocks({
         method: 'GET',
         url: `/api/quote?author=${author}&category=${category}`,

@@ -125,7 +125,7 @@ describe('GET /api/quote.svg', () => {
 
     it('should return a quote by a specific author from a specific category', async () => {
       const author = 'Steve Jobs';
-      const category = 'Motivation';
+      const category = 'motivation';
       const { req, res } = createMocks({
         method: 'GET',
         url: `/api/quote.svg?author=${author}&category=${category}`,
@@ -144,7 +144,7 @@ describe('GET /api/quote.svg', () => {
 
     it(`should return a 404 when the author doesn't exist from a specific category`, async () => {
       const author = 'NonExistentAuthor';
-      const category = 'Motivation';
+      const category = 'motivation';
       const { req, res } = createMocks({
         method: 'GET',
         url: `/api/quote.svg?author=${author}&category=${category}`,
@@ -178,7 +178,7 @@ describe('GET /api/quote.svg', () => {
 
     it('should return 404 when author is not found in the specific category', async () => {
       const author = 'Steve Jobs';
-      const category = 'Love';
+      const category = 'love';
       const { req, res } = createMocks({
         method: 'GET',
         url: `/api/quote.svg?author=${author}&category=${category}`,

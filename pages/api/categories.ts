@@ -1,9 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import rateLimit from "../../src/services/rate-limit.ts";
+import rateLimit from "../../src/services/rate-limit";
 import {
   Category,
   getAllCategories,
-} from '../../src/services/category.service.ts';
+} from '../../src/services/category.service';
+import {
+  DEFAULT_LANG,
+  validateLanguage,
+} from '../../src/services/translate.service';
 
 
 const limiter = rateLimit({
@@ -22,6 +26,14 @@ export default  async function handler(req: NextApiRequest, res: NextApiResponse
     return res.status(429).json({ error: 'Rate limit exceeded' });
   }
 
-  const categories: Category[] = await getAllCategories();
+  const lang = req.query.lang as string || DEFAULT_LANG;
+
+  try {
+    validateLanguage(lang);
+  } catch {
+    return res.status(404).json({ error: `Lang "${lang}" not supported` });
+  }
+
+  const categories: Category[] = await getAllCategories(lang);
   res.status(200).json(categories);
 }

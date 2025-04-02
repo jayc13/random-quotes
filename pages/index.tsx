@@ -30,13 +30,13 @@ const MainContainer = styled("div")(() => ({
 }));
 
 const CategorySelectorContainer = styled(Box)(() => ({
-  position: 'absolute',
+  position: 'fixed',
   top: '20px',
   right: '20px',
 }));
 
 const RefreshQuoteButton = styled(IconButton)(() => ({
-  position: 'absolute',
+  position: 'fixed',
   bottom: '20px',
   left: '20px',
   root: {
@@ -119,12 +119,11 @@ const HomePage = () => {
   }
 
   useEffect(() => {
-    fetchNewQuote().then();
-  }, []);
+    fetchNewQuote(selectedCategory).then();
+  }, [selectedCategory]);
 
   const handleCategoryChange = (categoryId: string) => {
     setSelectedCategory(categoryId);
-    fetchNewQuote(categoryId).then();
   };
 
   async function copyToClipboard(text: string) {
@@ -147,7 +146,7 @@ const HomePage = () => {
         <link rel="icon" href="/favicon.ico"/>
       </Head>
       <MainContainer>
-        <Box sx={{ position: 'absolute', top: '20px', left: '20px' }}>
+        <Box sx={{ position: 'fixed', top: '20px', left: '20px' }}>
           <LanguageSelector />
         </Box>
         <CategorySelectorContainer>
