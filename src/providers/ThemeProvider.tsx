@@ -3,6 +3,7 @@ import {ThemeProvider as MuiThemeProvider, createTheme, PaletteMode} from '@mui/
 import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
 import { Tooltip } from '@mui/material';
+import {useLanguage} from "../context/LanguageContext.tsx";
 
 interface ThemeContextType {
   theme: PaletteMode | 'system' | undefined;
@@ -17,6 +18,7 @@ interface ThemeProviderProps {
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({children, ...props}) => {
   const [theme, setTheme] = useState<PaletteMode | 'system'>('system');
+  const {translate} = useLanguage();
 
   const systemTheme = useCallback((): PaletteMode => {
     return typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -77,7 +79,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({children, ...props}) => {
       <MuiThemeProvider theme={muiTheme} {...props}>
         <CssBaseline/>
         {children}
-        <Tooltip title="Change theme" placement="left" arrow>
+        <Tooltip title={translate("Change theme")} placement="left" arrow>
           <IconButton
             onClick={toggleTheme}
             sx={{position: 'fixed', bottom: 16, right: 16}}

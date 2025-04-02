@@ -5,5 +5,7 @@
   "Refresh quote": "Rafraîchir la citation",
   "Failed to fetch quote": "Échec de la récupération de la citation",
   "Failed to fetch quote. Please try again": "Échec de la récupération de la citation. Veuillez réessayer",
-  "Quote copied!": "Citation copiée !"
+  "Quote copied!": "Citation copiée !",
+  "Category": "Catégorie",
+    "Change theme": "Changer le thème"
 }
