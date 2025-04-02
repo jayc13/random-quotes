@@ -62,7 +62,7 @@ export async function translateText(options: TranslateTextOptions): Promise<stri
   };
 
   // Try each endpoint until one works
-  let result = null;
+  let result: any;
   for (const endpoint of endpoints) {
     const url = new URL(endpoint);
     url.search = new URLSearchParams(params).toString();
@@ -81,7 +81,7 @@ export async function translateText(options: TranslateTextOptions): Promise<stri
   }
 
   // Print the result or an error message
-  if (result !== null) {
+  if (!result) {
     return result?.response?.translated_text || text;
   }
   throw new Error("Translation failed after trying all endpoints.");
