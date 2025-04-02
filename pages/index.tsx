@@ -94,14 +94,14 @@ const HomePage = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('');
-  const { translate } = useLanguage();
+  const { translate, language } = useLanguage();
 
   async function fetchNewQuote(category?: string) {
     setLoading(true);
     try {
-      let url = '/api/quote';
+      let url = `/api/quote?=language={${language}}`;
       if (category) {
-        url += `?category=${category}`;
+        url += `&category=${category}`;
       }
       const response = await fetch(url);
       if (!response.ok) {
@@ -120,7 +120,7 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchNewQuote(selectedCategory).then();
-  }, [selectedCategory]);
+  }, [selectedCategory, language]);
 
   const handleCategoryChange = (categoryId: string) => {
     setSelectedCategory(categoryId);
