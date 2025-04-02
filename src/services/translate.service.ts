@@ -7,6 +7,8 @@ interface TranslateTextOptions {
   text: string; // Text to be translated
 }
 
+export const DEFAULT_LANG = 'en';
+
 /**
  * Returns a list of supported language codes.
  * @returns {string[]} An array of supported language codes.

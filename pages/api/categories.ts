@@ -5,6 +5,7 @@ import {
   getAllCategories,
 } from '../../src/services/category.service';
 import {
+  DEFAULT_LANG,
   validateLanguage,
 } from '../../src/services/translate.service';
 
@@ -25,7 +26,7 @@ export default  async function handler(req: NextApiRequest, res: NextApiResponse
     return res.status(429).json({ error: 'Rate limit exceeded' });
   }
 
-  const lang = req.query.lang as string;
+  const lang = req.query.lang as string || DEFAULT_LANG;
 
   try {
     validateLanguage(lang);
