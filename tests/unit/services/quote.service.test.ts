@@ -7,10 +7,11 @@ const mockQuotes: QuotesCollection = {
   category1: [
     { quote: 'Quote 1', author: 'Author 1' },
     { quote: 'Quote 2', author: 'Author 1' },
+    { quote: 'Quote 3', author: 'Author 2' },
   ],
   category2: [
-    { quote: 'Quote 3', author: 'Author 4' },
-    { quote: 'Quote 4', author: 'Author 5' },
+    { quote: 'Quote 4', author: 'Author 3' },
+    { quote: 'Quote 5', author: 'Author 4' },
   ],
 }
 
@@ -38,8 +39,8 @@ describe('getRandomQuote', () => {
   it('returns a random quote by the specified author', async () => {
     jest.spyOn(fs, 'readFile').mockResolvedValue(JSON.stringify(mockQuotes));
 
-    const result = await getRandomQuote({ author: 'Author 1' });
-    expect(result).toEqual({ quote: 'Quote 1', author: 'Author 1' });
+    const result = await getRandomQuote({ author: 'Author 4', category: 'category2' });
+    expect(result).toEqual({ quote: 'Quote 5', author: 'Author 4' });
   });
 
   it('throws an error if no quotes are found', async () => {
