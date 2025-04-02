@@ -1,10 +1,16 @@
-
+/**
+ * Interface representing the options for translating text.
+ */
 interface TranslateTextOptions {
   sourceLang: string; // Source language for translation
   targetLang: string; // Target language for translation
   text: string; // Text to be translated
 }
 
+/**
+ * Returns a list of supported language codes.
+ * @returns {string[]} An array of supported language codes.
+ */
 export function getSupportedLanguages(): string[] {
   return [
     'en', // English
@@ -13,15 +19,31 @@ export function getSupportedLanguages(): string[] {
     'de', // German
     'it', // Italian
     'pt', // Portuguese
-  ]
+  ];
 }
 
+/**
+ * Validates if the provided language code is supported.
+ * @param {string} lang - The language code to validate.
+ * @throws Will throw an error if the language code is not supported.
+ */
+export function validateLanguage(lang: string): void {
+  const supportedLanguages = getSupportedLanguages();
+  if (!supportedLanguages.includes(lang)) {
+    throw new Error(`Unsupported target language: ${lang}`);
+  }
+}
+
+/**
+ * Translates text from a source language to a target language.
+ * @param {TranslateTextOptions} options - The options for translation.
+ * @returns {Promise<string>} A promise that resolves to the translated text.
+ * @throws Will throw an error if translation fails after trying all endpoints.
+ */
 export async function translateText(options: TranslateTextOptions): Promise<string> {
   const { sourceLang, targetLang, text } = options;
 
-  if (!getSupportedLanguages().includes(targetLang)) {
-    throw new Error(`Unsupported target language: ${targetLang}`);
-  }
+  validateLanguage(targetLang);
 
   const endpoints = [
     "https://emergency-tas-backup1.uncoverclimatix.workers.dev/translate",
