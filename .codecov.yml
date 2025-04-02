@@ -85,6 +85,18 @@ component_management:
       name: API
       paths:
         - pages/api/**
+    - component_id: module_services
+      name: Services
+      paths:
+        - src/services/**
+    - component_id: module_contexts
+      name: Contexts
+      paths:
+        - src/context/**
+    - component_id: module_providers
+      name: Providers
+      paths:
+        - src/providers/**
     - component_id: module_pages
       name: Pages
       paths:
