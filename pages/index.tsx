@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useCallback, useState, useEffect} from 'react';
 import {styled} from '@mui/material/styles';
 import {Box, IconButton, Tooltip} from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -96,7 +96,7 @@ const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const { translate, language } = useLanguage();
 
-  async function fetchNewQuote(category?: string) {
+  const fetchNewQuote = useCallback(async (category?: string) => {
     setLoading(true);
     try {
       let url = `/api/quote?lang=${language}`;
@@ -116,11 +116,11 @@ const HomePage = () => {
     } finally {
       setLoading(false);
     }
-  }
+  }, [language, translate]);
 
   useEffect(() => {
     fetchNewQuote(selectedCategory).then();
-  }, [selectedCategory, language]);
+  }, [fetchNewQuote, selectedCategory, language]);
 
   const handleCategoryChange = (categoryId: string) => {
     setSelectedCategory(categoryId);

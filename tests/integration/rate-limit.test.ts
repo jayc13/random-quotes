@@ -5,7 +5,7 @@ import handlerCategories from '../../pages/api/categories.ts';
 
 jest.mock('../../src/services/rate-limit.ts', () => {
   return jest.fn().mockImplementation(() => ({
-    check: jest.fn().mockImplementation((req) => {
+    check: jest.fn().mockImplementation(() => {
       throw new Error('Rate limit exceeded');
     }),
   }));

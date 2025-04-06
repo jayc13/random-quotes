@@ -15,7 +15,7 @@ const CategorySelector = ({ onChange }) => {
         const response = await fetch(`/api/categories?lang=${language}`);
         const data = await response.json();
         setCategories(data);
-      } catch (error) {
+      } catch {
         setCategories([]);
       } finally {
         setLoading(false);

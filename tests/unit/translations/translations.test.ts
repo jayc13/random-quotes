@@ -7,7 +7,7 @@ const supportedLanguages = getSupportedLanguages();
 
 describe('Translation files consistency', () => {
   const translationsDir = path.join(process.cwd(), 'src/translations');
-  const translationFiles: Record<string, Record<string, any>> = {};
+  const translationFiles: Record<string, Record<string, string>> = {};
 
   beforeAll(async () => {
     for (const lang of supportedLanguages) {
@@ -47,7 +47,7 @@ describe('Translation files consistency', () => {
     const referenceLanguage = languages[0];
 
     // Recursively collect all keys from an object
-    const collectKeys = (obj: any, prefix = ''): string[] => {
+    const collectKeys = (obj: Record<string, string>, prefix = ''): string[] => {
       return Object.entries(obj).flatMap(([key, value]) => {
         const currentKey = prefix ? `${prefix}.${key}` : key;
         if (typeof value === 'object' && value !== null) {
@@ -72,7 +72,7 @@ describe('Translation files consistency', () => {
       if (languages.length === 0) return;
 
       const referenceLanguage = languages[0];
-      const compareStructure = (refObj: any, targetObj: any, path = '') => {
+      const compareStructure = (refObj: Record<string, string>, targetObj: string, path = '') => {
         const refKeys = Object.keys(refObj);
         const targetKeys = Object.keys(targetObj);
         // Check that both objects have the same keys at the current level
