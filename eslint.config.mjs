@@ -1,24 +1,18 @@
-import generated from '@typescript-eslint/eslint-plugin';
-import eslintPluginReact from 'eslint-plugin-react';
-import eslintPluginJest from 'eslint-plugin-jest';
+import { FlatCompat } from '@eslint/eslintrc';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-export default [
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+});
+
+const configs = [
+  ...compat.extends('next/core-web-vitals'),
+  ...compat.extends('next/typescript'),
   {
-    ignores: [
-      'node_modules',
-      '.next',
-      'coverage',
-      '.idea',
-      '.swc',
-      'test-results'
-    ]
-  },
-  {
-    plugins: {
-      '@typescript-eslint': generated,
-      'react': eslintPluginReact,
-      'jest': eslintPluginJest
-    },
     rules: {
       'semi': ['error', 'always'],
       'quotes': ['error', 'single'],
@@ -28,3 +22,5 @@ export default [
     }
   }
 ];
+
+export default configs;
