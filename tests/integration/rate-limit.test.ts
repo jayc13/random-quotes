@@ -1,9 +1,9 @@
-import {createMocks} from "node-mocks-http";
-import handlerQuoteJSON from "../../pages/api/quote.ts";
+import {createMocks} from 'node-mocks-http';
+import handlerQuoteJSON from '../../pages/api/quote.ts';
 import handlerQuoteSVG from '../../pages/api/quote.svg.ts';
 import handlerCategories from '../../pages/api/categories.ts';
 
-jest.mock("../../src/services/rate-limit.ts", () => {
+jest.mock('../../src/services/rate-limit.ts', () => {
   return jest.fn().mockImplementation(() => ({
     check: jest.fn().mockImplementation((req) => {
       throw new Error('Rate limit exceeded');

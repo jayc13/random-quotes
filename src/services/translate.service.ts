@@ -48,10 +48,10 @@ export async function translateText(options: TranslateTextOptions): Promise<stri
   validateLanguage(targetLang);
 
   const endpoints = [
-    "https://655.mtis.workers.dev/translate",
-    "https://collonoid.tasport1.workers.dev/translate",
-    "https://t72.mouth-ploy-evoke.workers.dev/translate",
-    "https://emergency-tas-backup1.uncoverclimatix.workers.dev/translate",
+    'https://655.mtis.workers.dev/translate',
+    'https://collonoid.tasport1.workers.dev/translate',
+    'https://t72.mouth-ploy-evoke.workers.dev/translate',
+    'https://emergency-tas-backup1.uncoverclimatix.workers.dev/translate',
   ];
 
   // Parameters for translation (customize as needed)
@@ -84,5 +84,5 @@ export async function translateText(options: TranslateTextOptions): Promise<stri
     return result?.response?.translated_text || text;
   }
 
-  throw new Error("Translation failed after trying all endpoints.");
+  throw new Error('Translation failed after trying all endpoints.');
 }

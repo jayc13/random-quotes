@@ -1,4 +1,4 @@
-import {createMocks, RequestMethod} from 'node-mocks-http'
+import {createMocks, RequestMethod} from 'node-mocks-http';
 import handlerCategories from '../../pages/api/categories.ts';
 
 

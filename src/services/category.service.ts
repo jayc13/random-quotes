@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import { validateLanguage } from "./translate.service.ts";
+import { validateLanguage } from './translate.service.ts';
 
 
 export type Category = {

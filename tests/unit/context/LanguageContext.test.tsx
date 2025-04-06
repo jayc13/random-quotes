@@ -74,7 +74,7 @@ describe('LanguageContext', () => {
           <p data-testid="translated-text">{translate('nonExistentKey')}</p>
         </div>
       );
-    }
+    };
 
     render(
       <LanguageProvider>

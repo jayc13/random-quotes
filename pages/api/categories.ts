@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import rateLimit from "../../src/services/rate-limit";
+import rateLimit from '../../src/services/rate-limit';
 import {
   Category,
   getAllCategories,

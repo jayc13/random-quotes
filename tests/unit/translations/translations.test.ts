@@ -7,7 +7,7 @@ const supportedLanguages = getSupportedLanguages();
 
 describe('Translation files consistency', () => {
   const translationsDir = path.join(process.cwd(), 'src/translations');
-  let translationFiles: Record<string, Record<string, any>> = {};
+  const translationFiles: Record<string, Record<string, any>> = {};
 
   beforeAll(async () => {
     for (const lang of supportedLanguages) {

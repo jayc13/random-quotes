@@ -1,7 +1,7 @@
 import React, {act} from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { MediaQueryListEvent} from "mock-match-media";
+import { MediaQueryListEvent} from 'mock-match-media';
 import ThemeProvider, { useTheme } from '../../../src/providers/ThemeProvider.tsx';
 import LanguageProvider from '../../../src/context/LanguageContext.tsx';
 
@@ -18,7 +18,7 @@ const TestComponent: React.FC = () => {
 describe('ThemeProvider', () => {
 
   it('should throw error if useTheme is used outside of ThemeProvider', () => {
-    expect(() => render(<TestComponent />)).toThrow("useTheme must be used within a ThemeProvider");
+    expect(() => render(<TestComponent />)).toThrow('useTheme must be used within a ThemeProvider');
   });
 
   it('should provide theme context when used within ThemeProvider', () => {
@@ -151,7 +151,7 @@ describe('ThemeProvider', () => {
           dispatchEvent: jest.fn(),
         };
       }
-    })
+    });
 
     await act(async () => {
       render(
@@ -168,7 +168,7 @@ describe('ThemeProvider', () => {
     expect(themeToggleBtn).toHaveTextContent('🖥️');
 
     act(() => {
-      mockListener(new MediaQueryListEvent("change", {matches: false}));
+      mockListener(new MediaQueryListEvent('change', {matches: false}));
     });
 
     expect(themeToggleBtn).toHaveTextContent('🌞');
@@ -192,7 +192,7 @@ describe('ThemeProvider', () => {
           dispatchEvent: jest.fn(),
         };
       }
-    })
+    });
 
     await act(async () => {
       render(
@@ -209,7 +209,7 @@ describe('ThemeProvider', () => {
     expect(themeToggleBtn).toHaveTextContent('🖥️');
 
     act(() => {
-      mockListener(new MediaQueryListEvent("change", { matches: true }));
+      mockListener(new MediaQueryListEvent('change', { matches: true }));
     });
 
     expect(themeToggleBtn).toHaveTextContent('🌜');
@@ -225,7 +225,7 @@ describe('ThemeProvider', () => {
           dispatchEvent: jest.fn(),
         };
       }
-    })
+    });
 
     await act(async () => {
       render(
@@ -252,7 +252,7 @@ describe('ThemeProvider', () => {
           dispatchEvent: jest.fn(),
         };
       }
-    })
+    });
 
     await act(async () => {
       render(

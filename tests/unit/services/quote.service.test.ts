@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import { QuotesCollection, getRandomQuote } from '../../../src/services/quote.service';
-import { GetCategoryOptions } from "../../../src/services/category.service.ts";
-import {DEFAULT_LANG, validateLanguage, translateText} from "../../../src/services/translate.service.ts";
+import { GetCategoryOptions } from '../../../src/services/category.service.ts';
+import {DEFAULT_LANG, validateLanguage, translateText} from '../../../src/services/translate.service.ts';
 
 const mockQuotes: QuotesCollection = {
   category1: [
@@ -13,9 +13,9 @@ const mockQuotes: QuotesCollection = {
     { quote: 'Quote 4', author: 'Author 3' },
     { quote: 'Quote 5', author: 'Author 4' },
   ],
-}
+};
 
-jest.mock("../../../src/services/category.service.ts", () => {
+jest.mock('../../../src/services/category.service.ts', () => {
   return {
     getCategory: async (options?: GetCategoryOptions) => {
       const { expectedCategory } = options || {};
@@ -24,11 +24,11 @@ jest.mock("../../../src/services/category.service.ts", () => {
         name: 'Category Mock Name',
       };
     },
-  }
+  };
 });
 
-jest.mock("../../../src/services/translate.service.ts", () => {
-  const original = jest.requireActual("../../../src/services/translate.service.ts");
+jest.mock('../../../src/services/translate.service.ts', () => {
+  const original = jest.requireActual('../../../src/services/translate.service.ts');
   return {
     ...original,
     translateText: jest.fn(),
@@ -78,7 +78,7 @@ describe('getRandomQuote', () => {
   });
 
   it('handle exception when the quotes json is bad-formatted', async () => {
-    jest.spyOn(fs, 'readFile').mockResolvedValue(`Random file content`);
+    jest.spyOn(fs, 'readFile').mockResolvedValue('Random file content');
     await expect(getRandomQuote()).rejects.toThrow('No quotes found');
 
   });

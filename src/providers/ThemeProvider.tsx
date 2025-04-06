@@ -3,7 +3,7 @@ import {ThemeProvider as MuiThemeProvider, createTheme, PaletteMode} from '@mui/
 import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
 import { Tooltip } from '@mui/material';
-import {useLanguage} from "../context/LanguageContext.tsx";
+import {useLanguage} from '../context/LanguageContext.tsx';
 
 interface ThemeContextType {
   theme: PaletteMode | 'system' | undefined;
@@ -79,7 +79,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({children, ...props}) => {
       <MuiThemeProvider theme={muiTheme} {...props}>
         <CssBaseline/>
         {children}
-        <Tooltip title={translate("Change theme")} placement="left" arrow>
+        <Tooltip title={translate('Change theme')} placement="left" arrow>
           <IconButton
             onClick={toggleTheme}
             sx={{position: 'fixed', bottom: 16, right: 16}}
@@ -96,7 +96,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({children, ...props}) => {
 export const useTheme = () => {
   const themeContext = useContext(ThemeContext);
   if (!themeContext) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+    throw new Error('useTheme must be used within a ThemeProvider');
   }
   return themeContext;
 };
