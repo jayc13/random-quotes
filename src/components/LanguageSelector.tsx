@@ -1,6 +1,26 @@
 import React from 'react';
 import { FormControl, Select, MenuItem, OutlinedInput } from '@mui/material';
 import { useLanguage } from '../context/LanguageContext';
+import {styled} from "@mui/material/styles";
+
+const LangItem = styled(MenuItem)(() => ({
+  justifyContent: 'space-around',
+}));
+
+type LangWithFlags = {
+  value: string;
+  flag: string;
+}
+
+const LANGUAGES: LangWithFlags[] = [
+  { value: 'en', flag: '🇬🇧' },
+  { value: 'es', flag: '🇪🇸' },
+  { value: 'de', flag: '🇩🇪' },
+  { value: 'pt', flag: '🇵🇹' },
+  { value: 'fr', flag: '🇫🇷' },
+  { value: 'it', flag: '🇮🇹' },
+];
+
 
 const LanguageSelector = () => {
   const { language, setLanguage } = useLanguage();
@@ -29,12 +49,11 @@ const LanguageSelector = () => {
         }}
         onChange={handleLanguageChange}
       >
-        <MenuItem value="en">🇬🇧</MenuItem>
-        <MenuItem value="es">🇪🇸</MenuItem>
-        <MenuItem value="de">🇩🇪</MenuItem>
-        <MenuItem value="pt">🇵🇹</MenuItem>
-        <MenuItem value="fr">🇫🇷</MenuItem>
-        <MenuItem value="it">🇮🇹</MenuItem>
+        {LANGUAGES.map((lang) => (
+          <LangItem key={lang.value} value={lang.value}>
+            {lang.flag}
+          </LangItem>
+        ))}
       </Select>
     </FormControl>
   );
