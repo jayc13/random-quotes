@@ -32,7 +32,7 @@ Object.defineProperty(window, 'matchMedia', {
 
 const delay = (durationMs: number) => {
   return new Promise(resolve => setTimeout(resolve, durationMs));
-}
+};
 
 describe('HomePage', () => {
   let writeTextMock: jest.SpyInstance;
@@ -91,11 +91,11 @@ describe('HomePage', () => {
             {id: 'technology', name: 'Technology'},
             {id: 'philosophy', name: 'Philosophy'}
           ])
-        }
+        };
         return Promise.resolve({
           ok: true,
           json: () => Promise.resolve(fakeQuote)
-        })
+        });
       });
 
     await act(async () => {
@@ -121,11 +121,11 @@ describe('HomePage', () => {
             {id: 'technology', name: 'Technology'},
             {id: 'philosophy', name: 'Philosophy'}
           ])
-        }
+        };
         return Promise.resolve({
           ok: false,
           json: () => Promise.reject(new Error('Failed to fetch quote.'))
-        })
+        });
       });
 
     await act(async () => {
@@ -151,11 +151,11 @@ describe('HomePage', () => {
             {id: 'technology', name: 'Technology'},
             {id: 'philosophy', name: 'Philosophy'}
           ])
-        }
+        };
         return Promise.resolve({
           ok: true,
           json: () => Promise.resolve(mockQuote)
-        })
+        });
       });
 
     await act(async () => {
@@ -191,11 +191,11 @@ describe('HomePage', () => {
             {id: 'technology', name: 'Technology'},
             {id: 'philosophy', name: 'Philosophy'}
           ])
-        }
+        };
         return Promise.resolve({
           ok: true,
           json: () => Promise.resolve(quotes[index++])
-        })
+        });
       });
 
     await act(async () => {
@@ -244,11 +244,11 @@ describe('HomePage', () => {
               {id: 'technology', name: 'Technology'},
               {id: 'philosophy', name: 'Philosophy'}
             ])
-          }
+          };
           return Promise.resolve({
             ok: true,
             json: () => Promise.resolve(quotes[index++])
-          })
+          });
         });
 
       await act(async () => {

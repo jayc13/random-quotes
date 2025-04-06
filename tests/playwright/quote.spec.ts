@@ -3,10 +3,10 @@ import { test, expect } from '@playwright/test';
 test.describe('Quote App', () => {
   test.beforeEach(async ({ page }) => {
     const getQuoteRequest = page.waitForResponse(resp => {
-      return resp.url().includes('/api/quote') && resp.status() === 200
+      return resp.url().includes('/api/quote') && resp.status() === 200;
     });
     const getCategoriesRequest = page.waitForResponse(resp => {
-      return resp.url().includes('/api/categories') && resp.status() === 200
+      return resp.url().includes('/api/categories') && resp.status() === 200;
     });
     await page.goto('/');
     await getQuoteRequest;
@@ -50,7 +50,7 @@ test.describe('Quote App', () => {
 
   test('should refresh the quote when the refresh button is clicked', async ({ page }) => {
     const responsePromise = page.waitForResponse(resp => {
-      return resp.url().includes('/api/quote') && resp.status() === 200
+      return resp.url().includes('/api/quote') && resp.status() === 200;
     });
     await page.locator('[data-testid="refresh-quote-btn"]').click();
     const response = await responsePromise;
@@ -96,14 +96,14 @@ test.describe('Quote App', () => {
     const randomCategory = texts[Math.floor(Math.random() * (texts.length - 1)) + 1];
 
     const getQuoteRequest = page.waitForResponse(resp => {
-      return resp.url().includes('/api/quote') && resp.status() === 200
+      return resp.url().includes('/api/quote') && resp.status() === 200;
     });
 
     await page.locator(`li:has-text("${randomCategory}")`).click();
 
     const getQuoteResponse = await getQuoteRequest;
     const responseBody = await getQuoteResponse.json();
-    const requestedURL = new URL(getQuoteResponse.request().url())
+    const requestedURL = new URL(getQuoteResponse.request().url());
 
     expect(requestedURL.searchParams.get('category')).toBe(randomCategory.toLowerCase());
     await expect(page.locator('#loading')).toBeHidden();
@@ -130,7 +130,7 @@ test.describe('Quote App', () => {
 
     const getQuoteResponse = await getQuoteRequest;
     const responseBody = await getQuoteResponse.json();
-    const requestedURL = new URL(getQuoteResponse.request().url())
+    const requestedURL = new URL(getQuoteResponse.request().url());
 
     expect(requestedURL.searchParams.get('category')).toBe(randomCategory.toLowerCase());
     await expect(page.locator('#loading')).toBeHidden();
@@ -144,7 +144,7 @@ test.describe('Quote App', () => {
 
     const getRefreshQuoteResponse = await getRefreshQuoteRequest;
     const responseRefreshBody = await getRefreshQuoteResponse.json();
-    const requestedRefreshURL = new URL(getRefreshQuoteResponse.request().url())
+    const requestedRefreshURL = new URL(getRefreshQuoteResponse.request().url());
 
     expect(requestedRefreshURL.searchParams.get('category')).toBe(randomCategory.toLowerCase());
     await expect(page.locator('#loading')).toBeHidden();

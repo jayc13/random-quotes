@@ -1,11 +1,11 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import { Category, getCategory } from "./category.service.ts";
+import { Category, getCategory } from './category.service.ts';
 import {
   DEFAULT_LANG,
   translateText,
   validateLanguage
-} from "./translate.service.ts";
+} from './translate.service.ts';
 
 /**
  * Represents a quote with the text and the author.
@@ -100,7 +100,7 @@ export async function getRandomQuote(query?: GetRandomQuoteQuery): Promise<Quote
 
   const quotes = quotesCollection[filteredCategory.id] || [];
 
-  let filtered = filterByAuthor(quotes, author);
+  const filtered = filterByAuthor(quotes, author);
 
   if (!filtered.length) {
     throw new Error('No quotes found');

@@ -1,4 +1,4 @@
-import {createMocks} from 'node-mocks-http'
+import {createMocks} from 'node-mocks-http';
 import handlerQuoteSVG from '../../pages/api/quote.svg.ts';
 
 
@@ -142,7 +142,7 @@ describe('GET /api/quote.svg', () => {
       expect(svg).toContain(author);
     });
 
-    it(`should return a 404 when the author doesn't exist from a specific category`, async () => {
+    it('should return a 404 when the author doesn\'t exist from a specific category', async () => {
       const author = 'NonExistentAuthor';
       const category = 'motivation';
       const { req, res } = createMocks({
@@ -161,7 +161,7 @@ describe('GET /api/quote.svg', () => {
       expect(data).toHaveProperty('error', `No quotes found for author: ${author}`);
     });
 
-    it(`should return a random category when category doesn't exist`, async () => {
+    it('should return a random category when category doesn\'t exist', async () => {
       const category = 'NonExistentCategory';
       const { req, res } = createMocks({
         method: 'GET',

@@ -36,6 +36,17 @@ export function validateLanguage(lang: string): void {
   }
 }
 
+interface TranslateResponse {
+  input: {
+    text: string; // Original text
+    source_lang: string; // Source language code
+    target_lang: string; // Target language code
+  };
+  response: {
+    translated_text: string; // Translated text
+  };
+}
+
 /**
  * Translates text from a source language to a target language.
  * @param {TranslateTextOptions} options - The options for translation.
@@ -48,10 +59,10 @@ export async function translateText(options: TranslateTextOptions): Promise<stri
   validateLanguage(targetLang);
 
   const endpoints = [
-    "https://655.mtis.workers.dev/translate",
-    "https://collonoid.tasport1.workers.dev/translate",
-    "https://t72.mouth-ploy-evoke.workers.dev/translate",
-    "https://emergency-tas-backup1.uncoverclimatix.workers.dev/translate",
+    'https://655.mtis.workers.dev/translate',
+    'https://collonoid.tasport1.workers.dev/translate',
+    'https://t72.mouth-ploy-evoke.workers.dev/translate',
+    'https://emergency-tas-backup1.uncoverclimatix.workers.dev/translate',
   ];
 
   // Parameters for translation (customize as needed)
@@ -62,13 +73,13 @@ export async function translateText(options: TranslateTextOptions): Promise<stri
   };
 
   // Try each endpoint until one works
-  let result: any | null = null;
+  let result: TranslateResponse | null = null;
   for (const endpoint of endpoints) {
     const url = new URL(endpoint);
     url.search = new URLSearchParams(params).toString();
 
     try {
-      const response = await fetch(url);
+      const response: Response = await fetch(url);
       if (response.ok) {
         result = await response.json();
         break;
@@ -84,5 +95,5 @@ export async function translateText(options: TranslateTextOptions): Promise<stri
     return result?.response?.translated_text || text;
   }
 
-  throw new Error("Translation failed after trying all endpoints.");
+  throw new Error('Translation failed after trying all endpoints.');
 }

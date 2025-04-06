@@ -1,9 +1,9 @@
-import type { Config } from 'jest'
-import nextJest from 'next/jest.js'
+import type { Config } from 'jest';
+import nextJest from 'next/jest.js';
 
 const createJestConfig = nextJest({
   dir: './',
-})
+});
 
 const config: Config = {
   preset: 'ts-jest',
@@ -11,7 +11,7 @@ const config: Config = {
   testEnvironment: 'jsdom',
   silent: true,
   roots: [
-    "./tests/unit/"
+    './tests/unit/'
   ],
   testMatch: [
     '<rootDir>/tests/unit/**/*.test.ts',

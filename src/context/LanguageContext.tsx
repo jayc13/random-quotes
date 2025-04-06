@@ -66,7 +66,7 @@ export default LanguageProvider;
 export const useLanguage = () => {
   const langContext = useContext(LanguageContext);
   if (!langContext) {
-    throw new Error("useLanguage must be used within a LanguageProvider");
+    throw new Error('useLanguage must be used within a LanguageProvider');
   }
   return langContext;
 };

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useCallback, useState, useEffect} from 'react';
 import {styled} from '@mui/material/styles';
 import {Box, IconButton, Tooltip} from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -17,7 +17,7 @@ type Quote = {
   error?: string;
 };
 
-const MainContainer = styled("div")(() => ({
+const MainContainer = styled('div')(() => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
@@ -40,8 +40,8 @@ const RefreshQuoteButton = styled(IconButton)(() => ({
   bottom: '20px',
   left: '20px',
   root: {
-    "&.Mui-disabled": {
-      pointerEvents: "auto"
+    '&.Mui-disabled': {
+      pointerEvents: 'auto'
     }
   }
 }));
@@ -62,12 +62,12 @@ const QuoteContainer = styled(Box)(() => ({
   color: 'text.primary',
 }));
 
-const ErrorMessage = styled("div")(() => ({
+const ErrorMessage = styled('div')(() => ({
   color: '#d32f2f',
   fontWeight: 'bold',
 }));
 
-const QuoteText = styled("p")(() => ({
+const QuoteText = styled('p')(() => ({
   fontSize: '3em',
   fontStyle: 'italic',
   marginBottom: '10px',
@@ -75,13 +75,13 @@ const QuoteText = styled("p")(() => ({
   color: 'text.primary',
 }));
 
-const AuthorText = styled("p")(() => ({
+const AuthorText = styled('p')(() => ({
   fontSize: '1.4em',
   fontFamily: 'Open Sans, sans-serif',
   color: 'text.secondary',
 }));
 
-const Tagline = styled("h1")(() => ({
+const Tagline = styled('h1')(() => ({
   marginBottom: '20px',
   fontSize: '1em',
   fontWeight: 'bold',
@@ -96,7 +96,7 @@ const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const { translate, language } = useLanguage();
 
-  async function fetchNewQuote(category?: string) {
+  const fetchNewQuote = useCallback(async (category?: string) => {
     setLoading(true);
     try {
       let url = `/api/quote?lang=${language}`;
@@ -116,11 +116,11 @@ const HomePage = () => {
     } finally {
       setLoading(false);
     }
-  }
+  }, [language, translate]);
 
   useEffect(() => {
     fetchNewQuote(selectedCategory).then();
-  }, [selectedCategory, language]);
+  }, [fetchNewQuote, selectedCategory, language]);
 
   const handleCategoryChange = (categoryId: string) => {
     setSelectedCategory(categoryId);
@@ -129,7 +129,7 @@ const HomePage = () => {
   async function copyToClipboard(text: string) {
     await navigator.clipboard.writeText(text);
     toast.success(translate('Quote copied!'), {
-      position: "bottom-right",
+      position: 'bottom-right',
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -142,7 +142,7 @@ const HomePage = () => {
   return (
     <>
       <Head>
-        <title>{translate("Quote of the Day")}</title>
+        <title>{translate('Quote of the Day')}</title>
         <link rel="icon" href="/favicon.ico"/>
       </Head>
       <MainContainer>
@@ -161,12 +161,12 @@ const HomePage = () => {
             {!!error && <ErrorMessage id="error">{error}</ErrorMessage>}
             {(quote !== null && !error) &&
               <>
-                <Tagline data-testid="title">{translate("Your daily dose of inspiration.")}</Tagline>
+                <Tagline data-testid="title">{translate('Your daily dose of inspiration.')}</Tagline>
                 <Box
                   sx={{
                     position: 'relative'
                   }}>
-                  <Tooltip title={translate("Copy quote")} placement="top" arrow>
+                  <Tooltip title={translate('Copy quote')} placement="top" arrow>
                     <CopyQuoteButton
                       size="small"
                       onClick={() => copyToClipboard(`"${quote.quote}" - ${quote.author}`)}
@@ -196,6 +196,6 @@ const HomePage = () => {
       </MainContainer>
     </>
   );
-}
+};
 
 export default HomePage;

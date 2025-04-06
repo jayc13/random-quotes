@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import {Category} from "../services/category.service.ts";
+import {Category} from '../services/category.service.ts';
 import {FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import {useLanguage} from "../context/LanguageContext.tsx";
+import {useLanguage} from '../context/LanguageContext.tsx';
 
 const CategorySelector = ({ onChange }) => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -15,7 +15,7 @@ const CategorySelector = ({ onChange }) => {
         const response = await fetch(`/api/categories?lang=${language}`);
         const data = await response.json();
         setCategories(data);
-      } catch (error) {
+      } catch {
         setCategories([]);
       } finally {
         setLoading(false);
@@ -47,8 +47,8 @@ const CategorySelector = ({ onChange }) => {
         value={selectedCategory}
         defaultValue='random'
         sx={{
-          "& fieldset": {
-            border: "none",
+          '& fieldset': {
+            border: 'none',
           },
         }}
       >

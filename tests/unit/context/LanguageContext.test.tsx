@@ -45,7 +45,7 @@ describe('LanguageContext', () => {
 
   it.each(supportedLanguages)('supported languages - should support setTranslations(%s)', (lang) => {
     const TestComponent = () => {
-      const { language, setLanguage, translate } = useLanguage();
+      const { language, setLanguage } = useLanguage();
       return (
         <div>
           <p data-testid="language">{language}</p>
@@ -74,7 +74,7 @@ describe('LanguageContext', () => {
           <p data-testid="translated-text">{translate('nonExistentKey')}</p>
         </div>
       );
-    }
+    };
 
     render(
       <LanguageProvider>
