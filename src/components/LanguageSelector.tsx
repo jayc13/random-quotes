@@ -1,7 +1,7 @@
 import React from 'react';
-import { FormControl, Select, MenuItem, OutlinedInput } from '@mui/material';
-import { useLanguage } from '../context/LanguageContext';
-import {styled} from "@mui/material/styles";
+import {FormControl, MenuItem, OutlinedInput, Select} from '@mui/material';
+import {styled} from '@mui/material/styles';
+import {useLanguage} from '../context/LanguageContext';
 
 const LangItem = styled(MenuItem)(() => ({
   justifyContent: 'space-around',
