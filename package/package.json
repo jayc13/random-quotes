@@ -1,0 +1,16 @@
+{
+  "name": "my-new-package",
+  "version": "1.0.0",
+  "description": "This is a new package.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "yargs": "^17.7.2"
+  }
+}
